@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alejandro Morales Sierra">
+<meta name="dcterms.date" content="2022-08-09">
+
+<title>Virtual Plant Laboratory - Backends for visualization</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Backends for visualization</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Virtual Plant Laboratory</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Julia basics</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../julia_basics/index.html" class="sidebar-item-text sidebar-link">Julia basics for VPL</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">User Manual</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Graphs</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Graphs/index.html" class="sidebar-item-text sidebar-link">Dynamic graph creation and manipulation</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Visualization</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Visualization/index.html" class="sidebar-item-text sidebar-link active">Backends for visualization</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Tutorials - Beginner</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/algae/index.html" class="sidebar-item-text sidebar-link">Algae growth</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/binary_tree/index.html" class="sidebar-item-text sidebar-link">Binary tree</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/random_binary_forest/index.html" class="sidebar-item-text sidebar-link">Random binary tree</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Tutorials - Advanced</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">API</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Geometry.html" class="sidebar-item-text sidebar-link">Module Geometry</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Backends for visualization</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alejandro Morales Sierra </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 9, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>VPL has two forms of visualization that are specific to a model: (i) a network representation of the graph via <code>draw()</code> and (ii) a 3D rendering of a graph or scene via <code>render()</code>. Both forms of visualization rely on the <a href="https://makie.juliaplots.org/stable/">Makie</a> visualization ecosystem built into Julia. Makie allows for different backends that are relevant in different context of code execution. The backends are specified with the argument <code>backend</code> to either of the visualization methods:</p>
+<ol type="1">
+<li><p><code>backend = "native"</code>: A native, desktop-based backend that requires an OpenGL enabled graphics card (based on <a href="https://makie.juliaplots.org/stable/documentation/backends/glmakie/">GLMakie</a>). This is the default backend used by VPL. It provides interactive 2D (for <code>draw()</code>) or 3D (for <code>render()</code>) visualization.</p></li>
+<li><p><code>backend = "web"</code>: A web-based backend that requires a WebGL enabled web browser (based on <a href="https://makie.juliaplots.org/stable/documentation/backends/wglmakie/">WGLMakie</a>). It provides interactive 2D (for <code>draw()</code>) or 3D (for <code>render()</code>) visualization.</p></li>
+<li><p><code>backend = "vector"</code>: A vector graphics version of the visualization (based on <a href="https://makie.juliaplots.org/stable/documentation/backends/cairomakie/">CairoMakie</a>. Different vector engines can be specified via the <code>file</code> argument including <code>file = "pdf"</code> (default) and <code>file = "svg"</code>. It does not provide interactive visualization and it is meant for static documents (or for exporting pdf or svg versions of the visualization). This backend only works with <code>draw()</code>, not <code>render()</code></p></li>
+</ol>
+<p>Depending on the context where the code is being executed and the backend being used, different forms of visualization will be obtained with different scenarios listed below (see section on <a href="#exporting-visualization">Visualization</a>). It is also possible to export static versions of any visualization in a wide range of formats (see section on <a href="#exporting-visualization">Export visualization</a>).</p>
+</section>
+<section id="visualization" class="level1">
+<h1>Visualization</h1>
+<p>Depending on the context and backend used, a different form of visualization will be obtained. The different scenarios are described below:</p>
+<section id="terminal" class="level2">
+<h2 class="anchored" data-anchor-id="terminal">Terminal</h2>
+<p>This means the code is ran from within the Julia REPL inside a terminal or command prompt (i.e., no IDE or notebook environment):</p>
+<ul>
+<li><p>Using the native backend will trigger an external window (entitled <em>Makie</em>) where an interactive OpenGL visualization will be rendered. The interactivity provided allows zooming and moving the camera around the visualization.</p></li>
+<li><p>Using the web backend will open a browser tab (unless there are some OS settings preventing, in which case a local IP address will be printed to the REPL and the user will have to manually input it into the browser) which an intetactive WebGL version will be rendered. The behaviour will be analogous to the natibe backend but note that this backend is still experimental (at the time of writing this documentation) so one should expect the ocasional bug.</p></li>
+<li><p>The vector backend will not display any visual output in this context. One can still export the resulting figure (see section on <a href="#exporting-visualization">Export visualization</a>).</p></li>
+</ul>
+</section>
+<section id="live-interactive-notebook" class="level2">
+<h2 class="anchored" data-anchor-id="live-interactive-notebook">Live interactive notebook</h2>
+<p>This means the code is running withn a Jupyter or Pluto notebook and they an active kernel or Julia session running in the background. Note that a notebook that is stored online will not be live unless it is hosted by a server that can run notebooks such as Binder or Google colab.</p>
+<ul>
+<li><p>The native backend will have the same behaviour as in the terminal by default. If one wants an inline visualization (i.e., for the visualization output to show next to the code cell) one has to pass the argument <code>inline = true</code>. This will create a static image of the 2D or 3D with the initial camera settings (not interactive).</p></li>
+<li><p>The web backend will generate the visualization output next to the code cell and it will be interactive as long as the kernel or background Julia session keeps running.</p></li>
+<li><p>The vector backend will display the static output next to the code cell (but only if it is using the svg engine, which is the default).</p></li>
+</ul>
+</section>
+<section id="visual-studio-code" class="level2">
+<h2 class="anchored" data-anchor-id="visual-studio-code">Visual Studio Code</h2>
+<p>IDEs that support Julia such as <a href="https://code.visualstudio.com/">Visual Studio Code</a> will generally have a plot pane where visualization output is stored. This can generally be turn off (in which case the behaviour of the IDE will be the same as running from a terminal). VPL has been tested with Visual Studio Code and the <a href="https://marketplace.visualstudio.com/items?itemName=julialang.language-julia">Julia extension</a> and, if the plot pane is active, the behaviour will be equivalent to a live interative notebook:</p>
+<ul>
+<li><p>The native backend will trigger an external window by default unless we specify <code>inline = true</code>, in which case a static version of the output will show up in the plot pane.</p></li>
+<li><p>The web backend will generate the visualization output in the plot pane and it will be interactive.</p></li>
+<li><p>The vector backend will generate the static visualization output in the plot pane.</p></li>
+</ul>
+</section>
+<section id="document-generation" class="level2">
+<h2 class="anchored" data-anchor-id="document-generation">Document generation</h2>
+<p>This category includes a file that is processed by <a href="https://quarto.org/">Quarto</a>, <a href="https://juliadocs.github.io/Documenter.jl/stable/">Documenter</a>, <a href="http://weavejl.mpastell.com/stable/">Weave</a> or <a href="https://fredrikekre.github.io/Literate.jl/v2/">Literate</a>. In all of these cases the final output will remain static while the visualization output should be generated inline (i.e., next to the code chunk). The following behavior has been observed with Quarto (other document generation methods have not been fully tested with VPL but are expected to behave similarly):</p>
+<ul>
+<li><p>For the native backend, a static snapshot of the visualization will always be inlined (even when <code>inline = false</code>). The result would be as in the inline visualization of interactive notebooks.</p></li>
+<li><p>The web backend will not generate any visualization in the final document as this backend always requires interactivity.</p></li>
+<li><p>The vector backend will display the static ouput as in interactive notebooks.</p></li>
+</ul>
+</section>
+<section id="on-a-headless-server" class="level2">
+<h2 class="anchored" data-anchor-id="on-a-headless-server">On a headless server</h2>
+<p>It will be possible to use the visualization tools even when running VPL in a headless system (e.g., a high performance computing cluster). The folliowing is based on the documentation on Makie, it has not been tested with VPL:</p>
+<ul>
+<li><p>The native backend will require X11 forwarding to render on the local machine or use <a href="https://www.virtualgl.org/">VirtualGL</a> technology.</p></li>
+<li><p>The web backend will work if a Javascript serve is setup to serve the HTML content from the remote system (see <a href="https://makie.juliaplots.org/stable/documentation/headless/#wglmakie">here</a> for details).</p></li>
+<li><p>The vector backend will generate the images correctly but the user will have to export them to pdf or svg files.</p></li>
+</ul>
+</section>
+</section>
+<section id="exporting-visualization" class="level1">
+<h1>Exporting visualization</h1>
+<p>It is possible to save any visualization generated by VPL as an external file with the <code>export_graph()</code> and <code>export_scene()</code> functions (for graph and scene visualizations, respectively). The file formats supported are png (when using <code>native</code> and <code>web</code> backends), pdf and svg (when using <code>vector</code> backend). This is possible by assigning the object returned by <code>draw()</code> or <code>render()</code> to a variable and passing that variable to the corresponding export function. This object contains all the information related to the visualization and printing it (i.e., sending it to the Julia REPL) actually causes the visualization to be created. That is, the following code:</p>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(graph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>is equivalent to:</p>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fu">draw</span>(graph);</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Remember that <code>;</code> will prevent printing the output of whatever Julia command was executed. Saving the graph is a matter of passing <code>f</code> to <code>export_graph()</code> and assign it a file name with extension:</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fu">draw</span>(graph);</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">export_graph</span>(f, <span class="st">"&lt;filename&gt;.&lt;ext&gt;"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you generate an interactive visualization, you can remove the <code>;</code> which will trigger the visualization (inlined or in an external screen) while also saving a reference to the figure inside <code>f</code>. The user may then interact with the figure (e.g., zoom in and pan around), which will automatically update <code>f</code>. That is, whatever you see on the screen will be saved to the external file. For example, rhis allows the user to save the same scene from different perspectives in separate files. The vector formats (pdf and svg) are only compatible with the <code>vector</code> backend, which does not offer interactivity. Hence, this functionality is only available for png files that will save the graph or scene generated by the <code>native</code> or <code>web</code> backends.</p>
+<p>When drawing a graph or rendering a scene it is possible specify the resolution of the generated image as tuple of two numbers such as <code>resolution = (800, 600)</code>. In the case of <code>web</code> and <code>native</code> backends, the resolution is the actual pixels being used, whereas for the <code>vector</code> backend it is related to the actual dimensions of the figure in <em>points</em>. When the user sabes a graph or scene into an external file, the resolution may have to be chosen based on the intended physical dimensions of the figure (on screen or printed). For png images, the conversion from pixel resolution to physical dimensions is captured by the dpi (<em>dots per inch</em>) chosen at the moment of printing or displaying. In the case of vector images, as indicated before, the conventions are 1 Makie unit = 0.75 pt and 1 inch = 72 pt (these are conventions borrowed from web development such that svg images can be converted to png with altering the actual size of the image on the website). To help users, VPL offers the function <code>calculate_resolution()</code> which will compute the resolution to be used by <code>draw()</code> or <code>render()</code> in order to guarantee a particular dimension of the final exported output expressed as <code>width</code> and <code>height</code> (in cm). If we want to save the image as a png we have to specify the intended dpi:</p>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute pixel resolution to ensure a width of 6 cm, height of 16 cm and a dpi of 300</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> <span class="fu">calculate_resolution</span>(<span class="fl">6</span>, <span class="fl">16</span>, dpi <span class="op">=</span> <span class="fl">300</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fu">draw</span>(graph, resolution <span class="op">=</span> res);</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">export_graph</span>(f, <span class="st">"&lt;filename&gt;.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the case of vector formats, we only need to specify the width and height as the conversion between physical dimensions and pixel resolution is fixed, but we will need to specify the correct format:</p>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute pixel resolution to ensure a width of 6 cm, height of 16 cm and a dpi of 300</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> <span class="fu">calculate_resolution</span>(<span class="fl">6</span>, <span class="fl">16</span>, format <span class="op">=</span> <span class="st">"svg"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fu">draw</span>(graph, resolution <span class="op">=</span> res);</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">export_graph</span>(f, <span class="st">"&lt;filename&gt;.svg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Regarding dpi, please consider that the dpi is not a property of a png image (some software include a dpi header in the image metadata, but VPL will not). It is still the responsibility of the user to ensure that the image is printed (or inserted in some document) with the correct dimensions. The <code>calculate_resolution()</code> function will simply guarantee that, once the user enforces those dimensions, the image will have the correct dpi.</p>
+</section>
+<section id="examples-for-draw" class="level1">
+<h1>Examples for <code>draw()</code></h1>
+</section>
+<section id="examples-for-render" class="level1">
+<h1>Examples for <code>render()</code></h1>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
