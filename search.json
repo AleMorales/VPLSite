@@ -109,7 +109,7 @@
     "href": "index.html#installation",
     "title": "The Virtual Plant Laboratory",
     "section": "Installation",
-    "text": "Installation\nVPL requires using Julia version 1.7 or higher. The installation of VPL is as easy as running the following code:\nusing Pkg\nPkg.add(PackageSpec(url = \"https://git.wur.nl/vpl/vpl.git\", rev  = \"master\"))"
+    "text": "Installation\nVPL requires using Julia version 1.7 or higher. The installation of VPL is as easy as running the following code:\nusing Pkg\nPkg.add(PackageSpec(url = \"https://github.com/AleMorales/VPL.git\", rev  = \"master\"))"
   },
   {
     "objectID": "index.html#the-vpl-ecosystem",
