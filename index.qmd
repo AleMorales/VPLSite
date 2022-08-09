@@ -44,7 +44,7 @@ easy as running the following code:
 
 ```julia
 using Pkg
-Pkg.add(PackageSpec(url = "https://git.wur.nl/vpl/vpl.git", rev  = "master"))
+Pkg.add(PackageSpec(url = "https://github.com/AleMorales/VPL.git", rev  = "master"))
 ```
 
 ## The VPL ecosystem
