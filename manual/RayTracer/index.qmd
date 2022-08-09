@@ -1,0 +1,60 @@
+---
+title: "Ray tracing distribution of irradiance"
+author: "Alejandro Morales Sierra"
+date: last-modified
+execute: 
+  cache: true
+---
+
+
+# Some dev notes
+
+## General description
+
+Monte Carlo Ray Tracer where rays are tracer from the sources towards the scene that is representd by triangular 3D meshes. The ray tracer has the following features:
+
+1. A Russian roulette is used for scattering such that an unbiased estimate is obtained while using a finite number of scattering events per ray
+
+2. Different acceleration structures may be used (kd-trees, bounday volume hierarchies and no acceleration)
+
+3. Different optical materials may be chosen for each element in the scene (Lambertian, Phong, LambertianPhong, Black body, Sensor) which will stored the absorbed power
+across the different simulated wavelengths.
+
+4. A SideSwitcher on top of an optical material allows to keep a separate accounting fo rays that hit on either side of a surface (e.g., different sides of a leaf)
+
+5. Different types of sources of irradiance (differing in their geometry of emission) are available, including area, line, point sources, directional sources that 
+cover the entire scene and the possibility to turn any 3D mesh into a radiance source.
+
+6. The payload of a ray may include multiple wavelengths and the optical properties may be vary per wavelength. 
+
+7. The package Sky is provided to facilitate constructing collections of sources of radiance that approximate the angular distribution of sky radiance, including the
+different CIE standard sky models.
+
+8. The ray tracer can optionally make use of Julia's multithreading capabilities to spread the computation across multiple cores within the same machine.
+
+9. The ray tracer will establish a direct connection to the user's defined objects that contain the optical materials, such that the absorbed power can be accessed easily
+by the user from within graph queries and rules.
+
+10. A grid cloner is provided to minimize border effects with as little overhead as possible.
+
+
+## Source objects
+
+The source object contains the power of each ray. This is equivalent to the radiance emitted (measured at source or at some distance from it), times the area 
+where the radiance is measured and divided by the number of rays emitted by the light source that cross that area of measurement. Hence, when we run the ray tracer
+we should get back the correct irradiance on the measurement area.
+
+In the case of directional light sources, the user should just use the *Sky* package which performs all necessary calculations for direct and diffuse solar radiation
+and generate the sources themselves.
+
+For other types of sources, the user should provided the total power emitted by the source, but helper functions will be provided to calculate this value from different types
+of measurements and source geometries.
+
+Sources are separate from the scene itself. This allows separating the construction of 3D mesh with optical properties from the different types of sources. The reasoning for this
+is as follows: (i) the 3D mesh may be built incrementally, especially when elements not include in the graphs are needed (typical examples are the soil surface or structural
+elements in the scene), (ii) different sources may be used for different simulations in the same scene (e.g., different times of the day, different solar wavelengths, thermal radiation)
+
+## Grid cloner
+
+This should be implemented inside the `trace!()` function as that is where the new rays are generated. It should somehow make use of the gbox? Look for a previous implementation of the
+grid cloner approach.

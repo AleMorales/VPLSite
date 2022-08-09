@@ -1,0 +1,15 @@
+---
+title: "Julia basics for VPL"
+author: "Alejandro Morales Sierra"
+date: last-modified
+execute: 
+    enabled: false
+---
+
+This section will include an introduction to Julia with special emphasis on what is needed to build models with VPL (i.e., a deeper understand of the language is needed compared to just doing data analysis or simulations).
+
+Key ideas:
+
+- Types and methods
+- Mutability vs immutability
+- Type redefinition and modules

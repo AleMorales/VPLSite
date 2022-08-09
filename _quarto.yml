@@ -1,0 +1,48 @@
+project:
+  type: website
+
+execute:
+  freeze: auto
+
+website:
+  title: "Virtual Plant Laboratory"
+  sidebar:
+    style: "docked"
+    collapse-level: 1
+    search: true
+    contents:
+      - section: "Julia basics"
+        contents:
+          - julia_basics/index.qmd
+      - section: "User Manual"
+        contents:
+          - section: "Graphs"
+            contents:
+              - manual/Graphs/index.qmd
+          - section: "Visualization"
+            contents:
+              - manual/Visualization/index.qmd
+      - section: "Tutorials - Beginner"
+        contents:
+          - tutorials/algae/index.qmd
+          - tutorials/snowflakes/index.qmd
+          - tutorials/binary_tree/index.qmd
+          - tutorials/random_binary_forest/index.qmd
+      - section: "Tutorials - Advanced"
+        contents:
+          - tutorials/relational_queries/index.qmd
+      - section: "API"
+        contents:
+          - api/Core.md
+          - api/Geometry.md
+          - api/Render.md
+          - api/RayTracer.md
+format:
+  html:
+    css: styles.css
+    theme:
+      light: default
+      dark: darkly
+
+
+
