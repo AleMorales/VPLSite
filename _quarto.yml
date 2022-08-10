@@ -22,6 +22,9 @@ website:
           - section: "Visualization"
             contents:
               - manual/Visualization/index.qmd
+          - section: "Ray tracing"
+            contents:
+              - manual/RayTracer/index.qmd
       - section: "Tutorials - Beginner"
         contents:
           - tutorials/algae/index.qmd
@@ -37,6 +40,15 @@ website:
           - api/Geometry.md
           - api/Render.md
           - api/RayTracer.md
+      - section: "Sky"
+        contents:
+          - Sky/index.qmd
+      - section: "Ecophys"
+        contents:
+          - Ecophys/index.qmd      
+      - section: "GCIM"
+        contents:
+          - GCIM/index.qmd   
 format:
   html:
     css: styles.css

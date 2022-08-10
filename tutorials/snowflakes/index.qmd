@@ -17,7 +17,7 @@ The idea behind this approach is to imagine a turtle located in space with a par
 
 The construction process of the Koch snowflake in VPL could then be represented by the following axiom and rewriting rule:
 
-axiom: E(L) + RU(120) + E(L) + RU(120) + E(L)
+axiom: E(L) + RU(120) + E(L) + RU(120) + E(L)  
 rule:  E(L) → E(L/3) + RU(-60) + E(L/3) + RU(120) + E(L/3) + RU(-60) + E(L/3)
 
 Where E represent and edge of a given length (given in parenthesis) and RU represents a rotation of the turtle around the upward axis, with angle of rotation given in parenthesis in hexadecimal degrees. The rule can be visualized as follows:
