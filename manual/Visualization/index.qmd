@@ -6,6 +6,10 @@ execute:
   cache: true
 ---
 
+:::{.callout-warning}
+Some of the details may change in the short term due to changes to the Makie package (e.g., inlining of native graphics in Jupyter notebooks)
+:::
+
 # Introduction
 
 VPL has two forms of visualization that are specific to a model: (i) a network representation of the graph via `draw()` and (ii) a 3D rendering of a graph or scene via `render()`. Both forms of visualization rely on the [Makie](https://makie.juliaplots.org/stable/) visualization ecosystem built into Julia. Makie allows for different backends that are relevant in different context of code execution. The backends are specified with the argument `backend` to either of the visualization methods:
@@ -36,9 +40,9 @@ This means the code is ran from within the Julia REPL inside a terminal or comma
 
 This means the code is running withn a Jupyter or Pluto notebook and they an active kernel or Julia session running in the background. Note that a notebook that is stored online will not be live unless it is hosted by a server that can run notebooks such as Binder or Google colab.
 
-* The native backend will have the same behaviour as in the terminal by default. If one wants an inline visualization (i.e., for the visualization output to show next to the code cell) one has to pass the argument `inline = true`. This will create a static image of the 2D or 3D with the initial camera settings (not interactive).
+* The native backend will produce an inline visualization (i.e., the visualization output shows below the code cell). This will however create a static image of the 2D or 3D with the initial camera settings (not interactive).
 
-* The web backend will generate the visualization output next to the code cell and it will be interactive as long as the kernel or background Julia session keeps running.
+* The web backend will generate the visualization output below the code cell and it will be interactive as long as the kernel or background Julia session keeps running.
 
 * The vector backend will display the static output next to the code cell (but only if it is using the svg engine, which is the default).
 
@@ -46,7 +50,7 @@ This means the code is running withn a Jupyter or Pluto notebook and they an act
 
 IDEs that support Julia such as [Visual Studio Code](https://code.visualstudio.com/) will generally have a plot pane where visualization output is stored. This can generally be turn off (in which case the behaviour of the IDE will be the same as running from a terminal). VPL has been tested with Visual Studio Code and the [Julia extension](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia) and, if the plot pane is active, the behaviour will be equivalent to a live interative notebook:
 
-* The native backend will trigger an external window by default unless we specify `inline = true`, in which case a static version of the output will show up in the plot pane.
+* The native backend will trigger an external window rather than in the plot pane.
 
 * The web backend will generate the visualization output in the plot pane and it will be interactive.
 
@@ -56,7 +60,7 @@ IDEs that support Julia such as [Visual Studio Code](https://code.visualstudio.c
 
 This category includes a file that is processed by [Quarto](https://quarto.org/), [Documenter](https://juliadocs.github.io/Documenter.jl/stable/), [Weave](http://weavejl.mpastell.com/stable/) or [Literate](https://fredrikekre.github.io/Literate.jl/v2/). In all of these cases the final output will remain static while the visualization output should be generated inline (i.e., next to the code chunk). The following behavior has been observed with Quarto (other document generation methods have not been fully tested with VPL but are expected to behave similarly):
 
-* For the native backend, a static snapshot of the visualization will always be inlined (even when `inline = false`). The result would be as in the inline visualization of interactive notebooks.
+* For the native backend, a static snapshot of the visualization will always be inlined. The result would be as in the inline visualization of interactive notebooks.
 
 * The web backend will not generate any visualization in the final document as this backend always requires interactivity.
 

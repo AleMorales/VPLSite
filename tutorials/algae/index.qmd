@@ -92,7 +92,7 @@ draw(organism)
 ```
 ```{julia}
 #| echo: false
-draw(organism, inline = true)
+draw(organism)
 ```
 
 
@@ -114,7 +114,7 @@ draw(organism)
 ```
 ```{julia}
 #| echo: false
-draw(organism, inline = true)
+draw(organism)
 ```
 
 The network is rather boring as the system is growing linearly (no branching) but it already illustrates how graphs can grow rapidly in just a few iterations. Remember that the interactive visualization allows adjusting the zoom, which is handy when graphs become large.
