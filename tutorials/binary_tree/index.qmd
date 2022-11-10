@@ -69,7 +69,7 @@ axiom = btree.Internode(0.1) + btree.Meristem()
 And the object for the tree can be constructed as before, by passing the axiom and the graph rewriting rules, but in this case also with the object with growth-related parameters.
 
 ```{julia}
-tree = Graph(axiom, Tuple(rule), btree.treeparams(0.5))
+tree = Graph(axiom = axiom, rules = Tuple(rule), vars = btree.treeparams(0.5))
 ```
 
 Note that so far we have not included any code to simulate growth of the internodes. The reason is that, as elongation of internotes does not change the topology of the graph (it simply changes the data stored in certain nodes), this process does not need to be implemented with graph rewriting rules. Instead, we will use a combination of a query (to identify which nodes need to be altered) and direct modification of these nodes. A `Query` object is a like a `Rule` but without a right-hand side. In this case, we just want to identify those nodes of type `Internode`, so we do not need to specify a left-hand side either. Instead, we simply create the query as:

@@ -1,0 +1,354 @@
+---
+title: "Ray-traced forest of binary trees"
+author: "Alejandro Morales Sierra"
+date: last-modified
+execute: 
+  cache: true
+---
+
+In this example we extend the example on the forest of binary forests by adding leaves
+to the trees and computing the irradiance intercepted by these leaves for each tree, 
+assuming a single directional light source. Hence, this tutorial introduces the ray
+tracer provided by VPL. As usual, we load the VPL package at the start of the script:
+
+```{julia}
+using VPL
+```
+
+The data types are similar as in the binary tree example but we need to add an additional 
+type of organ (`Leaf`) and both `Internode` and `Leaf` include information describing 
+their optical properties (i.e., objects that inherit from `Material`). For both types of
+organs we assume Lambertian optical properties defined for a single wavelength (denoted by
+the type parameter `{1}`):
+
+```{julia}
+# Module defining the types
+module rtforest
+    import VPL
+    # Meristem
+    struct Meristem <: VPL.Node end
+    # Node
+    struct Node <: VPL.Node end
+    # Internode
+    mutable struct Internode <: VPL.Node
+        length::Float64
+        mat::VPL.Lambertian{1}
+    end
+    # Leaf (an ellipse with a certain aspect ratio)
+    mutable struct Leaf <: VPL.Node
+        length::Float64
+        ratio::Float64
+        angle::Float64
+        mat::VPL.Lambertian{1}
+    end
+    struct treeparams
+        growth::Float64
+    end
+end
+
+# Make module available through an alias, but do not import the types themselves
+import .rtforest as dt
+```
+
+Remember that using a module to store the data types (and not importing their names directly) makes it 
+more convenient to iteratively change your code, as otherwise every time a type definition is changed
+you would have to restart the Julia process (and pay the compilation time again). Using an alias `dt`
+saves some typing while still maintaing an unique name for the module (important if you are following
+these tutorials in sequence).
+
+First we define the geometry associated to internodes and leaves by specializing methods for `feedgeom!`.
+The internodes are still defined by prisms, whereas leaves are defined by ellipses. The dimensions of a
+leaf are defined by `length` and the `ratio` between width and length of the leaf. Also, leaves are inserted
+in the internodes at an `angle`.
+
+```{julia}
+function VPL.feedgeom!(turtle::VPL.MTurtle, i::Internode)
+    HollowCube!(turtle, l = i.length, h = i.length/25, w = i.length/25, move = true)
+    return nothing
+end
+function VPL.feedgeom!(turtle::VPL.MTurtle, l::Leaf)
+    ra!(turtle, l.angle)
+    Ellipse!(turtle, l = l.length, w = l.length*l.ratio, move = false)
+    ra!(turtle, -l.angle)
+    return nothing
+end
+```
+
+Note that the rotations necessary to insert the leaves are not stored as 
+nodes in a graph (e.g., using `RA` nodes in the growth rule below) but rather as commands that directly modify
+the state of the geometry turtle. Both approaches are facilitated by VPL and have the same effect in terms of 
+final geometry. If we want to store the insertion angle inside the `Leaf` object and modify it later on (e.g., to simulate
+leaf movement), we must implement the rotations inside the `feedgeom!`. This latter approach may also result in
+faster simulations with lower memory requirements. One caveat is that storing rotations in the graph brings
+VPL models closer to traditional L-systems and therefore may seem more understandable to users with previous
+experience in FSPM. In any case, such users are encouraged to rethink the approach, as VPL favours a procedural
+approach such that graphs are used as little as possible (i.e., for growth rules and relational queries), which may
+not have been possible in previous FSPM software.
+
+To render 3D representations of the binary trees, we need to add `feedcolor!` methods:
+
+```{julia}
+function VPL.feedcolor!(turtle::VPL.GLTurtle, i::Internode)
+    feedcolor!(turtle, RGB(0,1,0))
+    return nothing
+end
+function VPL.feedcolor!(turtle::VPL.GLTurtle, l::Leaf)
+    feedcolor!(turtle, RGB(1,1,0))
+    return nothing
+end
+```
+
+Finally, to compute light distribution within our simulated canopies, we need to assign optical properties to each
+organ via the `feedmaterial!` method and the use of `Material` objects. The `feedmaterial!` method works similarly
+to other turtle methods, except that it works with `RTTurtle` objects, that is specialized on collecting optical
+properties. The `Material` objects not only include the optical properties, but they also stored the absorbed
+radiant power after running the ray tracer. Therefore, if one wants to retrieve this information (e.g. to compute
+photosynthesis or energy balance), the `Material` object should be stored inside the organ. This simplifies the
+`feedmaterial!` method to the following:
+
+```{julia}
+function VPL.feedmaterial!(turtle::VPL.RTTurtle, i::Internode)
+    feedmaterial!(turtle, i.mat)
+    return nothing
+end
+function VPL.feedmaterial!(turtle::VPL.RTTurtle, l::Leaf)
+    feedmaterial!(turtle, l.mat)
+    return nothing
+end
+```
+
+
+The growth rule is similar the previous forest of binary trees, but two leaves are inserted at each bifurcation, 
+perpendicular to the parent internode. Also, `Lambertian` objects are created to store the optical properties
+defined by transmittance and reflectance.
+
+```{julia}
+optical_leaf() = Lambertian(0.1, 0.05)
+optical_internode() = Lambertian(0.0, 0.25)
+rule = Rule(Meristem, rhs = mer -> Node() + 
+                   (Leaf(0.05, 0.5, 90.0, optical_leaf()), 
+                    Leaf(0.05, 0.5, -90.0, optical_leaf()),
+                    RU(-60.0) + Internode(0.1, optical_internode()) + RH(90.0) + Meristem(), 
+                    RU(60.0)  + Internode(0.1, optical_internode()) + RH(90.0) + Meristem()))
+```
+
+
+As in the previous forest example, each tree is defined by a simple axiom, the growth rule given above and a
+growth parameter that is unique to that tree. We can wrap this in a function that also allows different locations
+for the trees:
+
+```{julia}
+function create_tree(origin, growth)
+    axiom = T(origin) + Internode(0.1, optical_internode()) + Meristem()
+    tree = Graph(axiom, Tuple(rule), treeparams(growth))
+    return tree
+end
+```
+
+Both internodes and leaves are elongated in each time step according to the growth rate associated to each tree:
+
+```{julia}
+getInternode = Query(rbtree.Internode)
+getLeaf      = Query(Leaf)
+function elongate!(tree, query)
+    for x in apply(tree, query)
+        x.length = x.length*(1.0 + vars(tree).growth)
+    end
+end
+```
+
+Both queries for internode and leaf elongation, plus the application of relational growth rules can be collected
+into a single function for convenience. This represent a single timestep for a given tree:
+
+```{julia}
+# Grow a tree by elongating the organs and applying growth rule
+function grow!(tree, queries)
+    elongate!(tree, queries[1])
+    elongate!(tree, queries[2])
+    rewrite!(tree)
+end
+```
+
+Given that this simple model does not include competition for resources among the trees, the growth of each plant can
+be simulated independently (in a more mechanistic FSPM this would not make sense). Hence, the simulation loop can be
+defined per tree within a `simulate` function:
+
+```{julia}
+function simulate(tree, query, nsteps)
+    new_tree = deepcopy(tree)
+    for i in 1:nsteps
+        growth!(new_tree, query)
+    end
+    return new_tree
+end
+```
+
+
+- Create a sample of growth parameters representing the population of trees
+- Create forest with regular origins
+- 6 step simulation using parallel computing
+- Create a scene and render it
+- Ray trace the forest
+- Retrieve the total radiant power absorbed for each tree
+
+
+
+
+
+
+Let's simulate a forest of 10 x 10 binary trees with a distance between (and within) rows
+of 2 meters. First we generate the original
+positions of the trees. For the position we just need to pass a `Vec` object with the
+x, y, and z coordinates of the location of each tree. The code below will generate 
+a matrix with the coordinates:
+
+```{julia}
+origins = [Vec(i,j,0) for i = 1:2.0:20.0, j = 1:2.0:20.0]
+```
+
+We now simulate the values of the `growth` parameter, by sampling values for a normal
+distribution (in practice you would determine this distribution from experiments). 
+We can implement a function that returns random values with the desired characteristics but
+take into account that `randn` implements the standard Normal distribution (so mean = 0 and 
+standard deviation = 1) so we need to scale it
+
+```{julia}
+growth_distr(n) = 0.5 .+ randn(n)./10
+```
+
+You may also use the Distributions Julia package (you will need to install it first) that allows to
+construct different distributions and sample from them. For now, let's work with this ad-hoc function
+but before we use it to generate the growth parameters of the different trees, let's visualize it
+using the Plots package (as before, you need to install it first if you have not done so already):
+
+```{julia}
+using Plots
+histogram(growth_distr(10_000))
+```
+
+So our trees will have, on average, a relative growth rate of 0.5 (like in the binary tree example) but
+each individual tree can have any value, mostly between 0.2 and 0.8. Let's generate the growth parameters
+for the 100 trees in our simulation:
+
+```{julia}
+growths = growth_distr(100);
+```
+
+Now we can create our random forest of binary trees by calling the `create_tree` function we defined earlier
+with the correct origins and growth parameter
+
+```{julia}
+forest = [create_tree(origins[i], growths[i]) for i in 1:100];
+```
+
+The object `forest` contains an array of binary trees. Each tree is a different Graph, with
+its own nodes, rewriting rules and variables. This avoids having to create a large graphs to
+include all the plants in a simulation. Below we will run a simulation, first using a sequential
+approach (i.e. using one core) and then using multiple cores in our computers (please check
+https://docs.julialang.org/en/v1/manual/multi-threading/ if the different cores are not being used
+as you may need to change some settings in your computer).
+
+## Sequential simulation
+
+We can simulate the growth of each tree by applying the method `simulate` to each
+tree, creating a new version of the forest (the code below is an array comprehension)
+
+```{julia}
+newforest = [simulate(tree, getInternode, 2) for tree in forest];
+```
+
+And we can render the forest with the function `render` as in the binary tree
+example but passing the whole forest at once
+
+```{julia}
+render(newforest)
+```
+
+If we iterate 4 more iterations we will start seeing the different individuals
+diverging in size due to the differences in growth rates
+
+```{julia}
+newforest = [simulate(tree, getInternode, 4) for tree in newforest];
+render(newforest)
+```
+
+## Multithreaded simulation
+
+In the previous section, the simulation of growth was done sequentially, one tree
+after another (since the growth of a tree only depends on its own parameters). However,
+this can also be executed in multiple threads. In this case we use an explicit loop 
+and execute the iterations of the loop in multiple threads using the macro `@threads`.
+Note that the rendering function can also be ran in parallel (i.e. the geometry will be
+generated separately for each plant and the merge together):
+
+```{julia}
+using Base.Threads
+newforest = deepcopy(forest)
+@threads for i in 1:length(forest)
+    newforest[i] = simulate(forest[i], getInternode, 6)
+end
+render(newforest, parallel = true)
+```
+
+An alternative way to perform the simulation is to have an outer loop for each timestep and an internal loop over the different trees. Although this approach is not required for this simple model, most FSP models will probably need such a scheme as growth of each individual plant will depend on competition for resources with neighbouring plants. In this case, this approach would look as follows:
+
+```{julia}
+newforest = deepcopy(forest)
+for step in 1:6
+    @threads for i in 1:length(newforest)
+        newforest[i] = simulate(newforest[i], getInternode, 1)
+    end
+end
+render(newforest, parallel = true)
+```
+
+# Customizing the scene
+
+Here we are going to customize the scene of our simulation by adding a horizontal tile represting soil and
+tweaking the 3D representation. When we want to combine plants generated from graphs with any other
+geometric element it is best to combine all these geometries in a `GLScene` object. We can start the scene
+with the `newforest` generated in the above:
+
+```{julia}
+scene = GLScene(newforest);
+```
+
+We can create the soil tile directly, without having to create a graph. The simplest approach is two use 
+a special constructor `Rectangle` where one species a corner of the rectangle and two vectors defining the
+two sides of the vectors. Both the sides and the corner need to be specified with `Vec` just like in the
+above when we determined the origin of each plant. VPL offers some shortcuts: `O()` returns the origin
+(`Vec(0.0, 0.0, 0.0)`), whereas `X`, `Y` and `Z` returns the corresponding axes and you can scale them by 
+passing the desired length as input. Below, a rectangle is created on the XY plane with the origin as a 
+corner and each side being 11 units long:
+
+```{julia}
+soil = Rectangle(O(), Y(21.0), X(21.0)); # (corner, side1, side2)
+```
+
+We can now add the `soil` to the `scene` object with the `add!` function.
+```{julia}
+VPL.add!(scene = scene, mesh = soil, color = RGB(1,1,0))
+```
+
+We can now render the scene that combines the random forest of binary trees and a yellow soil. Notice that
+in all previous figures, a coordinate system with grids was being depicted. This is helpful for debugging
+your code but also to help setup the scene (e.g. if you are not sure how big the soil tile should be).
+Howver, it may be distracting for the visualization. It turns out that we can turn that off with
+`show_axes = false`:
+
+```{julia}
+render(scene, axes = false)
+```
+
+We may also want to save a screenshot of the scene. For this, we need to store the output of the `render` function.
+We can then resize the window rendering the scene, move around, zoom, etc. When we have a perspective that we like,
+we can run the `save_scene` function on the object returned from `render`. The argument `resolution` can be adjust in both
+`render` and `save_scene` (the image will have the correct number of pixels but it looks much worse than in the original
+window...):
+
+```{julia}
+#| eval: false
+output = render(scene, axes = false)
+# Play around with the scene
+export_scene("nice_trees.png", output) 
+```

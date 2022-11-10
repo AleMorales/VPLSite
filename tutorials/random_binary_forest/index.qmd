@@ -1,5 +1,5 @@
 ---
-title: "Random binary tree"
+title: "Forest of binary trees"
 author: "Alejandro Morales Sierra"
 date: last-modified
 execute: 
@@ -59,7 +59,7 @@ the required parameters as inputs.
 ```{julia}
 function create_tree(origin, growth)
     axiom = T(origin) + rbtree.Internode(0.1) + rbtree.Meristem()
-    tree = Graph(axiom, Tuple(rule), rbtree.treeparams(growth))
+    tree = Graph(axiom = axiom, rules = Tuple(rule), vars = rbtree.treeparams(growth))
     return tree
 end
 ```
@@ -97,7 +97,7 @@ x, y, and z coordinates of the location of each tree. The code below will genera
 a matrix with the coordinates:
 
 ```{julia}
-origins = [Vec(i,j,0) for i = 1:2.0:20.0, j = 1:2.0:20.0]
+origins = [Vec(i,j,0) for i = 1:2.0:20.0, j = 1:2.0:20.0];
 ```
 
 We now simulate the values of the `growth` parameter, by sampling values for a normal
@@ -221,7 +221,7 @@ soil = Rectangle(O(), Y(21.0), X(21.0)); # (corner, side1, side2)
 
 We can now add the `soil` to the `scene` object with the `add!` function.
 ```{julia}
-VPL.add!(scene = scene, mesh = soil, color = RGB(1,1,0))
+VPL.add!(scene, soil, RGB(1,1,0))
 ```
 
 We can now render the scene that combines the random forest of binary trees and a yellow soil. Notice that
@@ -244,5 +244,5 @@ window...):
 #| eval: false
 output = render(scene, axes = false)
 # Play around with the scene
-export_scene("nice_trees.png", output) 
+export_scene(output, "nice_trees.png") 
 ```

@@ -75,7 +75,7 @@ For simple rules (especially if the right hand side is just a line of code) it i
 With the axiom and rules we can now create a `Graph` object that represents the algae organism. The first argument is the axiom and the second is a tuple with all the rewriting rules:
 
 ```{julia}
-organism = Graph(axiom, rules = (rule1, rule2))
+organism = Graph(axiom = axiom, rules = (rule1, rule2))
 ```
 
 If we apply the rewriting rules iteratively, the graph will grow, in this case representing the growth of the algae organism. The rewriting rules are applied on the graph with the function `rewrite!()`:
