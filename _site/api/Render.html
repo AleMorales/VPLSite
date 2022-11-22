@@ -287,11 +287,6 @@
   <a href="../api/Render.html" class="sidebar-item-text sidebar-link active">Module Render</a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
-  </div>
-</li>
     </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -357,11 +352,11 @@
 <p><a id="VPL.Render.GLScene" href="#VPL.Render.GLScene">#</a> <strong><code>VPL.Render.GLScene</code></strong> — <em>Type</em>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GLScene</span>(mesh, colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Create a 3D scene for rendering from a <code>Mesh</code> object (<code>m</code>) and colors associated to the different primitives (<code>colors</code>). This method is useful when the user has generated separately the 3D mesh and array with colors, as otherwise other methods of <code>GLScene()</code> will be more useful.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Scene.jl#LL1-L7" class="documenter-source">source</a><br></p>
-<p><a id="VPL.add!-Tuple{Any, Any, Any}" href="#VPL.add!-Tuple{Any, Any, Any}">#</a> <strong><code>VPL.add!</code></strong> — <em>Method</em>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add!</span>(scene, mesh, color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Scene.jl#LL1-L7" class="documenter-source">source</a><br></p>
+<p><a id="VPL.add!-Tuple{Any}" href="#VPL.add!-Tuple{Any}">#</a> <strong><code>VPL.add!</code></strong> — <em>Method</em>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add!</span>(scene; mesh, color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Manually add a 3D mesh with corresponding colors (<code>mesh</code> and <code>color</code>) to an existing <code>GLScene</code> object (<code>scene</code>).</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Scene.jl#LL65-L69" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Scene.jl#LL65-L70" class="documenter-source">source</a><br></p>
 <p><a id="Rendering-methods"></a></p>
 <p><a id="Rendering-methods-1"></a></p>
 </section>
@@ -370,46 +365,46 @@
 <p><a id="VPL.Render.GLTurtle" href="#VPL.Render.GLTurtle">#</a> <strong><code>VPL.Render.GLTurtle</code></strong> — <em>Type</em>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GLTurtle</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Create a <code>GLTurtle()</code> object that will parse a <code>Graph</code> object and store the colors associated to the different primitives. This type of turtle is automatically created by calls to <code>GLScene()</code> and <code>render()</code> but the user may want to separately construct the geometry and colors and manually combined them into a <code>GLScene</code> object for performance reasons.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Turtle.jl#LL2-L9" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Turtle.jl#LL2-L9" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Render.colors-Tuple{VPL.Render.GLTurtle}" href="#VPL.Render.colors-Tuple{VPL.Render.GLTurtle}">#</a> <strong><code>VPL.Render.colors</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colors</span>(turtle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Extract the array of colors stored inside an <code>GLTurtle</code> object</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Turtle.jl#LL14-L18" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Turtle.jl#LL14-L18" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Render.feedcolor!" href="#VPL.Render.feedcolor!">#</a> <strong><code>VPL.Render.feedcolor!</code></strong> — <em>Function</em>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">feedcolor!</span>(turtle<span class="op">::</span><span class="dt">GLTurtle</span>, color<span class="op">::</span><span class="dt">Colorant</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>General purpose method to feed a color to a GL turtle. This should be used inside user’s defined methods to add any color object that inherits from <code>Colorant</code> from the package <em>Color</em>, for example, by using <code>RGB()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Turtle.jl#LL21-L27" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Turtle.jl#LL21-L27" class="documenter-source">source</a><br></p>
 <pre><code>feedcolor!(turtle::GLTurtle, node::Node)</code></pre>
 <p>Default method for <code>feedcolor!()</code> that does not do anything. Hence, the user can include nodes in a graph withour associated colors (the nodes should not generate geometry either).</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Turtle.jl#LL30-L35" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Turtle.jl#LL30-L35" class="documenter-source">source</a><br></p>
 <pre><code>feedcolor!(turtle::GLTurtle, g::Graph)</code></pre>
 <p>Process a <code>Graph</code> object with a GL turtle and collect the colors defined in the graph, in the same order in which the 3D mesh is created by the corresponding <code>feedgeom!()</code> method.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Turtle.jl#LL38-L43" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Turtle.jl#LL38-L43" class="documenter-source">source</a><br></p>
 <pre><code>feedcolor!(turtle::GLTurtle, collection::AbstractArray)
 feedcolor!(turtle::GLTurtle, collection::Tuple)</code></pre>
 <p>Feed a GL turtle an array or tuple of objects (<code>collection</code>) with existing <code>feedcolor!()</code> methods.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Turtle.jl#LL68-L73" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Turtle.jl#LL68-L73" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Render.render" href="#VPL.Render.render">#</a> <strong><code>VPL.Render.render</code></strong> — <em>Function</em>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(m<span class="op">::</span><span class="dt">Mesh</span>, color; kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Render a mesh with a given color. This will create a new visualization (see Documentation for details). Keyword arguments are passed to the <code>render(scene::GLScene)</code> method and any unmatched keywords will be passed along to <code>Makie.mesh()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Render.jl#LL6-L12" class="documenter-source">source</a><br></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(m<span class="op">::</span><span class="dt">Mesh</span>; kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Render a mesh. This will create a new visualization (see Documentation for details). Keyword arguments are passed to the <code>render(scene::GLScene)</code> method and any unmatched keywords will be passed along to <code>Makie.mesh()</code>.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Render.jl#LL6-L12" class="documenter-source">source</a><br></p>
 <pre><code>render(scene::GLScene; normals::Bool = false, wireframe::Bool = false, kwargs...)</code></pre>
 <p>Render a <code>GLScene</code> object. This will create a new visualization (see Documentation for details). <code>normals = true</code> will draw arrows in the direction of the normal vector for each triangle in the mesh, <code>wireframe = true</code> will draw the edges of each triangle with black lines. Keyword arguments are passed to <code>Makie.mesh()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Render.jl#LL61-L68" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Render.jl#LL62-L70" class="documenter-source">source</a><br></p>
 <pre><code>render(graph::Graph; normals::Bool = false, wireframe::Bool = false, kwargs...)</code></pre>
 <p>Render the 3D mesh associated to a <code>Graph</code> object. This will create a new visualization (see Documentation for details). <code>normals = true</code> will draw arrows in the direction of the normal vector for each triangle in the mesh, <code>wireframe = true</code> will draw the edges of each triangle with black lines. Keyword arguments are passed to <code>Makie.mesh()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Render.jl#LL73-L80" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Render.jl#LL75-L83" class="documenter-source">source</a><br></p>
 <pre><code>render(graphs::Vector{&lt;:Graph}; normals::Bool = false, wireframe::Bool = false, kwargs...)</code></pre>
 <p>Render the 3D mesh associated to an array of <code>Graph</code> objects. This will create a new visualization (see Documentation for details). <code>normals = true</code> will draw arrows in the direction of the normal vector for each triangle in the mesh, <code>wireframe = true</code> will draw the edges of each triangle with black lines. Keyword arguments are passed to <code>Makie.mesh()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Render.jl#LL85-L92" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Render.jl#LL88-L96" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Render.render!" href="#VPL.Render.render!">#</a> <strong><code>VPL.Render.render!</code></strong> — <em>Function</em>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render!</span>(m<span class="op">::</span><span class="dt">Mesh</span>, color; kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Add a mesh with a given color the visualization currently active. This will create a new visualization (see Documentation for details). Keyword arguments are passed to the <code>render!(scene::GLScene)</code> method and any unmatched keywords will be passed along to <code>Makie.mesh!()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Render.jl#LL17-L23" class="documenter-source">source</a><br></p>
-<p><a id="VPL.Render.export_scene-Tuple{Any, Any}" href="#VPL.Render.export_scene-Tuple{Any, Any}">#</a> <strong><code>VPL.Render.export_scene</code></strong> — <em>Method</em>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">export_scene</span>(scene, filename; kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render!</span>(m<span class="op">::</span><span class="dt">Mesh</span>; kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Add a mesh to the visualization currently active. This will create a new visualization (see Documentation for details). Keyword arguments are passed to the <code>render!(scene::GLScene)</code> method and any unmatched keywords will be passed along to <code>Makie.mesh!()</code>.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Render.jl#LL17-L24" class="documenter-source">source</a><br></p>
+<p><a id="VPL.Render.export_scene-Tuple{}" href="#VPL.Render.export_scene-Tuple{}">#</a> <strong><code>VPL.Render.export_scene</code></strong> — <em>Method</em>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">export_scene</span>(;scene, filename, kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Export a screenshot of the current visualization (stored as <code>scene</code> as output of a call to <code>render</code>) as a PNG file store in the path given by <code>filename</code> (including <code>.png</code> extension). Keyword arguments will be passed along to the corresponding <code>save</code> method from Makie (see VPL documentation for details).</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/Render/Render.jl#LL101-L107" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/d66eff4b08a2351d41dba4727a743f0c082dc481/src/Render/Render.jl#LL105-L112" class="documenter-source">source</a><br></p>
 
 
 

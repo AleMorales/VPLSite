@@ -288,11 +288,6 @@
   <a href="../../api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
-  </div>
-</li>
     </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -353,7 +348,7 @@
 
 <div class="quarto-title"><h1 class="title d-none d-lg-block display-7">Relational queries</h1></div><div class="quarto-title-meta"><div><div class="quarto-title-meta-heading">Author</div><div class="quarto-title-meta-contents"><div class="quarto-title-authors"><div><div>
 <p>Alejandro Morales Sierra</p>
-</div></div></div></div></div><div><div class="quarto-title-meta-heading">Published</div><div class="quarto-title-meta-contents"><p class="date">November 10, 2022</p></div></div></div></header>
+</div></div></div></div></div><div><div class="quarto-title-meta-heading">Published</div><div class="quarto-title-meta-contents"><p class="date">November 22, 2022</p></div></div></div></header>
 <p>In this example we illustrate how to test relationships among nodes inside queries. Relational queries allow to establish relationships between nodes in the graph, which generally requires a intimiate knowledge of the graph. For this reason, relational queries are inheretly complex as graphs can become complex and there may be solutions that do not require relational queries in many instances. Nevertheless, they are integral part of VPL and can sometimes be useful. As they can be hard to grasp, this tutorial will illustrate with a relatively simple graph a series of relational queries with increasing complexity with the aim that users will get a better understanding of relational queries. For this purpose, an abstract graph with several branching levels will be used, so that we can focus on the relations among the nodes without being distracted by case-specific details.</p>
 <p>The graph will be composed of two types of nodes: the inner nodes (<code>A</code> and <code>C</code>) and the leaf nodes (<code>B</code>). Each leaf node will be identified uniquely with an index and the objective is to write queries that can identify a specific subset of the leaf nodes, without using the data stored in the nodes themselves. That is, the queries should select the right nodes based on their relationships to the rest of nodes in the graph. Note that <code>C</code> nodes contain a single value that may be positive or negative, whereas <code>A</code> nodes contain no data.</p>
 <p>As usual, we start with defining the types of nodes in the graph</p>

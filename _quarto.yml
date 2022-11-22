@@ -39,7 +39,7 @@ website:
           - api/Core.md
           - api/Geometry.md
           - api/Render.md
-          - api/RayTracer.md
+          #- api/RayTracer.md
       - section: "Sky"
         contents:
           - Sky/index.qmd
