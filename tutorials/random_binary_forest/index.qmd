@@ -32,7 +32,8 @@ module rbtree
 end
 
 function VPL.feedgeom!(turtle::MTurtle, i::rbtree.Internode)
-    HollowCube!(turtle, l = i.length, h =  min(i.length/10, 0.3), w =  min(i.length/10, 0.3), move = true)
+    HollowCube!(turtle, length = i.length, height =  min(i.length/10, 0.3), 
+                        width =  min(i.length/10, 0.3), move = true)
     return nothing
 end
 function VPL.feedcolor!(turtle::GLTurtle, i::rbtree.Internode)
@@ -216,12 +217,12 @@ passing the desired length as input. Below, a rectangle is created on the XY pla
 corner and each side being 11 units long:
 
 ```{julia}
-soil = Rectangle(O(), Y(21.0), X(21.0)); # (corner, side1, side2)
+soil = Rectangle(O(), length = Y(21.0), width = X(21.0)); # (corner, side1, side2)
 ```
 
 We can now add the `soil` to the `scene` object with the `add!` function.
 ```{julia}
-VPL.add!(scene, soil, RGB(1,1,0))
+VPL.add!(scene, mesh = soil, color = RGB(1,1,0))
 ```
 
 We can now render the scene that combines the random forest of binary trees and a yellow soil. Notice that
@@ -244,5 +245,5 @@ window...):
 #| eval: false
 output = render(scene, axes = false)
 # Play around with the scene
-export_scene(output, "nice_trees.png") 
+export_scene(scene = output, filename = "nice_trees.png") 
 ```
