@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2022-11-22">
+<meta name="dcterms.date" content="2022-11-24">
 
 <title>Virtual Plant Laboratory - Forest of binary trees</title>
 <style>
@@ -359,7 +359,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 22, 2022</p>
+      <p class="date">November 24, 2022</p>
     </div>
   </div>
   
@@ -533,7 +533,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>We can create the soil tile directly, without having to create a graph. The simplest approach is two use a special constructor <code>Rectangle</code> where one species a corner of the rectangle and two vectors defining the two sides of the vectors. Both the sides and the corner need to be specified with <code>Vec</code> just like in the above when we determined the origin of each plant. VPL offers some shortcuts: <code>O()</code> returns the origin (<code>Vec(0.0, 0.0, 0.0)</code>), whereas <code>X</code>, <code>Y</code> and <code>Z</code> returns the corresponding axes and you can scale them by passing the desired length as input. Below, a rectangle is created on the XY plane with the origin as a corner and each side being 11 units long:</p>
 <div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>soil <span class="op">=</span> <span class="fu">Rectangle</span>(<span class="fu">O</span>(), length <span class="op">=</span> <span class="fu">Y</span>(<span class="fl">21.0</span>), width <span class="op">=</span> <span class="fu">X</span>(<span class="fl">21.0</span>)); <span class="co"># (corner, side1, side2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>soil <span class="op">=</span> <span class="fu">Rectangle</span>(length <span class="op">=</span> <span class="fl">21.0</span>, width <span class="op">=</span> <span class="fl">21.0</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rotatey!</span>(soil, <span class="cn">pi</span><span class="op">/</span><span class="fl">2</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>VPL.<span class="fu">translate!</span>(soil, <span class="fu">Vec</span>(<span class="fl">0.0</span>, <span class="fl">10.5</span>, <span class="fl">0.0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now add the <code>soil</code> to the <code>scene</code> object with the <code>add!</code> function.</p>
 <div class="cell" data-execution_count="16">

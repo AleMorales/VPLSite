@@ -217,7 +217,9 @@ passing the desired length as input. Below, a rectangle is created on the XY pla
 corner and each side being 11 units long:
 
 ```{julia}
-soil = Rectangle(O(), length = Y(21.0), width = X(21.0)); # (corner, side1, side2)
+soil = Rectangle(length = 21.0, width = 21.0)
+rotatey!(soil, pi/2)
+VPL.translate!(soil, Vec(0.0, 10.5, 0.0))
 ```
 
 We can now add the `soil` to the `scene` object with the `add!` function.
