@@ -154,6 +154,76 @@
     "text": "This section will include an introduction to Julia with special emphasis on what is needed to build models with VPL (i.e., a deeper understand of the language is needed compared to just doing data analysis or simulations).\nKey ideas:\n\nTypes and methods\nMutability vs immutability\nType redefinition and modules"
   },
   {
+    "objectID": "manual/Geometry/Primitives/index.html",
+    "href": "manual/Geometry/Primitives/index.html",
+    "title": "Geometry primitives",
+    "section": "",
+    "text": "using VPL\nList of primitives with example of code for direct construction. See API for turtle constructors (the keyword arguments remain the same).\nThe 3D visualizations keep the axes to help understand what the standard location and orientation are (use axes = false to turn off). They also set normals = true and wireframe = true to highlight how the mesh is partitioned into triangles and the normal vectors of each triangle (this is important for the ray tracer and when exporting meshes out of VPL). All meshes are rendered in green assuming 50% transparency (color = RGBA(0,1,0,0.5)). Note that one must use transparency = true to ensure that the transparency is enabled when rendering the mesh."
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#triangle",
+    "href": "manual/Geometry/Primitives/index.html#triangle",
+    "title": "Geometry primitives",
+    "section": "Triangle",
+    "text": "Triangle\n\np = Triangle(length = 1.0, width = 1.0)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#rectangle",
+    "href": "manual/Geometry/Primitives/index.html#rectangle",
+    "title": "Geometry primitives",
+    "section": "Rectangle",
+    "text": "Rectangle\n\np = Rectangle(length = 1.0, width = 1.0)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#trapezoid",
+    "href": "manual/Geometry/Primitives/index.html#trapezoid",
+    "title": "Geometry primitives",
+    "section": "Trapezoid",
+    "text": "Trapezoid\n\np = Trapezoid(length = 1.0, width = 1.0, ratio = 0.5)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#ellipse",
+    "href": "manual/Geometry/Primitives/index.html#ellipse",
+    "title": "Geometry primitives",
+    "section": "Ellipse",
+    "text": "Ellipse\n\np = Ellipse(length = 1.0, width = 1.0, n = 30)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#axis-aligned-bounding-box",
+    "href": "manual/Geometry/Primitives/index.html#axis-aligned-bounding-box",
+    "title": "Geometry primitives",
+    "section": "Axis-aligned bounding box",
+    "text": "Axis-aligned bounding box\n\np = BBox(Vec(0.0, 0.0, 0.0), Vec(1.0, 1.0, 1.0))\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#cube",
+    "href": "manual/Geometry/Primitives/index.html#cube",
+    "title": "Geometry primitives",
+    "section": "Cube",
+    "text": "Cube\nSolid version\n\np = SolidCube(length = 1.0, width = 1.0, height = 1.0)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)\n\n\n\n\nHollow version\n\np = HollowCube(length = 1.0, width = 1.0, height = 1.0)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#cylinder",
+    "href": "manual/Geometry/Primitives/index.html#cylinder",
+    "title": "Geometry primitives",
+    "section": "Cylinder",
+    "text": "Cylinder\nSolid version\n\np = SolidCylinder(length = 1.0, width = 1.0, height = 1.0, n = 80)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)\n\n\n\n\nHollow version\n\np = HollowCylinder(length = 1.0, width = 1.0, height = 1.0, n = 40)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#frustum",
+    "href": "manual/Geometry/Primitives/index.html#frustum",
+    "title": "Geometry primitives",
+    "section": "Frustum",
+    "text": "Frustum\nSolid version\n\np = SolidFrustum(length = 1.0, width = 1.0, height = 1.0, ratio = 0.5, n = 80)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)\n\n\n\n\nHollow version\n\np = HollowFrustum(length = 1.0, width = 1.0, height = 1.0, ratio = 0.5, n = 40)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
+    "objectID": "manual/Geometry/Primitives/index.html#cone",
+    "href": "manual/Geometry/Primitives/index.html#cone",
+    "title": "Geometry primitives",
+    "section": "Cone",
+    "text": "Cone\nSolid version\n\np = SolidCone(length = 1.0, width = 1.0, height = 1.0, n = 40)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)\n\n\n\n\nHollow version\n\np = HollowCone(length = 1.0, width = 1.0, height = 1.0, n = 20)\nrender(p, wireframe = true, normals = true, color = RGBA(0,1,0,0.5), transparency = true)"
+  },
+  {
     "objectID": "manual/Graphs/index.html",
     "href": "manual/Graphs/index.html",
     "title": "Dynamic graph creation and manipulation",

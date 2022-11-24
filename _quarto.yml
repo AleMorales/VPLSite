@@ -19,6 +19,9 @@ website:
           - section: "Graphs"
             contents:
               - manual/Graphs/index.qmd
+          - section: "Geometry"
+            contents:
+              - manual/Geometry/Primitives/index.qmd
           - section: "Visualization"
             contents:
               - manual/Visualization/index.qmd
