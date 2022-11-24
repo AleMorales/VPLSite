@@ -381,7 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    rule <span class="op">=</span> <span class="fu">Rule</span>(A, rhs <span class="op">=</span> x <span class="op">-&gt;</span> <span class="fu">A0</span>() <span class="op">+</span> <span class="fu">B0</span>())</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    rules_graph <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> rule)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Graph.jl#LL7-L44" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Graph.jl#LL7-L44" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.Rule" href="#VPL.Core.Rule">#</a> <strong><code>VPL.Core.Rule</code></strong> — <em>Type</em>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Rule</span>(nodetype; lhs <span class="op">=</span> x <span class="op">-&gt;</span> <span class="cn">true</span>, rhs <span class="op">=</span> x <span class="op">-&gt;</span> <span class="cn">nothing</span>, captures <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Create a replacement rule for nodes of type <code>nodetype</code>.</p>
@@ -412,7 +412,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    rules_graph <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> rule)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rewrite!</span>(rules_graph)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Rule.jl#LL7-L40" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Rule.jl#LL7-L40" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.Query" href="#VPL.Core.Query">#</a> <strong><code>VPL.Core.Query</code></strong> — <em>Type</em>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Query</span>(nodetype<span class="op">::</span><span class="dt">DataType</span>; condition <span class="op">=</span> x <span class="op">-&gt;</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Create a query that matches nodes of type <code>nodetype</code> and a <code>condition</code>.</p>
@@ -434,7 +434,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> <span class="fu">Graph</span>(axiom)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="fu">Query</span>(A)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(graph, query)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Query.jl#LL7-L39" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Query.jl#LL7-L39" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.Node" href="#VPL.Core.Node">#</a> <strong><code>VPL.Core.Node</code></strong> — <em>Type</em>.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Node</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Abstract type from which every node in a graph should inherit. This allows using the graph construction DSL.</p>
@@ -447,7 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  b2 <span class="op">=</span> <span class="fu">bar</span>(<span class="fl">2</span>)</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  b1 <span class="op">+</span> b2</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Types.jl#LL3-L20" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Types.jl#LL3-L20" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.Context" href="#VPL.Core.Context">#</a> <strong><code>VPL.Core.Context</code></strong> — <em>Type</em>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Context</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Data structure than links a node to the rest of the graph.</p>
@@ -459,7 +459,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Details</strong></p>
 <p>A <code>Context</code> object wraps references to a node and its associated graph. The purpose of this structure is to be able to test relationships among nodes within a graph (from with a query or rule), as well as access the data stored in a node (with <code>data()</code>) or the graph (with <code>vars()</code>).</p>
 <p>Users do not build <code>Context</code> objects directly but they are provided by VPL as inputs to the user-defined functions inside rules and queries.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Types.jl#LL41-L58" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Types.jl#LL41-L58" class="documenter-source">source</a><br></p>
 <p><a id="Graph-DSL"></a></p>
 <p><a id="Graph-DSL-1"></a></p>
 </section>
@@ -475,7 +475,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    axiom <span class="op">=</span> <span class="fu">A1</span>(<span class="fl">1</span>) <span class="op">+</span> <span class="fu">B1</span>(<span class="fl">1</span>)</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">draw</span>(axiom)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/GraphConstruction.jl#LL52-L66" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL52-L66" class="documenter-source">source</a><br></p>
 <p><a id="Base.:+-Tuple{VPL.Core.StaticGraph, VPL.Core.Node}" href="#Base.:+-Tuple{VPL.Core.StaticGraph, VPL.Core.Node}">#</a> <strong><code>Base.:+</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">+</span>(g<span class="op">::</span><span class="dt">StaticGraph</span>, n<span class="op">::</span><span class="dt">Node</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Creates a graph as the result of appending the node <code>n</code> to the insertion point of graph <code>g</code>.</p>
@@ -487,7 +487,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    axiom <span class="op">=</span> axiom <span class="op">+</span> <span class="fu">A1</span>(<span class="fl">2</span>)</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">draw</span>(axiom)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/GraphConstruction.jl#LL76-L91" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL76-L91" class="documenter-source">source</a><br></p>
 <p><a id="Base.:+-Tuple{VPL.Core.Node, VPL.Core.StaticGraph}" href="#Base.:+-Tuple{VPL.Core.Node, VPL.Core.StaticGraph}">#</a> <strong><code>Base.:+</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">+</span>(n<span class="op">::</span><span class="dt">Node</span>, g<span class="op">::</span><span class="dt">StaticGraph</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Creates a graph as the result of appending the static graph <code>g</code> to the node <code>n</code>.</p>
@@ -499,7 +499,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    axiom <span class="op">=</span> <span class="fu">A1</span>(<span class="fl">2</span>) <span class="op">+</span> axiom</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">draw</span>(axiom)</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/GraphConstruction.jl#LL94-L109" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL94-L109" class="documenter-source">source</a><br></p>
 <p><a id="Base.:+-Tuple{VPL.Core.StaticGraph, VPL.Core.StaticGraph}" href="#Base.:+-Tuple{VPL.Core.StaticGraph, VPL.Core.StaticGraph}">#</a> <strong><code>Base.:+</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">+</span>(g1<span class="op">::</span><span class="dt">StaticGraph</span>, g2<span class="op">::</span><span class="dt">StaticGraph</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Creates a graph as the result of appending <code>g2</code> to the insertion point of <code>g1</code>. The insertion point of the final graph corresponds to the insertion point of <code>g2</code>.</p>
@@ -512,7 +512,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    axiom <span class="op">=</span> axiom1 <span class="op">+</span> axiom2</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">draw</span>(axiom)</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/GraphConstruction.jl#LL113-L130" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL113-L130" class="documenter-source">source</a><br></p>
 <p><a id="Base.:+-Tuple{VPL.Core.Node, Tuple}" href="#Base.:+-Tuple{VPL.Core.Node, Tuple}">#</a> <strong><code>Base.:+</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">+</span>(g<span class="op">::</span><span class="dt">StaticGraph</span>, T<span class="op">::</span><span class="dt">Tuple</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">+</span>(n<span class="op">::</span><span class="dt">Node</span>, T<span class="op">::</span><span class="dt">Tuple</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -524,7 +524,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    axiom <span class="op">=</span> <span class="fu">A1</span>(<span class="fl">1</span>) <span class="op">+</span> (<span class="fu">B1</span>(<span class="fl">1</span>) <span class="op">+</span> <span class="fu">A1</span>(<span class="fl">3</span>), <span class="fu">B1</span>(<span class="fl">4</span>))</span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">draw</span>(axiom)</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/GraphConstruction.jl#LL149-L166" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL149-L166" class="documenter-source">source</a><br></p>
 <p><a id="Applying-rules-and-queries"></a></p>
 <p><a id="Applying-rules-and-queries-1"></a></p>
 </section>
@@ -540,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> <span class="fu">Graph</span>(axiom)</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="fu">Query</span>(A)</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(graph, query)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Query.jl#LL61-L76" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Query.jl#LL61-L76" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.rewrite!-Tuple{VPL.Core.Graph}" href="#VPL.Core.rewrite!-Tuple{VPL.Core.Graph}">#</a> <strong><code>VPL.Core.rewrite!</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(g<span class="op">::</span><span class="dt">Graph</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Apply the graph-rewriting rules stored in the graph.</p>
@@ -561,7 +561,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    g <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> rule)</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rewrite!</span>(g)</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Rule.jl#LL158-L191" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Rule.jl#LL158-L191" class="documenter-source">source</a><br></p>
 <p><a id="Extracting-information"></a></p>
 <p><a id="Extracting-information-1"></a></p>
 </section>
@@ -575,7 +575,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>axiom <span class="op">=</span> <span class="fu">A</span>()</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> <span class="fu">Graph</span>(axiom, vars <span class="op">=</span> <span class="fl">2</span>)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vars</span>(graph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Graph.jl#LL76-L88" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Graph.jl#LL76-L88" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.rules-Tuple{VPL.Core.Graph}" href="#VPL.Core.rules-Tuple{VPL.Core.Graph}">#</a> <strong><code>VPL.Core.rules</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rules</span>(g<span class="op">::</span><span class="dt">Graph</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Returns a tuple with all the graph-rewriting rules stored in a dynamic graph</p>
@@ -586,15 +586,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>rule <span class="op">=</span> <span class="fu">Rule</span>(A, rhs <span class="op">=</span> x <span class="op">-&gt;</span> <span class="fu">A</span>() <span class="op">+</span> <span class="fu">B</span>())</span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>rules_graph <span class="op">=</span> <span class="fu">Graph</span>(axiom, rules <span class="op">=</span> rule)</span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rules</span>(rules_graph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Graph.jl#LL59-L73" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Graph.jl#LL59-L73" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.vars-Tuple{VPL.Core.Context}" href="#VPL.Core.vars-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.vars</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vars</span>(c<span class="op">::</span><span class="dt">Context</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Returns the graph-level variables. Intended to be used within a rule or query.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL22-L26" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL22-L26" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.data-Tuple{VPL.Core.Context}" href="#VPL.Core.data-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.data</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(c<span class="op">::</span><span class="dt">Context</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Returns the data stored in a node. Intended to be used within a rule or query.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL11-L15" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL11-L15" class="documenter-source">source</a><br></p>
 <p><a id="Node-relations"></a></p>
 <p><a id="Node-relations-1"></a></p>
 </section>
@@ -603,11 +603,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a id="VPL.Core.hasParent-Tuple{VPL.Core.Context}" href="#VPL.Core.hasParent-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.hasParent</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hasParent</span>(c<span class="op">::</span><span class="dt">Context</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Check if a node has a parent and return <code>true</code> or <code>false</code>. Intended to be used within a rule or query.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL36-L41" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL36-L41" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.isRoot-Tuple{VPL.Core.Context}" href="#VPL.Core.isRoot-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.isRoot</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">isRoot</span>(c<span class="op">::</span><span class="dt">Context</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Check if a node is the root of the graph (i.e., has no parent) and return <code>true</code> or <code>false</code>. Intended to be used within a rule or query.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL44-L49" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL44-L49" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.hasAncestor-Tuple{VPL.Core.Context}" href="#VPL.Core.hasAncestor-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.hasAncestor</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hasAncestor</span>(c<span class="op">::</span><span class="dt">Context</span>; condition <span class="op">=</span> x <span class="op">-&gt;</span> <span class="cn">true</span>, maxlevel<span class="op">::</span><span class="dt">Int </span><span class="op">=</span> <span class="fu">typemax</span>(<span class="dt">Int</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Check if a node has an ancestor that matches the condition. Intended to be used within a rule or query.</p>
@@ -642,7 +642,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> <span class="fu">apply</span>(g, Q2)</span>
 <span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    (R1,R2)</span>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL52-L102" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL52-L102" class="documenter-source">source</a><br></p>
 <p><a id="Base.parent-Tuple{VPL.Core.Context}" href="#Base.parent-Tuple{VPL.Core.Context}">#</a> <strong><code>Base.parent</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parent</span>(c<span class="op">::</span><span class="dt">Context</span>; nsteps<span class="op">::</span><span class="dt">Int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Returns the parent of a node that is <code>nsteps</code> away towards the root of the graph. Intended to be used within a rule or query.</p>
@@ -666,7 +666,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> <span class="fu">apply</span>(g, Q2)</span>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    (R1,R2)</span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL183-L215" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL183-L215" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.ancestor-Tuple{VPL.Core.Context}" href="#VPL.Core.ancestor-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.ancestor</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ancestor</span>(c<span class="op">::</span><span class="dt">Context</span>; condition <span class="op">=</span> x <span class="op">-&gt;</span> <span class="cn">true</span>, maxlevel<span class="op">::</span><span class="dt">Int </span><span class="op">=</span> <span class="fu">typemax</span>(<span class="dt">Int</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Returns the first ancestor of a node that matches the <code>condition</code>. Intended to be used within a rule or query.</p>
@@ -694,15 +694,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> <span class="fu">apply</span>(g, Q2)</span>
 <span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>    (R1,R2)</span>
 <span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL220-L256" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL220-L256" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.hasChildren-Tuple{VPL.Core.Context}" href="#VPL.Core.hasChildren-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.hasChildren</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hasChildren</span>(c<span class="op">::</span><span class="dt">Context</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Check if a node has at least one child and return <code>true</code> or <code>false</code>. Intended to be used within a rule or query.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL108-L113" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL108-L113" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.isLeaf-Tuple{VPL.Core.Context}" href="#VPL.Core.isLeaf-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.isLeaf</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">isLeaf</span>(c<span class="op">::</span><span class="dt">Context</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Check if a node is a leaf in the graph (i.e., has no children) and return <code>true</code> or <code>false</code>. Intended to be used within a rule or query.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL116-L121" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL116-L121" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.hasDescendent-Tuple{VPL.Core.Context}" href="#VPL.Core.hasDescendent-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.hasDescendent</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hasDescendent</span>(c<span class="op">::</span><span class="dt">Context</span>; condition <span class="op">=</span> x <span class="op">-&gt;</span> <span class="cn">true</span>, maxlevel<span class="op">::</span><span class="dt">Int </span><span class="op">=</span> <span class="fu">typemax</span>(<span class="dt">Int</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Check if a node has a descendent that matches the optional condition. Intended to be used within a rule or query.</p>
@@ -737,11 +737,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> <span class="fu">apply</span>(g, Q2)</span>
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    (R1,R2)</span>
 <span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL124-L174" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL124-L174" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.children-Tuple{VPL.Core.Context}" href="#VPL.Core.children-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.children</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">children</span>(c<span class="op">::</span><span class="dt">Context</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Returns all the children of a node as <code>Context</code> objects.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL262-L266" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL262-L266" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.descendent-Tuple{VPL.Core.Context}" href="#VPL.Core.descendent-Tuple{VPL.Core.Context}">#</a> <strong><code>VPL.Core.descendent</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">descendent</span>(c<span class="op">::</span><span class="dt">Context</span>; condition <span class="op">=</span> x <span class="op">-&gt;</span> <span class="cn">true</span>, maxlevel<span class="op">::</span><span class="dt">Int </span><span class="op">=</span> <span class="fu">typemax</span>(<span class="dt">Int</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Returns the first descendent of a node that matches the <code>condition</code>. Intended to be used within a rule or query.</p>
@@ -769,7 +769,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> <span class="fu">apply</span>(g, Q2)</span>
 <span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>    (R1,R2)</span>
 <span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Context.jl#LL271-L308" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL271-L308" class="documenter-source">source</a><br></p>
 <p><a id="Traversal-algorithms"></a></p>
 <p><a id="Traversal-algorithms-1"></a></p>
 </section>
@@ -807,7 +807,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traverse</span>(g, fun <span class="op">=</span> f)</span>
 <span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>    f.vals</span>
 <span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Algorithms.jl#LL7-L57" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Algorithms.jl#LL7-L57" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.traverseDFS-Tuple{VPL.Core.Graph}" href="#VPL.Core.traverseDFS-Tuple{VPL.Core.Graph}">#</a> <strong><code>VPL.Core.traverseDFS</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traverseDFS</span>(g<span class="op">::</span><span class="dt">Graph</span>; fun <span class="op">=</span> () <span class="op">-&gt;</span> <span class="cn">nothing</span>, ID <span class="op">=</span> <span class="fu">root</span>(g))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Iterates over all the nodes in the graph (depth-first order, starting at a any node) and execute for the function <code>fun</code> on each node</p>
@@ -843,7 +843,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traverseDFS</span>(g, fun <span class="op">=</span> f)</span>
 <span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>    f.vals</span>
 <span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Algorithms.jl#LL66-L119" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Algorithms.jl#LL66-L119" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.traverseBFS-Tuple{VPL.Core.Graph}" href="#VPL.Core.traverseBFS-Tuple{VPL.Core.Graph}">#</a> <strong><code>VPL.Core.traverseBFS</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">traverseBFS</span>(g<span class="op">::</span><span class="dt">Graph</span>; fun <span class="op">=</span> () <span class="op">-&gt;</span> <span class="cn">nothing</span>, ID <span class="op">=</span> <span class="fu">root</span>(g))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Iterates over all the nodes in the graph (breadth-first order, starting at a any node) and execute for the function <code>fun</code> on each node</p>
@@ -879,7 +879,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traverseBFS</span>(g, fun <span class="op">=</span> f)</span>
 <span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    f.vals</span>
 <span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Algorithms.jl#LL140-L193" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Algorithms.jl#LL140-L193" class="documenter-source">source</a><br></p>
 <p><a id="Graph-visualization"></a></p>
 <p><a id="Graph-visualization-1"></a></p>
 <section id="graph-visualization" class="level2">
@@ -930,17 +930,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    g <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom)</span>
 <span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">draw</span>(g)</span>
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Draw.jl#LL115-L169" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL115-L169" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.draw-Tuple{VPL.Core.StaticGraph}" href="#VPL.Core.draw-Tuple{VPL.Core.StaticGraph}">#</a> <strong><code>VPL.Core.draw</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(g<span class="op">::</span><span class="dt">StaticGraph</span>; force <span class="op">=</span> <span class="cn">false</span>, backend <span class="op">=</span> <span class="st">"native"</span>, inline <span class="op">=</span> <span class="cn">false</span>, </span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>     resolution <span class="op">=</span> (<span class="fl">1920</span>, <span class="fl">1080</span>), nlabels_textsize <span class="op">=</span> <span class="fl">15</span>, arrow_size <span class="op">=</span> <span class="fl">15</span>, </span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>     node_size <span class="op">=</span> <span class="fl">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Equivalent to the method <code>draw(g::Graph; kwargs...)</code> but to visualize static graphs (e.g., the axiom of a graph).</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Draw.jl#LL67-L74" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL67-L74" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.node_label-Tuple{VPL.Core.Node, Any}" href="#VPL.Core.node_label-Tuple{VPL.Core.Node, Any}">#</a> <strong><code>VPL.Core.node_label</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">node_label</span>(n<span class="op">::</span><span class="dt">Node</span>, id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Function to construct a label for a node to be used by <code>draw()</code> when visualizing. The user can specialize this method for user-defined data types to customize the labels. By default, the type of data stored in the node and the unique ID of the node are used as labels.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Draw.jl#LL3-L10" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL3-L10" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.export_graph-Tuple{Any}" href="#VPL.Core.export_graph-Tuple{Any}">#</a> <strong><code>VPL.Core.export_graph</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">export_graph</span>(f; filename, kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Save a network diagram generated by <code>draw()</code> to an external file.</p>
@@ -964,12 +964,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> <span class="fu">draw</span>(g);</span>
 <span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">export_graph</span>(f, filename <span class="op">=</span> <span class="st">"test.png"</span>)</span>
 <span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Draw.jl#LL176-L209" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL176-L209" class="documenter-source">source</a><br></p>
 <p><a id="VPL.Core.calculate_resolution-Tuple{}" href="#VPL.Core.calculate_resolution-Tuple{}">#</a> <strong><code>VPL.Core.calculate_resolution</code></strong> — <em>Method</em>.</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calculate_resolution</span>(;width <span class="op">=</span> <span class="fl">1024</span><span class="op">/</span><span class="fl">300</span><span class="op">*</span><span class="fl">2.54</span>, height <span class="op">=</span> <span class="fl">768</span><span class="op">/</span><span class="fl">300</span><span class="op">*</span><span class="fl">2.54</span>, </span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>                      format <span class="op">=</span> <span class="st">"raster"</span>, dpi <span class="op">=</span> <span class="fl">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Calculate the resolution required to achieve a specific <code>width</code> and <code>height</code> (in cm) of the exported image, with a particular <code>dpi</code> (for raster formats).</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/e4e3aa68ed1f0a6fa3a421ecbb7e759fb85eaebd/src/Core/Draw.jl#LL214-L220" class="documenter-source">source</a><br></p>
+<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL214-L220" class="documenter-source">source</a><br></p>
 
 
 </section>
