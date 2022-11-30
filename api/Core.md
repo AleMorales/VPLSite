@@ -65,7 +65,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Graph.jl#LL7-L44' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Graph.jl#LL7-L44' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.Rule' href='#VPL.Core.Rule'>#</a>
 **`VPL.Core.Rule`** &mdash; *Type*.
@@ -115,7 +115,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Rule.jl#LL7-L40' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Rule.jl#LL7-L40' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.Query' href='#VPL.Core.Query'>#</a>
 **`VPL.Core.Query`** &mdash; *Type*.
@@ -157,7 +157,7 @@ apply(graph, query)
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Query.jl#LL7-L39' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Query.jl#LL7-L39' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.Node' href='#VPL.Core.Node'>#</a>
 **`VPL.Core.Node`** &mdash; *Type*.
@@ -184,7 +184,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Types.jl#LL3-L20' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Types.jl#LL3-L20' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.Context' href='#VPL.Core.Context'>#</a>
 **`VPL.Core.Context`** &mdash; *Type*.
@@ -209,7 +209,7 @@ A `Context` object wraps references to a node and its associated graph. The purp
 Users do not build `Context` objects directly but they are provided by VPL as  inputs to the user-defined functions inside rules and queries. 
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Types.jl#LL41-L58' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Types.jl#LL41-L58' class='documenter-source'>source</a><br>
 
 
 <a id='Graph-DSL'></a>
@@ -241,7 +241,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL52-L66' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/GraphConstruction.jl#LL52-L66' class='documenter-source'>source</a><br>
 
 <a id='Base.:+-Tuple{VPL.Core.StaticGraph, VPL.Core.Node}' href='#Base.:+-Tuple{VPL.Core.StaticGraph, VPL.Core.Node}'>#</a>
 **`Base.:+`** &mdash; *Method*.
@@ -267,7 +267,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL76-L91' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/GraphConstruction.jl#LL76-L91' class='documenter-source'>source</a><br>
 
 <a id='Base.:+-Tuple{VPL.Core.Node, VPL.Core.StaticGraph}' href='#Base.:+-Tuple{VPL.Core.Node, VPL.Core.StaticGraph}'>#</a>
 **`Base.:+`** &mdash; *Method*.
@@ -293,7 +293,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL94-L109' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/GraphConstruction.jl#LL94-L109' class='documenter-source'>source</a><br>
 
 <a id='Base.:+-Tuple{VPL.Core.StaticGraph, VPL.Core.StaticGraph}' href='#Base.:+-Tuple{VPL.Core.StaticGraph, VPL.Core.StaticGraph}'>#</a>
 **`Base.:+`** &mdash; *Method*.
@@ -320,7 +320,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL113-L130' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/GraphConstruction.jl#LL113-L130' class='documenter-source'>source</a><br>
 
 <a id='Base.:+-Tuple{VPL.Core.Node, Tuple}' href='#Base.:+-Tuple{VPL.Core.Node, Tuple}'>#</a>
 **`Base.:+`** &mdash; *Method*.
@@ -346,7 +346,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/GraphConstruction.jl#LL149-L166' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/GraphConstruction.jl#LL149-L166' class='documenter-source'>source</a><br>
 
 
 <a id='Applying-rules-and-queries'></a>
@@ -378,7 +378,7 @@ apply(graph, query)
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Query.jl#LL61-L76' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Query.jl#LL61-L76' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.rewrite!-Tuple{VPL.Core.Graph}' href='#VPL.Core.rewrite!-Tuple{VPL.Core.Graph}'>#</a>
 **`VPL.Core.rewrite!`** &mdash; *Method*.
@@ -417,7 +417,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Rule.jl#LL158-L191' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Rule.jl#LL158-L191' class='documenter-source'>source</a><br>
 
 
 <a id='Extracting-information'></a>
@@ -445,7 +445,7 @@ vars(graph)
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Graph.jl#LL76-L88' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Graph.jl#LL76-L88' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.rules-Tuple{VPL.Core.Graph}' href='#VPL.Core.rules-Tuple{VPL.Core.Graph}'>#</a>
 **`VPL.Core.rules`** &mdash; *Method*.
@@ -470,7 +470,7 @@ rules(rules_graph)
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Graph.jl#LL59-L73' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Graph.jl#LL59-L73' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.vars-Tuple{VPL.Core.Context}' href='#VPL.Core.vars-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.vars`** &mdash; *Method*.
@@ -484,7 +484,7 @@ vars(c::Context)
 Returns the graph-level variables. Intended to be used within a rule or query. 
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL22-L26' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL22-L26' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.data-Tuple{VPL.Core.Context}' href='#VPL.Core.data-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.data`** &mdash; *Method*.
@@ -498,7 +498,7 @@ data(c::Context)
 Returns the data stored in a node. Intended to be used within a rule or query. 
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL11-L15' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL11-L15' class='documenter-source'>source</a><br>
 
 
 <a id='Node-relations'></a>
@@ -519,7 +519,7 @@ hasParent(c::Context)
 Check if a node has a parent and return `true` or `false`. Intended to be used  within a rule or query. 
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL36-L41' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL36-L41' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.isRoot-Tuple{VPL.Core.Context}' href='#VPL.Core.isRoot-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.isRoot`** &mdash; *Method*.
@@ -533,7 +533,7 @@ isRoot(c::Context)
 Check if a node is the root of the graph (i.e., has no parent) and return `true` or  `false`. Intended to be used within a rule or query. 
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL44-L49' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL44-L49' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.hasAncestor-Tuple{VPL.Core.Context}' href='#VPL.Core.hasAncestor-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.hasAncestor`** &mdash; *Method*.
@@ -589,7 +589,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL52-L102' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL52-L102' class='documenter-source'>source</a><br>
 
 <a id='Base.parent-Tuple{VPL.Core.Context}' href='#Base.parent-Tuple{VPL.Core.Context}'>#</a>
 **`Base.parent`** &mdash; *Method*.
@@ -631,7 +631,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL183-L215' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL183-L215' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.ancestor-Tuple{VPL.Core.Context}' href='#VPL.Core.ancestor-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.ancestor`** &mdash; *Method*.
@@ -677,7 +677,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL220-L256' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL220-L256' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.hasChildren-Tuple{VPL.Core.Context}' href='#VPL.Core.hasChildren-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.hasChildren`** &mdash; *Method*.
@@ -691,7 +691,7 @@ hasChildren(c::Context)
 Check if a node has at least one child and return `true` or `false`. Intended to be used within a rule or query. 
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL108-L113' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL108-L113' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.isLeaf-Tuple{VPL.Core.Context}' href='#VPL.Core.isLeaf-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.isLeaf`** &mdash; *Method*.
@@ -705,7 +705,7 @@ isLeaf(c::Context)
 Check if a node is a leaf in the graph (i.e., has no children) and return `true` or  `false`. Intended to be used within a rule or query. 
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL116-L121' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL116-L121' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.hasDescendent-Tuple{VPL.Core.Context}' href='#VPL.Core.hasDescendent-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.hasDescendent`** &mdash; *Method*.
@@ -761,7 +761,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL124-L174' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL124-L174' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.children-Tuple{VPL.Core.Context}' href='#VPL.Core.children-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.children`** &mdash; *Method*.
@@ -775,7 +775,7 @@ children(c::Context)
 Returns all the children of a node as `Context` objects.
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL262-L266' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL262-L266' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.descendent-Tuple{VPL.Core.Context}' href='#VPL.Core.descendent-Tuple{VPL.Core.Context}'>#</a>
 **`VPL.Core.descendent`** &mdash; *Method*.
@@ -821,7 +821,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Context.jl#LL271-L308' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Context.jl#LL271-L308' class='documenter-source'>source</a><br>
 
 
 <a id='Traversal-algorithms'></a>
@@ -881,7 +881,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Algorithms.jl#LL7-L57' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Algorithms.jl#LL7-L57' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.traverseDFS-Tuple{VPL.Core.Graph}' href='#VPL.Core.traverseDFS-Tuple{VPL.Core.Graph}'>#</a>
 **`VPL.Core.traverseDFS`** &mdash; *Method*.
@@ -938,7 +938,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Algorithms.jl#LL66-L119' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Algorithms.jl#LL66-L119' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.traverseBFS-Tuple{VPL.Core.Graph}' href='#VPL.Core.traverseBFS-Tuple{VPL.Core.Graph}'>#</a>
 **`VPL.Core.traverseBFS`** &mdash; *Method*.
@@ -995,7 +995,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Algorithms.jl#LL140-L193' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Algorithms.jl#LL140-L193' class='documenter-source'>source</a><br>
 
 
 <a id='Graph-visualization'></a>
@@ -1070,7 +1070,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL115-L169' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Draw.jl#LL115-L169' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.draw-Tuple{VPL.Core.StaticGraph}' href='#VPL.Core.draw-Tuple{VPL.Core.StaticGraph}'>#</a>
 **`VPL.Core.draw`** &mdash; *Method*.
@@ -1086,7 +1086,7 @@ draw(g::StaticGraph; force = false, backend = "native", inline = false,
 Equivalent to the method `draw(g::Graph; kwargs...)` but  to visualize static  graphs (e.g., the axiom of a graph).
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL67-L74' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Draw.jl#LL67-L74' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.node_label-Tuple{VPL.Core.Node, Any}' href='#VPL.Core.node_label-Tuple{VPL.Core.Node, Any}'>#</a>
 **`VPL.Core.node_label`** &mdash; *Method*.
@@ -1100,7 +1100,7 @@ node_label(n::Node, id)
 Function to construct a label for a node to be used by `draw()` when visualizing. The user can specialize this method for user-defined data types to customize the  labels. By default, the type of data stored in the node and the unique ID of the node are used as labels.
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL3-L10' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Draw.jl#LL3-L10' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.export_graph-Tuple{Any}' href='#VPL.Core.export_graph-Tuple{Any}'>#</a>
 **`VPL.Core.export_graph`** &mdash; *Method*.
@@ -1144,7 +1144,7 @@ end
 ```
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL176-L209' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Draw.jl#LL176-L209' class='documenter-source'>source</a><br>
 
 <a id='VPL.Core.calculate_resolution-Tuple{}' href='#VPL.Core.calculate_resolution-Tuple{}'>#</a>
 **`VPL.Core.calculate_resolution`** &mdash; *Method*.
@@ -1159,5 +1159,5 @@ calculate_resolution(;width = 1024/300*2.54, height = 768/300*2.54,
 Calculate the resolution required to achieve a specific `width` and `height`  (in cm) of the exported image, with a particular `dpi` (for raster formats).
 
 
-<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/9775e88a757b7da7f4b781737c4ba96b1b0d5fde/src/Core/Draw.jl#LL214-L220' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/5958cb5f2472fe814ba61832037cd95c2988bab5/src/Core/Draw.jl#LL214-L220' class='documenter-source'>source</a><br>
 
