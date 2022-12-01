@@ -56,9 +56,6 @@ a motif that is repeated three times (with a small variation), so we can create
 the graph in a piecewise manner. Note how we can use the function `sum` to add
 nodes to the graph (i.e. `sum(A() for i in 1:3)` is equivalent to `A() + A() + A()`)
 
-<!-- TODO: Need to use a labelling function in order for this to work properly -->
-<!-- TODO: Comment on why the id may not be what we want to print because it is an internal id -->
-
 ```{julia}
 #| code-fold: false
 motif(n, i = 0) = Q.A() + (Q.C(45.0) + Q.A() + (Q.C(45.0) +  Q.A() + Q.B(i + 1), 
@@ -122,8 +119,6 @@ upwards in the graph recursively (until reaching the root node). Note that, in
 order to access the object stored inside the node, we need to use the `data()`
 function, and then we can test if that object is of type `C`. The `B` node 13
 is the only node for which `hasAncestor()` should return `false`:
-
-<!-- FIXME: Describe better what the hasAncestor function takes and returns -->
 
 ```{julia}
 function Q2_fun(n)
