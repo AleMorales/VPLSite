@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.242">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2022-11-22">
+<meta name="dcterms.date" content="2023-01-10">
 
 <title>Virtual Plant Laboratory - The Koch snowflake</title>
 <style>
@@ -349,7 +349,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
     </ul>
     </div>
-</nav>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src="../..\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div></div></nav>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -361,20 +367,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Alejandro Morales Sierra 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Centre for Crop Systems Analysis - Wageningen University
+          </p>
+      </div>
+    </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Alejandro Morales Sierra </p>
-          </div>
-  </div>
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 22, 2022</p>
+      <p class="date">January 10, 2023</p>
     </div>
   </div>
   
@@ -419,7 +432,7 @@ rule: E(L) → E(L/3) + RU(-60) + E(L/3) + RU(120) + E(L/3) + RU(-60) + E(L/3)</
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> L <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>axiom <span class="op">=</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> VPL.<span class="fu">RU</span>(<span class="fl">120.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> VPL.<span class="fu">RU</span>(<span class="fl">120.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>VPL.Core.StaticGraph(Dict{Int64, Any}(5 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set{Int64}(), 4, 5), 4 =&gt; VPL.Core.GraphNode{VPL.Geom.RU{Float64}}(VPL.Geom.RU{Float64}(120.0), Set([5]), 3, 4), 2 =&gt; VPL.Core.GraphNode{VPL.Geom.RU{Float64}}(VPL.Geom.RU{Float64}(120.0), Set([3]), 1, 2), 3 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set([4]), 2, 3), 1 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set([2]), missing, 1)), Dict{DataType, Set{Int64}}(VPL.Geom.RU{Float64} =&gt; Set([4, 2]), Main.sn.E =&gt; Set([5, 3, 1])), 1, 5)</code></pre>
+<pre><code>VPL.Core.StaticGraph(Dict{Int64, Any}(5 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set{Int64}(), 4, 5), 4 =&gt; VPL.Core.GraphNode{VPL.Geom.RU{Float64}}(VPL.Geom.RU{Float64}(120.0), Set([5]), 3, 4), 2 =&gt; VPL.Core.GraphNode{VPL.Geom.RU{Float64}}(VPL.Geom.RU{Float64}(120.0), Set([3]), 1, 2), 3 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set([4]), 2, 3), 1 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set([2]), missing, 1)), Dict{DataType, Set{Int64}}(Main.sn.E =&gt; Set([5, 3, 1]), VPL.Geom.RU{Float64} =&gt; Set([4, 2])), 1, 5)</code></pre>
 </div>
 </div>
 <p>The rule is also straightforward to implement as all the nodes of type E will be replaced in each iteration. However, we need to ensure that the length of the new edges is a calculated from the length of the edge being replaced. In order to extract the data stored in the node being replaced we can simply use the function data. In this case, the replacement function is defined and then added to the rule. This can make the code more readable but helps debugging and testing the replacement function.</p>
@@ -437,7 +450,7 @@ rule: E(L) → E(L/3) + RU(-60) + E(L/3) + RU(120) + E(L/3) + RU(-60) + E(L/3)</
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Koch <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> <span class="fu">Tuple</span>(rule))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>Dynamic graph with 5 nodes of types VPL.Geom.RU{Float64},Main.sn.E and 1 rewriting rules.</code></pre>
+<pre><code>Dynamic graph with 5 nodes of types Main.sn.E,VPL.Geom.RU{Float64} and 1 rewriting rules.</code></pre>
 </div>
 </div>
 <p>In order to be able to generate a 3D structure we need to define a method for the function <code>VPL.feedgeom!</code> (notice the need to prefix it with <code>VPL.</code> as we are going to define a method for this function). The method needs to two take two arguments, the first one is always an object of type MTurtle and the second is an object of the type for which the method is defined (in this case, E).</p>
@@ -492,7 +505,7 @@ rule: E(L) → E(L/3) + RU(-60) + E(L/3) + RU(120) + E(L/3) + RU(-60) + E(L/3)</
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>rule2 <span class="op">=</span> <span class="fu">Rule</span>(sn.E, rhs <span class="op">=</span> Kochsnowflake2)</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Koch2 <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> <span class="fu">Tuple</span>(rule2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>Dynamic graph with 5 nodes of types VPL.Geom.RU{Float64},Main.sn.E and 1 rewriting rules.</code></pre>
+<pre><code>Dynamic graph with 5 nodes of types Main.sn.E,VPL.Geom.RU{Float64} and 1 rewriting rules.</code></pre>
 </div>
 </div>
 <p>The axiom is the same, but now the edges added by the rule will generate the edges towards the inside of the initial triangle. Let’s execute the first three iterations and render the results</p>

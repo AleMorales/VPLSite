@@ -1,6 +1,8 @@
 ---
 title: "Julia basics for VPL"
-author: "Alejandro Morales Sierra"
+author: 
+    - name: "Alejandro Morales Sierra"
+      affiliation: "Centre for Crop Systems Analysis - Wageningen University"
 date: last-modified
 execute: 
     enabled: false

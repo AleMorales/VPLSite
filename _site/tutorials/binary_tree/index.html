@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.242">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2022-11-22">
+<meta name="dcterms.date" content="2023-01-10">
 
 <title>Virtual Plant Laboratory - Binary tree</title>
 <style>
@@ -349,7 +349,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
     </ul>
     </div>
-</nav>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src="../..\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div></div></nav>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -361,20 +367,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Alejandro Morales Sierra 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Centre for Crop Systems Analysis - Wageningen University
+          </p>
+      </div>
+    </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Alejandro Morales Sierra </p>
-          </div>
-  </div>
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 22, 2022</p>
+      <p class="date">January 10, 2023</p>
     </div>
   </div>
   
@@ -437,14 +450,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>axiom <span class="op">=</span> btree.<span class="fu">Internode</span>(<span class="fl">0.1</span>) <span class="op">+</span> btree.<span class="fu">Meristem</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>VPL.Core.StaticGraph(Dict{Int64, Any}(2 =&gt; VPL.Core.GraphNode{Main.btree.Meristem}(Main.btree.Meristem(), Set{Int64}(), 1, 2), 1 =&gt; VPL.Core.GraphNode{Main.btree.Internode}(Main.btree.Internode(0.1), Set([2]), missing, 1)), Dict{DataType, Set{Int64}}(Main.btree.Meristem =&gt; Set([2]), Main.btree.Internode =&gt; Set([1])), 1, 2)</code></pre>
+<pre><code>VPL.Core.StaticGraph(Dict{Int64, Any}(2 =&gt; VPL.Core.GraphNode{Main.btree.Meristem}(Main.btree.Meristem(), Set{Int64}(), 1, 2), 1 =&gt; VPL.Core.GraphNode{Main.btree.Internode}(Main.btree.Internode(0.1), Set([2]), missing, 1)), Dict{DataType, Set{Int64}}(Main.btree.Internode =&gt; Set([1]), Main.btree.Meristem =&gt; Set([2])), 1, 2)</code></pre>
 </div>
 </div>
 <p>And the object for the tree can be constructed as before, by passing the axiom and the graph rewriting rules, but in this case also with the object with growth-related parameters.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> <span class="fu">Tuple</span>(rule), vars <span class="op">=</span> btree.<span class="fu">treeparams</span>(<span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>Dynamic graph with 2 nodes of types Main.btree.Meristem,Main.btree.Internode and 1 rewriting rules.
+<pre><code>Dynamic graph with 2 nodes of types Main.btree.Internode,Main.btree.Meristem and 1 rewriting rules.
 Dynamic graph variables stored in struct of type Main.btree.treeparams</code></pre>
 </div>
 </div>
@@ -494,7 +507,7 @@ Dynamic graph variables stored in struct of type Main.btree.treeparams</code></p
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>newtree <span class="op">=</span> <span class="fu">simulate</span>(tree, getInternode, <span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>Dynamic graph with 26 nodes of types Main.btree.Meristem,VPL.Geom.RH{Float64},VPL.Geom.RU{Float64},Main.btree.Internode,Main.btree.Node and 1 rewriting rules.
+<pre><code>Dynamic graph with 26 nodes of types VPL.Geom.RH{Float64},Main.btree.Internode,Main.btree.Meristem,VPL.Geom.RU{Float64},Main.btree.Node and 1 rewriting rules.
 Dynamic graph variables stored in struct of type Main.btree.treeparams</code></pre>
 </div>
 </div>
