@@ -48,6 +48,7 @@ website:
       - section: "Sky"
         contents:
           - Sky/index.qmd
+          - Sky/API.md
       - section: "Ecophys"
         contents:
           - Ecophys/index.qmd      

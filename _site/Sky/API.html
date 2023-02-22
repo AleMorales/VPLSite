@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Virtual Plant Laboratory – render</title>
+<title>Virtual Plant Laboratory – api</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -277,12 +277,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">API</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">API</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
@@ -295,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../api/Render.html" class="sidebar-item-text sidebar-link active">Module Render</a>
+  <a href="../api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -307,20 +307,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">Sky</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Sky</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Sky/index.html" class="sidebar-item-text sidebar-link">Sky solar radiation</a>
   </div>
 </li>
           <li class="sidebar-item">
-  Sky/API.qmd
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../Sky/API.html" class="sidebar-item-text sidebar-link active">Module Sky</a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -369,81 +371,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p><a id="Module-Render"></a></p>
-<p><a id="Module-Render-1"></a></p>
-<section id="module-render" class="level1">
-<h1>Module Render</h1>
-<p><a id="Scenes-for-rendering"></a></p>
-<p><a id="Scenes-for-rendering-1"></a></p>
-<section id="scenes-for-rendering" class="level2">
-<h2 class="anchored" data-anchor-id="scenes-for-rendering">Scenes for rendering</h2>
-<p><a id="VPL.Render.GLScene" href="#VPL.Render.GLScene">#</a> <strong><code>VPL.Render.GLScene</code></strong> — <em>Type</em>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GLScene</span>(mesh, colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Create a 3D scene for rendering from a <code>Mesh</code> object (<code>m</code>) and colors associated to the different primitives (<code>colors</code>). This method is useful when the user has generated separately the 3D mesh and array with colors, as otherwise other methods of <code>GLScene()</code> will be more useful.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Scene.jl#LL1-L7" class="documenter-source">source</a><br></p>
-<p><a id="VPL.add!-Tuple{Any}" href="#VPL.add!-Tuple{Any}">#</a> <strong><code>VPL.add!</code></strong> — <em>Method</em>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add!</span>(scene; mesh, color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Manually add a 3D mesh with corresponding colors (<code>mesh</code> and <code>color</code>) to an existing <code>GLScene</code> object (<code>scene</code>).</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Scene.jl#LL72-L77" class="documenter-source">source</a><br></p>
-<p><a id="Rendering-methods"></a></p>
-<p><a id="Rendering-methods-1"></a></p>
-</section>
-<section id="rendering-methods" class="level2">
-<h2 class="anchored" data-anchor-id="rendering-methods">Rendering methods</h2>
-<p><a id="VPL.Render.GLTurtle" href="#VPL.Render.GLTurtle">#</a> <strong><code>VPL.Render.GLTurtle</code></strong> — <em>Type</em>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GLTurtle</span>(colors, message)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Create a <code>GLTurtle()</code> object that will parse a <code>Graph</code> object and store the colors associated to the different primitives. This type of turtle is automatically created by calls to <code>GLScene()</code> and <code>render()</code> but the user may want to separately construct the geometry and colors and manually combine them into a <code>GLScene</code> object for performance reasons. The argument <code>message</code> is any user-defined object.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Turtle.jl#LL2-L10" class="documenter-source">source</a><br></p>
-<p><a id="VPL.Render.colors-Tuple{VPL.Render.GLTurtle}" href="#VPL.Render.colors-Tuple{VPL.Render.GLTurtle}">#</a> <strong><code>VPL.Render.colors</code></strong> — <em>Method</em>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colors</span>(turtle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Extract the array of colors stored inside an <code>GLTurtle</code> object</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Turtle.jl#LL16-L20" class="documenter-source">source</a><br></p>
-<p><a id="VPL.Render.feedcolor!" href="#VPL.Render.feedcolor!">#</a> <strong><code>VPL.Render.feedcolor!</code></strong> — <em>Function</em>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">feedcolor!</span>(turtle<span class="op">::</span><span class="dt">GLTurtle</span>, color<span class="op">::</span><span class="dt">Colorant</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>General purpose method to feed a color to a GL turtle. This should be used inside user’s defined methods to add any color object that inherits from <code>Colorant</code> from the package <em>Color</em>, for example, by using <code>RGB()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Turtle.jl#LL23-L29" class="documenter-source">source</a><br></p>
-<pre><code>feedcolor!(turtle::GLTurtle, node::Node)</code></pre>
-<p>Default method for <code>feedcolor!()</code> that does not do anything. Hence, the user can include nodes in a graph withour associated colors (the nodes should not generate geometry either).</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Turtle.jl#LL32-L37" class="documenter-source">source</a><br></p>
-<pre><code>feedcolor!(turtle::GLTurtle, g::Graph)</code></pre>
-<p>Process a <code>Graph</code> object with a GL turtle and collect the colors defined in the graph, in the same order in which the 3D mesh is created by the corresponding <code>feedgeom!()</code> method.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Turtle.jl#LL40-L45" class="documenter-source">source</a><br></p>
-<pre><code>feedcolor!(turtle::GLTurtle, collection::AbstractArray)
-feedcolor!(turtle::GLTurtle, collection::Tuple)</code></pre>
-<p>Feed a GL turtle an array or tuple of objects (<code>collection</code>) with existing <code>feedcolor!()</code> methods.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Turtle.jl#LL70-L75" class="documenter-source">source</a><br></p>
-<p><a id="VPL.Render.render" href="#VPL.Render.render">#</a> <strong><code>VPL.Render.render</code></strong> — <em>Function</em>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(m<span class="op">::</span><span class="dt">Mesh</span>; kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Render a mesh. This will create a new visualization (see Documentation for details). Keyword arguments are passed to the <code>render(scene::GLScene)</code> method and any unmatched keywords will be passed along to <code>Makie.mesh()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Render.jl#LL6-L12" class="documenter-source">source</a><br></p>
-<pre><code>render(scene::GLScene; normals::Bool = false, wireframe::Bool = false, kwargs...)</code></pre>
-<p>Render a <code>GLScene</code> object. This will create a new visualization (see Documentation for details). <code>normals = true</code> will draw arrows in the direction of the normal vector for each triangle in the mesh, <code>wireframe = true</code> will draw the edges of each triangle with black lines. Keyword arguments are passed to <code>Makie.mesh()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Render.jl#LL63-L71" class="documenter-source">source</a><br></p>
-<pre><code>render(graph::Graph, Float64; normals::Bool = false, message = nothing,
-       wireframe::Bool = false, kwargs...)</code></pre>
-<p>Render the 3D mesh associated to a <code>Graph</code> object. This will create a new visualization (see Documentation for details). <code>normals = true</code> will draw arrows in the direction of the normal vector for each triangle in the mesh, <code>wireframe = true</code> will draw the edges of each triangle with black lines. Keyword arguments are passed to <code>Makie.mesh()</code>. The argument <code>message</code> is any user-defined object that will be stored in the turtles and hence available within the <code>feedgeom!</code> and <code>feedcolor!</code> methods. By default, double floating precision will be used (<code>Float64</code>) but it is possible to generate a version with a different precision by specifying the corresponding type as in <code>render(graph, Float32)</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Render.jl#LL77-L91" class="documenter-source">source</a><br></p>
-<pre><code>render(graphs::Vector{&lt;:Graph}, Float64; normals::Bool = false, 
-       wireframe::Bool = false, messsage = nothing, kwargs...)</code></pre>
-<p>Render the 3D mesh associated to an array of <code>Graph</code> objects. This will create a new visualization (see Documentation for details). <code>normals = true</code> will draw arrows in the direction of the normal vector for each triangle in the mesh, <code>wireframe = true</code> will draw the edges of each triangle with black lines. Keyword arguments are passed to <code>Makie.mesh()</code>. The argument <code>message</code> is any user-defined object that will be stored in the turtles and hence available within the <code>feedgeom!</code> and <code>feedcolor!</code> methods. By default, double floating precision will be used (<code>Float64</code>) but it is possible to generate a version with a different precision by specifying the corresponding type as in <code>render(graphs, Float32)</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Render.jl#LL98-L112" class="documenter-source">source</a><br></p>
-<p><a id="VPL.Render.render!" href="#VPL.Render.render!">#</a> <strong><code>VPL.Render.render!</code></strong> — <em>Function</em>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render!</span>(source<span class="op">::</span><span class="dt">Source{G, A, nw}</span>; n <span class="op">=</span> <span class="fl">20</span>, alpha <span class="op">=</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Add a mesh representing the light source to a 3D scene. For each type of light source a triangular mesh will be created, where <code>n</code> is the number of triangles (see documentation of geometric primitives for details) and <code>alpha</code> is the transparency to be used for each triangle.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Raytracer/Render.jl#LL4-L11" class="documenter-source">source</a><br></p>
-<pre><code>render!(grid::GridCloner; alpha = 0.2)</code></pre>
-<p>Add a mesh representing the bounding boxes of the grid cloner to a 3D scene, where <code>alpha</code> represents the transparency of each box.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Raytracer/Render.jl#LL27-L32" class="documenter-source">source</a><br></p>
-<pre><code>render!(m::Mesh; kwargs...)</code></pre>
-<p>Add a mesh to the visualization currently active. This will create a new visualization (see Documentation for details). Keyword arguments are passed to the <code>render!(scene::GLScene)</code> method and any unmatched keywords will be passed along to <code>Makie.mesh!()</code>.</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Render.jl#LL17-L24" class="documenter-source">source</a><br></p>
-<p><a id="VPL.Render.export_scene-Tuple{}" href="#VPL.Render.export_scene-Tuple{}">#</a> <strong><code>VPL.Render.export_scene</code></strong> — <em>Method</em>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">export_scene</span>(;scene, filename, kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Export a screenshot of the current visualization (stored as <code>scene</code> as output of a call to <code>render</code>) as a PNG file store in the path given by <code>filename</code> (including <code>.png</code> extension). Keyword arguments will be passed along to the corresponding <code>save</code> method from Makie (see VPL documentation for details).</p>
-<p><a target="_blank" href="https://github.com/AleMorales/VPL.jl/blob/95b9ec3af8f79b223271d3a3a2886919076df5ea/src/Render/Render.jl#LL124-L131" class="documenter-source">source</a><br></p>
+<p><a id="Module-Sky"></a></p>
+<p><a id="Module-Sky-1"></a></p>
+<section id="module-sky" class="level1">
+<h1>Module Sky</h1>
+<p><a id="Sky.UniformSky" href="#Sky.UniformSky">#</a> <strong><code>Sky.UniformSky</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">UniformSky</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Model of uniform sky diffuse radiation. See package documentation for details.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SkyDome.jl#LL263-L267" class="documenter-source">source</a><br></p>
+<p><a id="Sky.StandardSky" href="#Sky.StandardSky">#</a> <strong><code>Sky.StandardSky</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">StandardSky</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Standard model of overcast sky diffuse radiation Moon &amp; Spencer (1942). See package documentation for details.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SkyDome.jl#LL291-L296" class="documenter-source">source</a><br></p>
+<p><a id="Sky.CIE" href="#Sky.CIE">#</a> <strong><code>Sky.CIE</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">CIE</span>(<span class="kw">type</span><span class="op">::</span><span class="dt">Int</span>; θₛ <span class="op">=</span> <span class="fl">0.0</span>, Φₛ <span class="op">=</span> <span class="fl">0.0</span>, rtol <span class="op">=</span> <span class="fu">sqrt</span>(<span class="fu">eps</span>(<span class="dt">Float64</span>)), atol <span class="op">=</span> <span class="fl">0.0</span>,</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>maxevals = typemax(Int))</p>
+<p>Create a standard CIE model of sky diffuse radiance as described by Darula and Kittler (2002). The argument <code>type</code> can have values from 1 to 15 representing the 15 standard CIE models. θₛ and Φₛ are the zenith and azimuth angles of the solar disc. <code>rtol</code> and <code>atol</code> and <code>maxevals</code> are the relative tolerance, absolute tolerance and maximum number of function evaluation of the numerical integration algorithm. See package documentation for details.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SkyDome.jl#LL333-L343" class="documenter-source">source</a><br></p>
+<p><a id="Sky.radiance" href="#Sky.radiance">#</a> <strong><code>Sky.radiance</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">radiance</span>(m, θ, Φ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Calculate the radiance per unit of solid angle at zenith (θ) and azimuth (Φ) angle normalized by diffuse radiance on the horizontal plane for a given model of diffuse radiation <code>m</code>. See package documentation for details.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SkyDome.jl#LL119-L125" class="documenter-source">source</a><br></p>
+<p><a id="Sky.radiosity" href="#Sky.radiosity">#</a> <strong><code>Sky.radiosity</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">radiosity</span>(m, sky<span class="op">::</span><span class="dt">SkySectors</span>, cosine <span class="op">=</span> <span class="cn">true</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Calculate the radiosity of each section of <code>sky</code>(multiplied by cos(θ) if <code>cosine = true</code>) normalized by diffuse radiance on the horizontal plane for a given model of radiation <code>m</code>. See package documentation for details.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SkyDome.jl#LL142-L148" class="documenter-source">source</a><br></p>
+<p><a id="Sky.equal_solid_angles" href="#Sky.equal_solid_angles">#</a> <strong><code>Sky.equal_solid_angles</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>equal_solid_angles (ntheta, nphi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Discretize the sky into <code>ntheta</code> zenith rings and a number of sectors per ring that is proportional to <code>sin(θ)</code>. The total number of sectors will be <code>ntheta*nphi</code>. Returns an object of type <code>SkySectors</code>. See package documentation for details.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SkyDome.jl#LL54-L60" class="documenter-source">source</a><br></p>
+<p><a id="Sky.equal_angle_intervals" href="#Sky.equal_angle_intervals">#</a> <strong><code>Sky.equal_angle_intervals</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">equal_angle_intervals</span>(ntheta, nphi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Discretize the sky into <code>ntheta</code> zenith rings of <code>nphi</code> sectors each assuming the same angle intervals for each sector (Δθ = π/2/ntheta and ΔΦ = 2π/nphi). Returns an object of type <code>SkySectors</code>. See package documentation for details.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SkyDome.jl#LL36-L42" class="documenter-source">source</a><br></p>
+<p><a id="Sky.sky" href="#Sky.sky">#</a> <strong><code>Sky.sky</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sky</span>(scene; Idir <span class="op">=</span> <span class="fl">0.77</span>, nrays_dir <span class="op">=</span> <span class="fl">100_000</span>, theta_dir <span class="op">=</span> <span class="fl">0.0</span>, phi_dir <span class="op">=</span> <span class="fl">0.0</span>, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>           Idif <span class="op">=</span> <span class="fl">0.23</span>, nrays_dif <span class="op">=</span> <span class="fl">1_000_000</span>, sky_model <span class="op">=</span> StandardSky,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>           dome_method <span class="op">=</span> equal_solid_angles, ntheta <span class="op">=</span> <span class="fl">9</span>, nphi <span class="op">=</span> <span class="fl">12</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>           kwargs<span class="op">...</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Create a vector of directional radiation sources representing diffuse and direct solar radiation for a given scene.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>scene</code>: A Scene object generated by VPL.</li>
+<li><code>Idir</code>: The direct solar radiation measured on the horizontal plane.</li>
+<li><code>nrays_dir</code>: The number of rays to be generated for direct solar radiation.</li>
+<li><code>theta_dir</code>: The zenith angle of the sun position (radians).</li>
+<li><code>phi_dir</code>: The azimuthal angle of the sun position (radians).</li>
+<li><code>Idif</code>: The diffuse solar radiation measured on the horizontal plane.</li>
+<li><code>nrays_dif</code>: The total number of rays to be generated diffuse solar radiation.</li>
+<li><code>sky_model</code>: The angular distribution of diffuse irradiance (<code>StandardSky</code>, <code>UniformSky</code> or <code>CIE</code>).</li>
+<li><code>dome_method</code>: The method to discretize hemisphere into patches for diffuse solar radiation (<code>equal_solid_angles</code> or <code>equal_angle_intervals</code>).</li>
+<li><code>ntheta</code>: The number of divisions along the zenith angle for <code>dome_method</code>.</li>
+<li><code>nphi</code>: The number of divisions along the azimuthal angle for <code>dome_method</code>.</li>
+<li><code>kwargs...</code>: Additional arguments to be used when <code>dome_method = CIE</code></li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A vector of directional sources that can be used for ray tracing calculations in VPL. ```</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SkyDome.jl#LL185-L211" class="documenter-source">source</a><br></p>
+<p><a id="Sky.clear_sky" href="#Sky.clear_sky">#</a> <strong><code>Sky.clear_sky</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clear_sky</span>(;lat, DOY, t, altitude <span class="op">=</span> <span class="fl">0.0</span>, TL <span class="op">=</span> <span class="fl">4.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Calculate global, direct and diffuse solar radiation on the horizontal plane using the clear sky model by Ineichen and Perez (2002).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>lat</code>: latitude in radians</li>
+<li><code>DOY</code>: day of year</li>
+<li><code>f</code>: fraction of the day (0 = sunrise, 1 = sunset)</li>
+<li><code>altitude</code>: altitude above sea level in meters (default 0.0)</li>
+<li><code>TL</code>: Linke turbidity coefficient (default 4.0)</li>
+</ul>
+<p><strong>Returns</strong></p>
+<p>A named tuple with fields:</p>
+<ul>
+<li><code>Ig</code>: global solar radiation on the horizontal plane in W/m^2</li>
+<li><code>Idir</code>: direct solar radiation on the horizontal plane in W/m^2</li>
+<li><code>Idif</code>: diffuse solar radiation on the horizontal plane in W/m^2</li>
+<li><code>theta</code>: solar zenith angle in radians</li>
+</ul>
+<p><strong>References</strong></p>
+<p>Ineichen P., Perez R., A new airmass independent formulation for the Linke turbidity coefficient, Solar Energy, Vol 73(3), pp.151–157, 2002.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SolarIrradiance.jl#LL56-L79" class="documenter-source">source</a><br></p>
+<p><a id="Sky.waveband_conversion" href="#Sky.waveband_conversion">#</a> <strong><code>Sky.waveband_conversion</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waveband_conversion</span>(;Itype <span class="op">=</span> <span class="op">:</span>direct, waveband <span class="op">=</span> <span class="op">:</span>PAR, mode <span class="op">=</span> <span class="op">:</span>power)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Returns the conversion coefficient from solar radiation (W/m2) to a give waveband in either power (W/m2) or photon flux (umol/m2/s). The coefficients are based on the Bird spectral model for a clear sky using June 21th in The Netherlands (latitude 52° N).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>Itype</code>: The type of solar radiation, either <code>:direct</code> or <code>:diffuse</code>.</li>
+<li><code>waveband</code>: The waveband of interest, one of <code>:PAR</code>, <code>:UV</code>, <code>:blue</code>, <code>:red</code>, <code>:green</code>, or <code>:NIR</code>.</li>
+<li><code>mode</code>: The physical units of the target, either <code>:power</code> (W/m^2) or <code>:flux</code> (mol/m^2/s).</li>
+</ul>
+<p><strong>Examples</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waveband_conversion</span>(Itype <span class="op">=</span> <span class="op">:</span>diffuse, waveband <span class="op">=</span> <span class="op">:</span>UV, mode <span class="op">=</span> <span class="op">:</span>flux)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">waveband_conversion</span>(waveband <span class="op">=</span> <span class="op">:</span>NIR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a target="_blank" href="https://github.com/AleMorales/Sky.jl/blob/47e5a2c5631880c7cc24f74c9d59b030ddbb5829/src/SolarIrradiance.jl#LL144-L162" class="documenter-source">source</a><br></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
