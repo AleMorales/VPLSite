@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.2.242">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-01-10">
+<meta name="dcterms.date" content="2023-02-24">
 
 <title>Virtual Plant Laboratory - Sky solar radiation</title>
 <style>
@@ -22,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -258,8 +321,10 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
           <li class="sidebar-item">
-  Sky/API.qmd
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../Sky/API.html" class="sidebar-item-text sidebar-link">Module Sky</a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -314,7 +379,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta-author">
   <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
+  <div class="quarto-title-meta-heading"></div>
   
     <div class="quarto-title-meta-contents">
     Alejandro Morales Sierra 
@@ -332,7 +397,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 10, 2023</p>
+      <p class="date">February 24, 2023</p>
     </div>
   </div>
   
@@ -342,9 +407,91 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><strong>In development</strong></p>
+<p>The package Sky provides a function to calculate the solar radiation on a horizontal surface (for clear skies) as a function of latitude, day of year and time of the day and for different wavebands. In addition, it can generate light sources as required by the <a href="https://github.com/AleMorales/VPL">VPL</a> package to simulate the light distribution in a 3D scene.</p>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>The package Sky is not in the Julia registry. To install it, you can use the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(url <span class="op">=</span> <span class="st">"https://github.com/AleMorales/Sky.jl.git"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="usage" class="level2">
+<h2 class="anchored" data-anchor-id="usage">Usage</h2>
+<section id="solar-radiation" class="level3">
+<h3 class="anchored" data-anchor-id="solar-radiation">Solar radiation</h3>
+<p>Use the <code>clear_sky</code> function to calculate the solar radiation on a horizontal plane as a function of day of year, latitude (in radians) and the relative solar time of the day (<code>f = 0</code> is sunrise, <code>f = 1</code> is sunset). The function returns the total solar radiation in W/m² as well as direct and diffuse components. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Sky</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lat <span class="op">=</span> <span class="fl">52.0</span><span class="op">*</span><span class="cn">π</span><span class="op">/</span><span class="fl">180.0</span> <span class="co"># latitude in radians</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>DOY <span class="op">=</span> <span class="fl">182</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="fl">0.5</span> <span class="co"># solar noon</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Ig, Idir, Idif <span class="op">=</span> <span class="fu">clear_sky</span>(lat <span class="op">=</span> lat, DOY <span class="op">=</span> DOY, f <span class="op">=</span> f) <span class="co"># W/m2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The values <code>Ig</code>, <code>Idir</code> and <code>Idif</code> are the total, direct and diffuse solar radiation in W/m². The function <code>waveband_conversion</code> can be used to convert these values to specfic wavebands (UV, PAR, NIR, blue, green or red) as well as converting from W/m² to umol/m²/s, assuming particular spectra for direct and diffuse solar radiation. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>f_PAR_dir <span class="op">=</span> <span class="fu">waveband_conversion</span>(Itype <span class="op">=</span> <span class="op">:</span>direct, waveband <span class="op">=</span> <span class="op">:</span>PAR, mode <span class="op">=</span> <span class="op">:</span>flux)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Idir_PAR <span class="op">=</span> f_PAR_dir<span class="op">*</span>Idir <span class="co"># PAR in umol/m²/s</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>f_PAR_dif <span class="op">=</span> <span class="fu">waveband_conversion</span>(Itype <span class="op">=</span> <span class="op">:</span>diffuse, waveband <span class="op">=</span> <span class="op">:</span>PAR, mode <span class="op">=</span> <span class="op">:</span>flux)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Idif_PAR <span class="op">=</span> f_PAR_dif<span class="op">*</span>Idif <span class="co"># PAR in umol/m²/s</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="light-sources-for-ray-tracing" class="level3">
+<h3 class="anchored" data-anchor-id="light-sources-for-ray-tracing">Light sources for ray tracing</h3>
+<p>Once the direct and diffuse solar radiation in the relevant wavebands and units have been calculated, the function <code>sky</code> can be used to generate the light sources required by VPL to simulate the light distribution in a 3D scene. For example, a simple horizontal tile (representing soil) in VPL may be created as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">VPL</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> <span class="fu">Rectangle</span>(length <span class="op">=</span> <span class="fl">2.0</span>, width <span class="op">=</span> <span class="fl">1.0</span>) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rotatey!</span>(r, <span class="op">-</span><span class="cn">π</span><span class="op">/</span><span class="fl">2</span>) <span class="co"># To put it in the XY plane</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">translate!</span>(r, <span class="fu">Vec</span>(<span class="fl">0.0</span>, <span class="fl">0.5</span>, <span class="fl">0.0</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A 3D scene requires adding optical properties (e.g., a black material property) and linking these to the mesh (for complicated scenes see <a href="http://virtualplantlab.com/">VPL documentation</a> for examples):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>materials <span class="op">=</span> [<span class="fu">Black</span>()]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> [<span class="fl">1</span>,<span class="fl">1</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>scene <span class="op">=</span> <span class="fu">RTScene</span>(mesh <span class="op">=</span> r, ids <span class="op">=</span> ids, materials <span class="op">=</span> materials)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we want to compute the amount of solar radiation absorbed by this tile, we need to create a series of light sources. The function <code>sky</code> can be used for that purpose:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sources <span class="op">=</span> <span class="fu">sky</span>(scene, </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>             Idir <span class="op">=</span> Idir_PAR, <span class="co"># Direct solar radiation from above</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>             nrays_dir <span class="op">=</span> <span class="fl">1_000_000</span>, <span class="co"># Number of rays for direct solar radiation</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>             Idif <span class="op">=</span> Idif_PAR, <span class="co"># Diffuse solar radiation from above</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>             nrays_dif <span class="op">=</span> <span class="fl">10_000_000</span>, <span class="co"># Total number of rays for diffuse solar radiation</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>             sky_model <span class="op">=</span> StandardSky, <span class="co"># Angular distribution of solar radiation</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>             dome_method <span class="op">=</span> equal_solid_angles, <span class="co"># Discretization of the sky dome</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>             ntheta <span class="op">=</span> <span class="fl">9</span>, <span class="co"># Number of discretization steps in the zenith angle </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>             nphi <span class="op">=</span> <span class="fl">12</span>) <span class="co"># Number of discretization steps in the azimuth angle</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function takes the scene as input to ensure that light sources scale with the scene. Direct solar radiation is represented by a single directiona light source that will emmit a number of rays given by <code>nrays_dir</code>. Diffuse solar radiation is represented by a hemispherical dome of directional light sources that will emmit a total of <code>nrays_dif</code> rays. The angular distribution of the diffuse solar radiation and the discretization of the sky dome can be modified via <code>dome_method, sky_model</code>, <code>ntheta</code> and <code>nphi</code>. See API documentation and <a href="http://virtualplantlab.com/">VPL documentation</a> for details.</p>
+<p>Once the light sources are created, a ray tracing object can be generated combining all the elements above:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>settings <span class="op">=</span> <span class="fu">RTSettings</span>(parallel <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rtobj <span class="op">=</span> <span class="fu">RayTracer</span>(scene, sources, settings <span class="op">=</span> settings);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And the ray tracing can be performed by calling the <code>trace!</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trace!</span>(rtobj);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As expected, the amount of solar radiation absorbed by the tile equals the total in the scene (<code>Ig</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>materials[<span class="fl">1</span>].power[<span class="fl">1</span>]<span class="op">/</span><span class="fu">area</span>(r) <span class="op">≈</span> Idir_PAR <span class="op">+</span> Idif_PAR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>See <a href="http://virtualplantlab.com/">VPL documentation</a> for more details and tutorials on ray tracing simulations</p>
+</section>
+</section>
+<section id="roadmap-for-future-dfevelopment" class="level2">
+<h2 class="anchored" data-anchor-id="roadmap-for-future-dfevelopment">Roadmap for future dfevelopment</h2>
+<p>The package is still under development. The following features are planned:</p>
+<ul>
+<li><p>Calculate fraction of direct and diffuse radiation from measurements of actual solar radiation.</p></li>
+<li><p>Calculate the solar radiation on a tilted surface.</p></li>
+<li><p>Allow for a different orientation of the 3D scene from VPL.</p></li>
+<li><p>More advanced algorithms for solar radiation and spectrum (e.g., SOLPOS, Bird).</p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
