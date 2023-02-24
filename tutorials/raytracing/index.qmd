@@ -1,0 +1,10 @@
+---
+title: "Basics of ray tracing"
+author: 
+    - name: "Alejandro Morales Sierra"
+      affiliation: "Centre for Crop Systems Analysis - Wageningen University"
+date: last-modified
+execute: 
+  cache: true
+---
+

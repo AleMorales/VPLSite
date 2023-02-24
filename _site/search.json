@@ -319,7 +319,28 @@
     "href": "Sky/index.html",
     "title": "Sky solar radiation",
     "section": "",
-    "text": "In development"
+    "text": "The package Sky provides a function to calculate the solar radiation on a horizontal surface (for clear skies) as a function of latitude, day of year and time of the day and for different wavebands. In addition, it can generate light sources as required by the VPL package to simulate the light distribution in a 3D scene."
+  },
+  {
+    "objectID": "Sky/index.html#installation",
+    "href": "Sky/index.html#installation",
+    "title": "Sky solar radiation",
+    "section": "Installation",
+    "text": "Installation\nThe package Sky is not in the Julia registry. To install it, you can use the following command:\n\nPkg.add(url = \"https://github.com/AleMorales/Sky.jl.git\")"
+  },
+  {
+    "objectID": "Sky/index.html#usage",
+    "href": "Sky/index.html#usage",
+    "title": "Sky solar radiation",
+    "section": "Usage",
+    "text": "Usage\n\nSolar radiation\nUse the clear_sky function to calculate the solar radiation on a horizontal plane as a function of day of year, latitude (in radians) and the relative solar time of the day (f = 0 is sunrise, f = 1 is sunset). The function returns the total solar radiation in W/m² as well as direct and diffuse components. For example:\n\nusing Sky\nlat = 52.0*π/180.0 # latitude in radians\nDOY = 182\nf = 0.5 # solar noon\nIg, Idir, Idif = clear_sky(lat = lat, DOY = DOY, f = f) # W/m2\n\nThe values Ig, Idir and Idif are the total, direct and diffuse solar radiation in W/m². The function waveband_conversion can be used to convert these values to specfic wavebands (UV, PAR, NIR, blue, green or red) as well as converting from W/m² to umol/m²/s, assuming particular spectra for direct and diffuse solar radiation. For example:\n\nf_PAR_dir = waveband_conversion(Itype = :direct, waveband = :PAR, mode = :flux)\nIdir_PAR = f_PAR_dir*Idir # PAR in umol/m²/s\nf_PAR_dif = waveband_conversion(Itype = :diffuse, waveband = :PAR, mode = :flux)\nIdif_PAR = f_PAR_dif*Idif # PAR in umol/m²/s\n\n\n\nLight sources for ray tracing\nOnce the direct and diffuse solar radiation in the relevant wavebands and units have been calculated, the function sky can be used to generate the light sources required by VPL to simulate the light distribution in a 3D scene. For example, a simple horizontal tile (representing soil) in VPL may be created as follows:\n\nusing VPL\nr = Rectangle(length = 2.0, width = 1.0) \nrotatey!(r, -π/2) # To put it in the XY plane\ntranslate!(r, Vec(0.0, 0.5, 0.0))\nrender(r)\n\nA 3D scene requires adding optical properties (e.g., a black material property) and linking these to the mesh (for complicated scenes see VPL documentation for examples):\n\nmaterials = [Black()]\nids = [1,1]\nscene = RTScene(mesh = r, ids = ids, materials = materials)\n\nIf we want to compute the amount of solar radiation absorbed by this tile, we need to create a series of light sources. The function sky can be used for that purpose:\n\nsources = sky(scene, \n             Idir = Idir_PAR, # Direct solar radiation from above\n             nrays_dir = 1_000_000, # Number of rays for direct solar radiation\n             Idif = Idif_PAR, # Diffuse solar radiation from above\n             nrays_dif = 10_000_000, # Total number of rays for diffuse solar radiation\n             sky_model = StandardSky, # Angular distribution of solar radiation\n             dome_method = equal_solid_angles, # Discretization of the sky dome\n             ntheta = 9, # Number of discretization steps in the zenith angle \n             nphi = 12) # Number of discretization steps in the azimuth angle\n\nThe function takes the scene as input to ensure that light sources scale with the scene. Direct solar radiation is represented by a single directiona light source that will emmit a number of rays given by nrays_dir. Diffuse solar radiation is represented by a hemispherical dome of directional light sources that will emmit a total of nrays_dif rays. The angular distribution of the diffuse solar radiation and the discretization of the sky dome can be modified via dome_method, sky_model, ntheta and nphi. See API documentation and VPL documentation for details.\nOnce the light sources are created, a ray tracing object can be generated combining all the elements above:\n\nsettings = RTSettings(parallel = true)\nrtobj = RayTracer(scene, sources, settings = settings);\n\nAnd the ray tracing can be performed by calling the trace! function:\n\ntrace!(rtobj);\n\nAs expected, the amount of solar radiation absorbed by the tile equals the total in the scene (Ig):\n\nmaterials[1].power[1]/area(r) ≈ Idir_PAR + Idif_PAR\n\nSee VPL documentation for more details and tutorials on ray tracing simulations"
+  },
+  {
+    "objectID": "Sky/index.html#roadmap-for-future-dfevelopment",
+    "href": "Sky/index.html#roadmap-for-future-dfevelopment",
+    "title": "Sky solar radiation",
+    "section": "Roadmap for future dfevelopment",
+    "text": "Roadmap for future dfevelopment\nThe package is still under development. The following features are planned:\n\nCalculate fraction of direct and diffuse radiation from measurements of actual solar radiation.\nCalculate the solar radiation on a tilted surface.\nAllow for a different orientation of the 3D scene from VPL.\nMore advanced algorithms for solar radiation and spectrum (e.g., SOLPOS, Bird)."
   },
   {
     "objectID": "tutorials/algae/index.html",
