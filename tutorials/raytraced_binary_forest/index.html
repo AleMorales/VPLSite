@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.242">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alejandro Morales Sierra">
+<meta name="dcterms.date" content="2023-02-28">
+
+<title>Virtual Plant Laboratory - Ray-traced forest of binary trees</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Ray-traced forest of binary trees</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Virtual Plant Laboratory</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Julia basics</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../julia_basics/index.html" class="sidebar-item-text sidebar-link">Julia basics for VPL</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">User Manual</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Graphs</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Graphs/index.html" class="sidebar-item-text sidebar-link">Dynamic graph creation and manipulation</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Geometry</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Visualization</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Visualization/index.html" class="sidebar-item-text sidebar-link">Backends for visualization</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Tutorials - Beginner</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/algae/index.html" class="sidebar-item-text sidebar-link">Algae growth</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/binary_tree/index.html" class="sidebar-item-text sidebar-link">Binary tree</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/random_binary_forest/index.html" class="sidebar-item-text sidebar-link">Forest of binary trees</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/raytraced_binary_forest/index.html" class="sidebar-item-text sidebar-link active">Ray-traced forest of binary trees</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Tutorials - Advanced</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">API</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Geometry.html" class="sidebar-item-text sidebar-link">Module Geometry</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">Sky</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky solar radiation</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Sky/API.html" class="sidebar-item-text sidebar-link">Module Sky</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">Ecophys</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Ecophys/index.html" class="sidebar-item-text sidebar-link">Ecophysiological modules</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">GCIM</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../GCIM/index.html" class="sidebar-item-text sidebar-link">Generic crop interactions model</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src="../..\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div></div></nav>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Ray-traced forest of binary trees</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading"></div>
+  
+    <div class="quarto-title-meta-contents">
+    Alejandro Morales Sierra 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Centre for Crop Systems Analysis - Wageningen University
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 28, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In this example we extend the binary forest example to couple growth to light interception, using a simple light model, where each tree is described by a separate graph object and parameters driving the growth of these trees vary across individuals following a predefined distribution. This is not intended an optimal implementation of such a model but rather a demonstration of how to use the ray tracer within VPL in combination with Sky package to simulate light distribution within a scene and retrieved the resulting values on an organ basis.</p>
+<p>The following packages are needed:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">VPL</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Base.Threads</span>: @threads</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Random</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Sky</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">FastGaussQuadrature</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The data types needed to simulate the binary trees are given in the following module. The main difference with respect to the previous example is that more information is being stored in the Internode object, including the optical properties as well as biomass. The <code>treeparams</code> object stores the total PAR absorbed each day, the total biomass of the tree, the specific internode weight and the radiation use efficiency (RUE).</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> rbtree</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">VPL</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Meristem</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Meristem <span class="op">&lt;:</span><span class="dt"> VPL.Node </span><span class="kw">end</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Node</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Node <span class="op">&lt;:</span><span class="dt"> VPL.Node </span><span class="kw">end</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Internode</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">mutable struct</span> Internode <span class="op">&lt;:</span><span class="dt"> VPL.Node</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        biomass<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        length<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        width<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        material<span class="op">::</span><span class="dt">Lambertian{3} </span><span class="co"># Optical properties for 3 wavebands</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Tree-level variables</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">mutable struct</span> treeparams</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        PAR<span class="op">::</span><span class="dt">Float64     </span><span class="co"># Total PAR intercepted by the tree in a day</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        RUE<span class="op">::</span><span class="dt">Float64     </span><span class="co"># Convert absorbed PAR to biomass growth</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        SIW<span class="op">::</span><span class="dt">Float64     </span><span class="co"># Specific internode weight</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        Biomass<span class="op">::</span><span class="dt">Float64 </span><span class="co"># Current total biomass</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>Main.rbtree</code></pre>
+</div>
+</div>
+<p>The methods for creating the geometry and color of the tree are the same as in the previous example.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Turtle methods</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedgeom!</span>(turtle<span class="op">::</span><span class="dt">MTurtle</span>, i<span class="op">::</span><span class="dt">rbtree.Internode</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HollowCube!</span>(turtle, length <span class="op">=</span> i.length, height <span class="op">=</span>  i.width, width <span class="op">=</span>  i.width, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                move <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedcolor!</span>(turtle<span class="op">::</span><span class="dt">GLTurtle</span>, i<span class="op">::</span><span class="dt">rbtree.Internode</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">feedcolor!</span>(turtle, <span class="fu">RGB</span>(<span class="fl">0</span>,<span class="fl">0.35</span>,<span class="fl">0</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The growth rule is also the same as in the previous example, but now the Internode takes initial biomass and optical properties. The optical properties are stored in a <code>Lambertian</code> object, which is a <code>Material</code> object that defines the transmittance and reflectance of the material for each waveband to be simulated (in this case three).</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new material object with the optical properties</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mat</span>() <span class="op">=</span> <span class="fu">Lambertian</span>(τ <span class="op">=</span> (<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>), <span class="co"># transmittance for blue, green, red</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                   ρ <span class="op">=</span> (<span class="fl">0.05</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>)) <span class="co"># reflectance for blue, green, red</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create right side of the growth rule (parameterized by initial values of the organ)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">create_branching_rule</span>(biomass, length, width)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    mer <span class="op">-&gt;</span> <span class="cf">begin</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># New branches</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        branch1 <span class="op">=</span> <span class="fu">RU</span>(<span class="op">-</span><span class="fl">60.0</span>) <span class="op">+</span> rbtree.<span class="fu">Internode</span>(biomass, length, width, <span class="fu">mat</span>()) <span class="op">+</span> <span class="fu">RH</span>(<span class="fl">90.0</span>) <span class="op">+</span> rbtree.<span class="fu">Meristem</span>()</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        branch2 <span class="op">=</span> <span class="fu">RU</span>(<span class="fl">60.0</span>)  <span class="op">+</span> rbtree.<span class="fu">Internode</span>(biomass, length, width, <span class="fu">mat</span>()) <span class="op">+</span> <span class="fu">RH</span>(<span class="fl">90.0</span>) <span class="op">+</span> rbtree.<span class="fu">Meristem</span>()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sub-graph to be added to the tree</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        rbtree.<span class="fu">Node</span>() <span class="op">+</span> (branch1, branch2)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>create_branching_rule (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>The creation of each individual tree also resembles the previous example</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a tree given the origin and RUE</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">create_tree</span>(origin, RUE)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    SIW    <span class="op">=</span> <span class="fl">1e6</span> <span class="co"># g/m3 (typical wood density for a hardwood)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    length <span class="op">=</span> <span class="fl">0.5</span> <span class="co"># m</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    width  <span class="op">=</span> <span class="fl">0.05</span> <span class="co"># m</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    biomass <span class="op">=</span> length<span class="op">*</span>width<span class="op">^</span><span class="fl">2</span><span class="op">*</span>SIW <span class="co"># g</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Growth rule</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    rule <span class="op">=</span> <span class="fu">Rule</span>(rbtree.Meristem, rhs <span class="op">=</span> <span class="fu">create_branching_rule</span>(biomass, length, width))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    axiom <span class="op">=</span> <span class="fu">T</span>(origin) <span class="op">+</span> rbtree.<span class="fu">Internode</span>(biomass, length, width, <span class="fu">mat</span>()) <span class="op">+</span> rbtree.<span class="fu">Meristem</span>()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    tree <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> <span class="fu">Tuple</span>(rule), </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                 vars <span class="op">=</span> rbtree.<span class="fu">treeparams</span>(<span class="fl">0.0</span>, RUE, SIW, biomass))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tree</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>create_tree (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>We can now create a forest of trees on a regular grid with random RUE values:</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regular grid of trees 2 meters apart</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>origins <span class="op">=</span> [<span class="fu">Vec</span>(i,j,<span class="fl">0</span>) for i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2.0</span><span class="op">:</span><span class="fl">20.0</span>, j <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2.0</span><span class="op">:</span><span class="fl">20.0</span>];</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">123456789</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume RUE follows a log-normal distribution wth low standard deviation</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">RUE_distr</span>(n) <span class="op">=</span> <span class="fu">exp</span>.(<span class="fu">randn</span>(n)) <span class="op">.+</span> <span class="fl">15.0</span> <span class="co"># Unrealistic value to speed up simulation! </span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>RUEs <span class="op">=</span> <span class="fu">RUE_distr</span>(<span class="fu">length</span>(origins))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">histogram</span>(RUEs)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the forest</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> [<span class="fu">create_tree</span>(origins[i], RUEs[i]) for i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span>];</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As growth is now dependent on intercepted PAR via RUE, we now need to simulate light interception by the trees. We will use a ray-tracing approach to do so. The first step is to create a scene with the trees and the light sources. The geometry of the scene is generated from the <code>feedgeom!()</code> methods, just like for 3D rendering. However, instead of assigning a color to the different objects, we need to assign optical properties for the different wavelengths, via a <code>Material</code> object. The <code>feedmaterial!()</code> method is used to do so. The <code>Material</code> object not only provides the optical property but also stores the absorbed PAR. Hence it is important to store these objects in the graph itself (see above for the definition of <code>Internode</code>). Hence, the <code>feedmaterial!()</code> method will generally just pass the material object of each node to the turtle (note that this would be a <code>RTTurtle</code>, not a <code>MTurtle</code> or <code>GLTurtle</code>, the <code>RT</code> standing for ray tracing).</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedmaterial!</span>(turtle<span class="op">::</span><span class="dt">RTTurtle</span>, i<span class="op">::</span><span class="dt">rbtree.Internode</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">feedmaterial!</span>(turtle, i.material)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The scene can be created from the <code>forest</code> object by simply calling <code>RTScene(forest)</code> that will generate the 3D meshes and connect them to their optical properties. However, we also want to add a soil surface as this will affect the light distribution within the scene due to reflection from the soil surface. This is similar to the customized scene that we created in the previous example. Note that the <code>soil_material</code> created below is stored in the scene but nowhere else. If we wanted to recover the irradiance absorbed by the soil tile later on, we would need to store this information somewhere else.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">create_soil</span>()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    soil <span class="op">=</span> <span class="fu">Rectangle</span>(length <span class="op">=</span> <span class="fl">21.0</span>, width <span class="op">=</span> <span class="fl">21.0</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rotatey!</span>(soil, <span class="cn">π</span><span class="op">/</span><span class="fl">2</span>) <span class="co"># To put it in the XY plane</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    VPL.<span class="fu">translate!</span>(soil, <span class="fu">Vec</span>(<span class="fl">0.0</span>, <span class="fl">10.5</span>, <span class="fl">0.0</span>)) <span class="co"># Corner at (0,0,0)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> soil</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">create_scene</span>(forest)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># These are the trees</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    scene <span class="op">=</span> <span class="fu">RTScene</span>(forest)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a soil surface</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    soil <span class="op">=</span> <span class="fu">create_soil</span>()</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    soil_material <span class="op">=</span> <span class="fu">Lambertian</span>(τ <span class="op">=</span> (<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                               ρ <span class="op">=</span> (<span class="fl">0.21</span>, <span class="fl">0.21</span>, <span class="fl">0.21</span>))</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add!</span>(scene, mesh <span class="op">=</span> soil, material <span class="op">=</span> soil_material)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the scene</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scene</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>create_scene (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>Given the scene, we can create the light sources that can approximate the solar irradiance on a given day, location and time of the day using the functions from the Sky package (see package documentation for details). Given the latitude, day of year and fraction of the day (<code>f = 0</code> being sunrise and <code>f = 1</code> being sunset), the function <code>clear_sky()</code> computes the direct and diffuse solar radiation assuming a clear sky. These values may be converted to different wavebands and units using <code>waveband_conversion()</code>. Finally, the collection of light sources approximating the solar irradiance distribution over the sky hemisphere is constructed with the function <code>sky()</code> (this last step requires the 3D scene as input in order to place the light sources adequately).</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">create_sky</span>(;scene, f, lat <span class="op">=</span> <span class="fl">52.0</span><span class="op">*</span><span class="cn">π</span><span class="op">/</span><span class="fl">180.0</span>, DOY <span class="op">=</span> <span class="fl">182</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute solar irradiance</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    Ig, Idir, Idif <span class="op">=</span> <span class="fu">clear_sky</span>(lat <span class="op">=</span> lat, DOY <span class="op">=</span> DOY, f <span class="op">=</span> f) <span class="co"># W/m2</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Conversion factors to red, green and blue for direct and diffuse irradiance</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    wavebands <span class="op">=</span> (<span class="op">:</span>blue, <span class="op">:</span>green, <span class="op">:</span>red)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    f_dir <span class="op">=</span> <span class="fu">Tuple</span>(<span class="fu">waveband_conversion</span>(Itype <span class="op">=</span> <span class="op">:</span>direct,  waveband <span class="op">=</span> x, mode <span class="op">=</span> <span class="op">:</span>power) <span class="cf">for</span> x <span class="kw">in</span> wavebands)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    f_dif <span class="op">=</span> <span class="fu">Tuple</span>(<span class="fu">waveband_conversion</span>(Itype <span class="op">=</span> <span class="op">:</span>diffuse, waveband <span class="op">=</span> x, mode <span class="op">=</span> <span class="op">:</span>power) <span class="cf">for</span> x <span class="kw">in</span> wavebands)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Actual irradiance per waveband</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    Idir_color <span class="op">=</span> <span class="fu">Tuple</span>(f_dir[i]<span class="op">*</span>Idir <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    Idif_color <span class="op">=</span> <span class="fu">Tuple</span>(f_dif[i]<span class="op">*</span>Idif <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the light sources and assign number of rays</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    sources <span class="op">=</span> <span class="fu">sky</span>(scene, </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                  Idir <span class="op">=</span> Idir_color, <span class="co"># Direct solar radiation from above</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                  nrays_dir <span class="op">=</span> <span class="fl">1_000_000</span>, <span class="co"># Number of rays for direct solar radiation</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                  Idif <span class="op">=</span> Idif_color, <span class="co"># Diffuse solar radiation from above</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>                  nrays_dif <span class="op">=</span> <span class="fl">10_000_000</span>, <span class="co"># Total number of rays for diffuse solar radiation</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                  sky_model <span class="op">=</span> StandardSky, <span class="co"># Angular distribution of solar radiation</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                  dome_method <span class="op">=</span> equal_solid_angles, <span class="co"># Discretization of the sky dome</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                  ntheta <span class="op">=</span> <span class="fl">9</span>, <span class="co"># Number of discretization steps in the zenith angle </span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                  nphi <span class="op">=</span> <span class="fl">12</span>) <span class="co"># Number of discretization steps in the azimuth angle</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sources</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>create_sky (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>The 3D scene and the light sources are then combined into a <code>RayTracer</code> object, together with general settings for the ray tracing simulation chosen via <code>RTSettings()</code>. The most important settings refer to the Russian roulette system and the grid cloner (see section on Ray Tracing for details). The settings for the Russian roulette system include the number of times a ray will be traced deterministically (<code>maxiter</code>) and the probability that a ray that exceeds <code>maxiter</code> is terminated (<code>pkill</code>). The grid cloner is used to approximate an infinite canopy by replicating the scene in the different directions (<code>nx</code> and <code>ny</code> being the number of replicates in each direction along the x and y axes, respectively). It is also possible to turn on parallelization of the ray tracing simulation by setting <code>parallel = true</code> (currently this uses Julia’s builtin multithreading capabilities).</p>
+<p>In addition <code>RTSettings()</code>, an acceleration structure and a splitting rule can be defined when creating the <code>RayTracer</code> object (see ray tracing documentation for details). The acceleration structure allows speeding up the ray tracing by avoiding testing all rays against all objects in the scene.</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">create_raytracer</span>(scene, sources)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    settings <span class="op">=</span> <span class="fu">RTSettings</span>(pkill <span class="op">=</span> <span class="fl">0.9</span>, maxiter <span class="op">=</span> <span class="fl">4</span>, nx <span class="op">=</span> <span class="fl">5</span>, ny <span class="op">=</span> <span class="fl">5</span>, parallel <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">RayTracer</span>(scene, sources, settings <span class="op">=</span> settings, acceleration <span class="op">=</span> BVH,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                     rule <span class="op">=</span> <span class="fu">SAH</span><span class="dt">{6}</span>(<span class="fl">5</span>, <span class="fl">10</span>));</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>create_raytracer (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>The actual ray tracing simulation is performed by calling the <code>trace!()</code> method on the ray tracing object. This will trace all rays from all light sources and update the radiant power absorbed by the different surfaces in the scene inside the <code>Material</code> objects (see <code>feedmaterial!()</code> above):</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">run_raytracer!</span>(forest; f <span class="op">=</span> <span class="fl">0.5</span>, DOY <span class="op">=</span> <span class="fl">182</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    scene   <span class="op">=</span> <span class="fu">create_scene</span>(forest)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    sources <span class="op">=</span> <span class="fu">create_sky</span>(scene <span class="op">=</span> scene, f <span class="op">=</span> f, DOY <span class="op">=</span> DOY)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    rtobj   <span class="op">=</span> <span class="fu">create_raytracer</span>(scene, sources)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">trace!</span>(rtobj)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>run_raytracer! (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>The total PAR absorbed for each tree is calculated from the material objects of the different internodes (using <code>power()</code> on the <code>Material</code> object). Note that the <code>power()</code> function returns three different values, one for each waveband, but they are added together as RUE is defined for total PAR.</p>
+<p>In most cases the relationship between absorbed PAR and growth is not linear and thus the process needs to be integrated over the day. That is not case here since we use an RUE constant, however the general scenario is shown for generality. For more complex models (e.g., where photosynthesis is computed for each organ) the <code>calculate_PAR!</code> function below would be replaced by a function that computes photosynthesis for each organ and then adds up to the tree level.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>getInternode <span class="op">=</span> <span class="fu">Query</span>(rbtree.Internode)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the ray tracer, calculate PAR absorbed per tree and add it to the daily</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># total using general weighted quadrature formula</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculate_PAR!</span>(forest; f <span class="op">=</span> <span class="fl">0.5</span>, w <span class="op">=</span> <span class="fl">1.0</span>, dt <span class="op">=</span> <span class="fl">1.0</span>, DOY <span class="op">=</span> <span class="fl">182</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Run the ray tracer</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run_raytracer!</span>(forest, f <span class="op">=</span> f, DOY <span class="op">=</span> DOY)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add up PAR absorbed by each tree and add to the tree variables</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@threads</span> <span class="cf">for</span> tree <span class="kw">in</span> forest</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        PAR <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">apply</span>(tree, getInternode)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>            PAR <span class="op">+=</span> <span class="fu">sum</span>(<span class="fu">power</span>(i.material))</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        tree.vars.PAR <span class="op">+=</span> w<span class="op">*</span>PAR<span class="op">*</span>dt</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Gaussian-Legendre integration of PAR absorbed over the day</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">daily_PAR!</span>(forest; nsteps <span class="op">=</span> <span class="fl">5</span>, DOY <span class="op">=</span> <span class="fl">182</span>, lat <span class="op">=</span> <span class="fl">52.0</span><span class="op">*</span><span class="cn">π</span><span class="op">/</span><span class="fl">180.0</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute length of the day</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    dec <span class="op">=</span> <span class="fu">declination</span>(DOY)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    dl <span class="op">=</span> <span class="fu">day_length</span>(lat, dec)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> dl<span class="op">/</span>nsteps</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate nodes and weights for Gaussian-Legendre integration</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    nodes, weights <span class="op">=</span> <span class="fu">gausslegendre</span>(nsteps)</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    ws   <span class="op">=</span> weights<span class="op">./</span><span class="fl">2</span> <span class="co"># Scale weights to add up to 1</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    fs   <span class="op">=</span> <span class="fl">0.5</span> <span class="op">.+</span> nodes<span class="op">./</span><span class="fl">2</span> <span class="co"># Scale nodes to [0,1]</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Integrate over the day</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>nsteps</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">calculate_PAR!</span>(forest, f <span class="op">=</span> fs[i], w <span class="op">=</span> ws[i], dt <span class="op">=</span> dt, DOY <span class="op">=</span> DOY)</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset PAR absorbed by the tree (at the start of a new day)</span></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">reset_PAR!</span>(forest)</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> tree <span class="kw">in</span> forest</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>        tree.vars.PAR <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>reset_PAR! (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>Given the total daily PAR absorbed by each tree, it may be converted to biomass using the RUE. The growth function below is called at the end of each day and updates the dimensions of each internode inside a tree based on the new biomass, as well as add new organs to the tree by applying the graph rewriting rule.</p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Growth function</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">growth!</span>(tree)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Total growth based on RUE</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    growth <span class="op">=</span> tree.vars.RUE<span class="op">*</span>tree.vars.PAR<span class="op">/</span><span class="fl">1e6</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Allocate growth to each organ and compute new dimensions</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">apply</span>(tree, getInternode)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        biomass    <span class="op">=</span> i.length<span class="op">*</span>i.width<span class="op">^</span><span class="fl">2</span><span class="op">*</span>tree.vars.SIW</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        i.biomass <span class="op">+=</span> growth<span class="op">*</span>i.biomass<span class="op">/</span>tree.vars.Biomass <span class="co"># Simple allocation rule</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        volume     <span class="op">=</span> i.biomass<span class="op">/</span>tree.vars.SIW</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        i.length   <span class="op">=</span> <span class="fu">cbrt</span>(<span class="fl">100</span>volume) <span class="co"># Assume width = length/10</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        i.width    <span class="op">=</span> i.length<span class="op">/</span><span class="fl">10</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update total tree biomass</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    tree.vars.Biomass <span class="op">+=</span> growth</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create new organs with the growth rule</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rewrite!</span>(tree)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>growth! (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>Finally, all the pieces may be combined into a single function that simulates the daily steps of the model:</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">daily_step!</span>(forest, DOY)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reset PAR absorbed by the tree</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">reset_PAR!</span>(forest)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Integrate PAR absorbed over the day</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">daily_PAR!</span>(forest, DOY <span class="op">=</span> DOY)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update tree dimensions and add new organs</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@threads</span> <span class="cf">for</span> tree <span class="kw">in</span> forest</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">growth!</span>(tree)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>daily_step! (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>We can create a function for rendering the forest in combination with the soil:</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">render_forest</span>(forest)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot the forest</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">display</span>(<span class="fu">render</span>(forest, axes <span class="op">=</span> <span class="cn">false</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate the soil and add it</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    soil <span class="op">=</span> <span class="fu">create_soil</span>()</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">render!</span>(soil, color <span class="op">=</span> <span class="fu">RGB</span>(<span class="fl">1.0</span>,<span class="fl">1.0</span>,<span class="fl">0.5</span>))</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>render_forest (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>We can now simulate and visualize the growth of the forest by calling the <code>daily_step!</code> function iteratively:</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>newforest <span class="op">=</span> <span class="fu">deepcopy</span>(forest)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> <span class="fl">182</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render_forest</span>(forest)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"Day </span><span class="sc">$</span>i<span class="st">"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">daily_step!</span>(newforest, start <span class="op">+</span> i)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">render_forest</span>(newforest)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
