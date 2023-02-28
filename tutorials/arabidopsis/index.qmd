@@ -1,0 +1,35 @@
+---
+title: "Arabidopsis growth model"
+author: 
+    - name: "Alejandro Morales Sierra"
+      affiliation: "Centre for Crop Systems Analysis - Wageningen University"
+date: last-modified
+execute: 
+  cache: true
+---
+
+Model of Arabidopsis growth based on:
+
+1. Phyllochron
+2. Elliptical phyllotaxis
+3. Paddle leaves (rectangle + ellipse)
+4. Leaf angle model over time
+5. Relative sink strength
+6. NRH photosynthesis model
+7. Simple light model that only depends on leaf angle
+
+At the end comment on the simplification regarding light and diurnal integration
+of photosynthesis in preparation for the next model. In the next model we may also
+introduce the FvCB model. 
+
+Assumptions of the model:
+
+- Gaussian model of sink strength per leaf (assumed rank-independent but thermal time-dependent)
+- Quadratic model for leaf emergence as a function of thermal time
+- SLA model as a function of leaf rank to conver to surface
+- Dynamic leaf angle model that is thermal time dependent
+- Paddle model of leaf morphology (rectangle + ellipse)
+- Petiole ratio that is rank dependent
+- Light response curve to produce assimilates
+- Global pool for allocation
+- Fixed allocation to roots?

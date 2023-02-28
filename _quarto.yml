@@ -36,6 +36,7 @@ website:
           - tutorials/snowflakes/index.qmd
           - tutorials/binary_tree/index.qmd
           - tutorials/random_binary_forest/index.qmd
+          - tutorials/raytraced_binary_forest/index.qmd
       - section: "Tutorials - Advanced"
         contents:
           - tutorials/relational_queries/index.qmd
