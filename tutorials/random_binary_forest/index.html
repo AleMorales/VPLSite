@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.242">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-02-24">
+<meta name="dcterms.date" content="2023-03-05">
 
 <title>Virtual Plant Laboratory - Forest of binary trees</title>
 <style>
@@ -322,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky solar radiation</a>
+  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky.jl</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -384,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="quarto-title-meta-author">
   <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading"></div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
     Alejandro Morales Sierra 
@@ -402,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 24, 2023</p>
+      <p class="date">March 5, 2023</p>
     </div>
   </div>
   
@@ -432,19 +432,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedgeom!</span>(turtle<span class="op">::</span><span class="dt">MTurtle</span>, i<span class="op">::</span><span class="dt">rbtree.Internode</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedgeom!</span>(turtle<span class="op">::</span><span class="dt">Turtle</span>, i<span class="op">::</span><span class="dt">rbtree.Internode</span>, vars)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HollowCube!</span>(turtle, length <span class="op">=</span> i.length, height <span class="op">=</span>  <span class="fu">min</span>(i.length<span class="op">/</span><span class="fl">10</span>, <span class="fl">0.3</span>), </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                        width <span class="op">=</span>  <span class="fu">min</span>(i.length<span class="op">/</span><span class="fl">10</span>, <span class="fl">0.3</span>), move <span class="op">=</span> <span class="cn">true</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedcolor!</span>(turtle<span class="op">::</span><span class="dt">GLTurtle</span>, i<span class="op">::</span><span class="dt">rbtree.Internode</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">feedcolor!</span>(turtle, <span class="fu">RGB</span>(<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>))</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>rule <span class="op">=</span> <span class="fu">Rule</span>(rbtree.Meristem, rhs <span class="op">=</span> mer <span class="op">-&gt;</span> rbtree.<span class="fu">Node</span>() <span class="op">+</span> </span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>                                         (<span class="fu">RU</span>(<span class="op">-</span><span class="fl">60.0</span>) <span class="op">+</span> rbtree.<span class="fu">Internode</span>(<span class="fl">0.1</span>) <span class="op">+</span> <span class="fu">RH</span>(<span class="fl">90.0</span>) <span class="op">+</span> rbtree.<span class="fu">Meristem</span>(), </span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">RU</span>(<span class="fl">60.0</span>)  <span class="op">+</span> rbtree.<span class="fu">Internode</span>(<span class="fl">0.1</span>) <span class="op">+</span> <span class="fu">RH</span>(<span class="fl">90.0</span>) <span class="op">+</span> rbtree.<span class="fu">Meristem</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                        width <span class="op">=</span>  <span class="fu">min</span>(i.length<span class="op">/</span><span class="fl">10</span>, <span class="fl">0.3</span>), move <span class="op">=</span> <span class="cn">true</span>, </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                        color <span class="op">=</span> <span class="fu">RGB</span>(<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>rule <span class="op">=</span> <span class="fu">Rule</span>(rbtree.Meristem, rhs <span class="op">=</span> mer <span class="op">-&gt;</span> rbtree.<span class="fu">Node</span>() <span class="op">+</span> </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                                         (<span class="fu">RU</span>(<span class="op">-</span><span class="fl">60.0</span>) <span class="op">+</span> rbtree.<span class="fu">Internode</span>(<span class="fl">0.1</span>) <span class="op">+</span> <span class="fu">RH</span>(<span class="fl">90.0</span>) <span class="op">+</span> rbtree.<span class="fu">Meristem</span>(), </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                                          <span class="fu">RU</span>(<span class="fl">60.0</span>)  <span class="op">+</span> rbtree.<span class="fu">Internode</span>(<span class="fl">0.1</span>) <span class="op">+</span> <span class="fu">RH</span>(<span class="fl">90.0</span>) <span class="op">+</span> rbtree.<span class="fu">Meristem</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>Rule replacing nodes of type Main.rbtree.Meristem without context capturing.</code></pre>
 </div>
@@ -572,7 +569,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Customizing the scene</h1>
 <p>Here we are going to customize the scene of our simulation by adding a horizontal tile represting soil and tweaking the 3D representation. When we want to combine plants generated from graphs with any other geometric element it is best to combine all these geometries in a <code>GLScene</code> object. We can start the scene with the <code>newforest</code> generated in the above:</p>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>scene <span class="op">=</span> <span class="fu">GLScene</span>(newforest);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>scene <span class="op">=</span> <span class="fu">Scene</span>(newforest);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can create the soil tile directly, without having to create a graph. The simplest approach is two use a special constructor <code>Rectangle</code> where one species a corner of the rectangle and two vectors defining the two sides of the vectors. Both the sides and the corner need to be specified with <code>Vec</code> just like in the above when we determined the origin of each plant. VPL offers some shortcuts: <code>O()</code> returns the origin (<code>Vec(0.0, 0.0, 0.0)</code>), whereas <code>X</code>, <code>Y</code> and <code>Z</code> returns the corresponding axes and you can scale them by passing the desired length as input. Below, a rectangle is created on the XY plane with the origin as a corner and each side being 11 units long:</p>
 <div class="cell" data-execution_count="15">

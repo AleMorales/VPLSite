@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.242">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-01-10">
+<meta name="dcterms.date" content="2023-03-05">
 
 <title>Virtual Plant Laboratory - The Koch snowflake</title>
 <style>
@@ -322,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky solar radiation</a>
+  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky.jl</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -384,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="quarto-title-meta-author">
   <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading"></div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
     Alejandro Morales Sierra 
@@ -402,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 10, 2023</p>
+      <p class="date">March 5, 2023</p>
     </div>
   </div>
   
@@ -447,7 +447,7 @@ rule: E(L) → E(L/3) + RU(-60) + E(L/3) + RU(120) + E(L/3) + RU(-60) + E(L/3)</
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> L <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>axiom <span class="op">=</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> VPL.<span class="fu">RU</span>(<span class="fl">120.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> VPL.<span class="fu">RU</span>(<span class="fl">120.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>VPL.Core.StaticGraph(Dict{Int64, Any}(5 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set{Int64}(), 4, 5), 4 =&gt; VPL.Core.GraphNode{VPL.Geom.RU{Float64}}(VPL.Geom.RU{Float64}(120.0), Set([5]), 3, 4), 2 =&gt; VPL.Core.GraphNode{VPL.Geom.RU{Float64}}(VPL.Geom.RU{Float64}(120.0), Set([3]), 1, 2), 3 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set([4]), 2, 3), 1 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set([2]), missing, 1)), Dict{DataType, Set{Int64}}(Main.sn.E =&gt; Set([5, 3, 1]), VPL.Geom.RU{Float64} =&gt; Set([4, 2])), 1, 5)</code></pre>
+<pre><code>VPL.Core.StaticGraph(Dict{Int64, Any}(5 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set{Int64}(), 4, 5), 4 =&gt; VPL.Core.GraphNode{VPL.Geom.RU{Float64}}(VPL.Geom.RU{Float64}(120.0), Set([5]), 3, 4), 2 =&gt; VPL.Core.GraphNode{VPL.Geom.RU{Float64}}(VPL.Geom.RU{Float64}(120.0), Set([3]), 1, 2), 3 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set([4]), 2, 3), 1 =&gt; VPL.Core.GraphNode{Main.sn.E}(Main.sn.E(1.0), Set([2]), missing, 1)), Dict{DataType, Set{Int64}}(VPL.Geom.RU{Float64} =&gt; Set([4, 2]), Main.sn.E =&gt; Set([5, 3, 1])), 1, 5)</code></pre>
 </div>
 </div>
 <p>The rule is also straightforward to implement as all the nodes of type E will be replaced in each iteration. However, we need to ensure that the length of the new edges is a calculated from the length of the edge being replaced. In order to extract the data stored in the node being replaced we can simply use the function data. In this case, the replacement function is defined and then added to the rule. This can make the code more readable but helps debugging and testing the replacement function.</p>
@@ -465,101 +465,97 @@ rule: E(L) → E(L/3) + RU(-60) + E(L/3) + RU(120) + E(L/3) + RU(-60) + E(L/3)</
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Koch <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> <span class="fu">Tuple</span>(rule))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>Dynamic graph with 5 nodes of types Main.sn.E,VPL.Geom.RU{Float64} and 1 rewriting rules.</code></pre>
+<pre><code>Dynamic graph with 5 nodes of types VPL.Geom.RU{Float64},Main.sn.E and 1 rewriting rules.</code></pre>
 </div>
 </div>
-<p>In order to be able to generate a 3D structure we need to define a method for the function <code>VPL.feedgeom!</code> (notice the need to prefix it with <code>VPL.</code> as we are going to define a method for this function). The method needs to two take two arguments, the first one is always an object of type MTurtle and the second is an object of the type for which the method is defined (in this case, E).</p>
-<p>The body of the method should generate the 3D structures using the geometry primitives provided by VPL and feed them to the turtle that is being passed to the method as first argument. In this case, we are going to represent the edges of the Koch snowflakes with cylinders, which can be generated with the <code>HollowCylinder!</code> function from VPL. Note that the <code>feedgeom!</code> should return <code>nothing</code>, the turtle will be modified in place (hence the use of <code>!</code> at the end of the function as customary in the VPL community):</p>
+<p>In order to be able to generate a 3D structure we need to define a method for the function <code>VPL.feedgeom!</code> (notice the need to prefix it with <code>VPL.</code> as we are going to define a method for this function). The method needs to two take two arguments, the first one is always an object of type Turtle and the second is an object of the type for which the method is defined (in this case, E).</p>
+<p>The body of the method should generate the 3D structures using the geometry primitives provided by VPL and feed them to the turtle that is being passed to the method as first argument. In this case, we are going to represent the edges of the Koch snowflakes with cylinders, which can be generated with the <code>HollowCylinder!</code> function from VPL. Note that the <code>feedgeom!</code> should return <code>nothing</code>, the turtle will be modified in place (hence the use of <code>!</code> at the end of the function as customary in the VPL community).</p>
+<p>In order to render the geometry, we need assign a <code>color</code> (i.e., any type of color support by the package ColorTypes.jl). In this case, we just feed a basic <code>RGB</code> color defined by the proportion of red, green and blue. To make the figures more appealing, we can assign random values to each channel of the color to generate random colors.</p>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedgeom!</span>(turtle<span class="op">::</span><span class="dt">MTurtle</span>, <span class="cn">e</span><span class="op">::</span><span class="dt">sn.E</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HollowCylinder!</span>(turtle, length <span class="op">=</span> <span class="cn">e</span>.length, width <span class="op">=</span> <span class="cn">e</span>.length<span class="op">/</span><span class="fl">10</span>, height <span class="op">=</span> <span class="cn">e</span>.length<span class="op">/</span><span class="fl">10</span>, move <span class="op">=</span> <span class="cn">true</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedgeom!</span>(turtle<span class="op">::</span><span class="dt">Turtle</span>, <span class="cn">e</span><span class="op">::</span><span class="dt">sn.E</span>, vars)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HollowCylinder!</span>(turtle, length <span class="op">=</span> <span class="cn">e</span>.length, width <span class="op">=</span> <span class="cn">e</span>.length<span class="op">/</span><span class="fl">10</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                    height <span class="op">=</span> <span class="cn">e</span>.length<span class="op">/</span><span class="fl">10</span>, move <span class="op">=</span> <span class="cn">true</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                    color <span class="op">=</span> <span class="fu">RGB</span>(<span class="fu">rand</span>(), <span class="fu">rand</span>(), <span class="fu">rand</span>()))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Note that the argument <code>move = true</code> indicates that the turtle should move forward as the cylinder is generated a distance equal to the length of the cylinder.</p>
-<p>With the <code>feedgeom!</code> method defined we can already generate the 3D structure, but we cannot render it yet as we also need to define the color with which to render it. This is achieved by defining the <code>VPL.feedcolor!</code> method that takes a <code>GLTurtle</code> as argument (notice the different data types, <code>MTurtle</code> to collect triangular meshes, <code>GLTurtle</code> to collect colors for rendering). In this case, we just feed a basic <code>RGB</code> color defined by the proportion of red, green and blue. To make the figures more appealing, we can assign random values to each channel of the color to generate random colors.</p>
+<p>Note that the argument <code>move = true</code> indicates that the turtle should move forward as the cylinder is generated a distance equal to the length of the cylinder. Also, the <code>feedgeom!</code> method has a third argument called <code>vars</code>. This gives acess to the shared variables stored within the graph (such that they can be accessed by any node). In this case, we are not using this argument.</p>
+<p>After defining the method, we can now call the function render on the graph to generate a 3D interactive image of the Koch snowflake in the current state</p>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedcolor!</span>(turtle<span class="op">::</span><span class="dt">GLTurtle</span>, <span class="cn">e</span><span class="op">::</span><span class="dt">sn.E</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">feedcolor!</span>(turtle, <span class="fu">RGB</span>(<span class="fu">rand</span>(), <span class="fu">rand</span>(), <span class="fu">rand</span>()))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<p><img src="index_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
-<p>After defining these two methods, we can now call the function render on the graph to generate a 3D interactive image of the Koch snowflake in the current state</p>
+</div>
+<p>This renders the initial triangle of the construction procedure of the Koch snowflake. Let’s execute the rules once to verify that we get the 2nd iteration (check the figure at the beginning of this document):</p>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Koch)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <p><img src="index_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>This renders the initial triangle of the construction procedure of the Koch snowflake. Let’s execute the rules once to verify that we get the 2nd iteration (check the figure at the beginning of this document):</p>
+<p>And two more times</p>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Koch)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rewrite!</span>(Koch)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <p><img src="index_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<p>And two more times</p>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rewrite!</span>(Koch)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<p><img src="index_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <section id="other-snowflake-fractals" class="level1">
 <h1>Other snowflake fractals</h1>
 <p>To demonstrate the power of this approach, let’s create an alternative snowflake. We will simply invert the rotations of the turtle in the rewriting rule</p>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Kochsnowflake2</span>(x)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>   L <span class="op">=</span> <span class="fu">data</span>(x).length</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>   sn.<span class="fu">E</span>(L<span class="op">/</span><span class="fl">3</span>) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">60.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L<span class="op">/</span><span class="fl">3</span>) <span class="op">+</span> <span class="fu">RU</span>(<span class="op">-</span><span class="fl">120.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L<span class="op">/</span><span class="fl">3</span>) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">60.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L<span class="op">/</span><span class="fl">3</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>rule2 <span class="op">=</span> <span class="fu">Rule</span>(sn.E, rhs <span class="op">=</span> Kochsnowflake2)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Koch2 <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> <span class="fu">Tuple</span>(rule2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>Dynamic graph with 5 nodes of types Main.sn.E,VPL.Geom.RU{Float64} and 1 rewriting rules.</code></pre>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Kochsnowflake2</span>(x)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>   L <span class="op">=</span> <span class="fu">data</span>(x).length</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>   sn.<span class="fu">E</span>(L<span class="op">/</span><span class="fl">3</span>) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">60.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L<span class="op">/</span><span class="fl">3</span>) <span class="op">+</span> <span class="fu">RU</span>(<span class="op">-</span><span class="fl">120.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L<span class="op">/</span><span class="fl">3</span>) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">60.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L<span class="op">/</span><span class="fl">3</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>rule2 <span class="op">=</span> <span class="fu">Rule</span>(sn.E, rhs <span class="op">=</span> Kochsnowflake2)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>Koch2 <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiom, rules <span class="op">=</span> <span class="fu">Tuple</span>(rule2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>Dynamic graph with 5 nodes of types VPL.Geom.RU{Float64},Main.sn.E and 1 rewriting rules.</code></pre>
 </div>
 </div>
 <p>The axiom is the same, but now the edges added by the rule will generate the edges towards the inside of the initial triangle. Let’s execute the first three iterations and render the results</p>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First iteration</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Koch2)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch2, axes <span class="op">=</span> <span class="cn">false</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Second iteration</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Koch2)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch2, axes <span class="op">=</span> <span class="cn">false</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Third iteration</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Koch2)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch2, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<p><img src="index_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>This is know as <a href="https://mathworld.wolfram.com/KochAntisnowflake.html">Koch antisnowflake</a>. We could also easily generate a <a href="https://mathworld.wolfram.com/CesaroFractal.html">Cesàro fractal</a> by also changing the axiom:</p>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First iteration</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Koch2)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch2, axes <span class="op">=</span> <span class="cn">false</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Second iteration</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Koch2)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch2, axes <span class="op">=</span> <span class="cn">false</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Third iteration</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Koch2)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Koch2, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>axiomCesaro <span class="op">=</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">90.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">90.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">90.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>Cesaro <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiomCesaro, rules <span class="op">=</span> (rule2,))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Cesaro, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <p><img src="index_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>This is know as <a href="https://mathworld.wolfram.com/KochAntisnowflake.html">Koch antisnowflake</a>. We could also easily generate a <a href="https://mathworld.wolfram.com/CesaroFractal.html">Cesàro fractal</a> by also changing the axiom:</p>
+<p>And, as before, let’s go through the first three iterations</p>
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>axiomCesaro <span class="op">=</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">90.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">90.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L) <span class="op">+</span> <span class="fu">RU</span>(<span class="fl">90.0</span>) <span class="op">+</span> sn.<span class="fu">E</span>(L)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Cesaro <span class="op">=</span> <span class="fu">Graph</span>(axiom <span class="op">=</span> axiomCesaro, rules <span class="op">=</span> (rule2,))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Cesaro, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First iteration</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Cesaro)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Cesaro, axes <span class="op">=</span> <span class="cn">false</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Second iteration</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Cesaro)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Cesaro, axes <span class="op">=</span> <span class="cn">false</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Third iteration</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Cesaro)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Cesaro, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <p><img src="index_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<p>And, as before, let’s go through the first three iterations</p>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First iteration</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Cesaro)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Cesaro, axes <span class="op">=</span> <span class="cn">false</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Second iteration</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Cesaro)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Cesaro, axes <span class="op">=</span> <span class="cn">false</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Third iteration</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rewrite!</span>(Cesaro)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">render</span>(Cesaro, axes <span class="op">=</span> <span class="cn">false</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<p><img src="index_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
