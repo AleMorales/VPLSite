@@ -42,15 +42,12 @@ module btree
 end
 ```
 
-As always, the 3D structure and the color of each type of node are implemented with the `feedgeom!` and `feedcolor!` methods. In this case, only the internodes have a 3D representation, so these methods are defined for this type only.
+As always, the 3D structure and the color of each type of node are implemented with the `feedgeom!` method. In this case, only the internodes have a 3D representation, so these methods are defined for this type only.
 
 ```{julia}
-function VPL.feedgeom!(turtle::MTurtle, i::btree.Internode)
-    HollowCube!(turtle, length = i.length, height = i.length/10, width = i.length/10, move = true)
-    return nothing
-end
-function VPL.feedcolor!(turtle::GLTurtle, i::btree.Internode)
-    feedcolor!(turtle, RGB(0,1,0))
+function VPL.feedgeom!(turtle::Turtle, i::btree.Internode, vars)
+    HollowCube!(turtle, length = i.length, height = i.length/10, width = i.length/10, 
+                move = true, color = RGB(0,1,0))
     return nothing
 end
 ```

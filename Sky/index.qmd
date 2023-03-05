@@ -1,5 +1,5 @@
 ---
-title: "Sky solar radiation"
+title: "Sky.jl"
 author: 
     - name: "Alejandro Morales Sierra"
       affiliation: "Centre for Crop Systems Analysis - Wageningen University"

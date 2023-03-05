@@ -33,13 +33,10 @@ module rbtree
     end
 end
 
-function VPL.feedgeom!(turtle::MTurtle, i::rbtree.Internode)
+function VPL.feedgeom!(turtle::Turtle, i::rbtree.Internode, vars)
     HollowCube!(turtle, length = i.length, height =  min(i.length/10, 0.3), 
-                        width =  min(i.length/10, 0.3), move = true)
-    return nothing
-end
-function VPL.feedcolor!(turtle::GLTurtle, i::rbtree.Internode)
-    feedcolor!(turtle, RGB(0,1,0))
+                        width =  min(i.length/10, 0.3), move = true, 
+                        color = RGB(0,1,0))
     return nothing
 end
 
@@ -207,7 +204,7 @@ geometric element it is best to combine all these geometries in a `GLScene` obje
 with the `newforest` generated in the above:
 
 ```{julia}
-scene = GLScene(newforest);
+scene = Scene(newforest);
 ```
 
 We can create the soil tile directly, without having to create a graph. The simplest approach is two use 

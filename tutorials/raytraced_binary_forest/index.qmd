@@ -61,16 +61,13 @@ end
 ```
 
 The methods for creating the geometry and color of the tree are the same as in
-the previous example. 
+the previous example with the addition that we also assign a `Material` object
+to the argument `material` (which is a `Lambertian` object in this case).
 ```{julia}
 # Turtle methods
-function VPL.feedgeom!(turtle::MTurtle, i::rbtree.Internode)
+function VPL.feedgeom!(turtle::Turtle, i::rbtree.Internode, vars)
     HollowCube!(turtle, length = i.length, height =  i.width, width =  i.width, 
-                move = true)
-    return nothing
-end
-function VPL.feedcolor!(turtle::GLTurtle, i::rbtree.Internode)
-    feedcolor!(turtle, RGB(0,0.35,0))
+                move = true, color = RGB(0,0.35,0), matertial = i.material)
     return nothing
 end
 ```
@@ -131,26 +128,11 @@ forest = [create_tree(origins[i], RUEs[i]) for i in 1:100];
 
 As growth is now dependent on intercepted PAR via RUE, we now need to simulate
 light interception by the trees. We will use a ray-tracing approach to do so.
-The first step is to create a scene with the trees and the light sources. The
-geometry of the scene is generated from the `feedgeom!()` methods, just like for
-3D rendering. However, instead of assigning a color to the different objects, we
-need to assign optical properties for the different wavelengths, via a `Material`
-object. The `feedmaterial!()` method is used to do so. The `Material` object not
-only provides the optical property but also stores the absorbed PAR. Hence it is
-important to store these objects in the graph itself (see above for the definition
-of `Internode`). Hence, the `feedmaterial!()` method will generally just pass
-the material object of each node to the turtle (note that this would be
-a `RTTurtle`, not a `MTurtle` or `GLTurtle`, the `RT` standing for ray tracing).
+The first step is to create a scene with the trees and the light sources. As for
+rendering, the scene can be created from the `forest` object by simply calling 
+`Scene(forest)` that will generate the 3D meshes and connect them to their 
+optical properties.
 
-```{julia}
-function VPL.feedmaterial!(turtle::RTTurtle, i::rbtree.Internode)
-    feedmaterial!(turtle, i.material)
-    return nothing
-end
-```
-
-The scene can be created from the `forest` object by simply calling `RTScene(forest)` 
-that will generate the 3D meshes and connect them to their optical properties.
 However, we also want to add a soil surface as this will affect the light 
 distribution within the scene due to reflection from the soil surface. This is
 similar to the customized scene that we created in the previous example. Note
@@ -167,7 +149,7 @@ function create_soil()
 end
 function create_scene(forest)
     # These are the trees
-    scene = RTScene(forest)
+    scene = Scene(forest)
     # Add a soil surface
     soil = create_soil()
     soil_material = Lambertian(τ = (0.0, 0.0, 0.0),
