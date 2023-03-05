@@ -27,7 +27,7 @@ VPL does not provide a domain-specific language to implement rules and queries.
 Rather, they are defined by functions which are stored in objects of types `Rule` 
 and `Query`, respectively. Similarly, the nodes of a graph can be of any 
 user-defined type, as long as the user defines the necessary methods to support 
-specific functionality (e.g. the `feedgeom!` method to generate geometry).
+specific functionality (e.g. the `feed!` method to generate geometry).
 
 VPL is designed around data types and methods. Building a model in VPL typically
 requires:

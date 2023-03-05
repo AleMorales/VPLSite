@@ -71,7 +71,7 @@ Default method for `feedmaterial!()` that does not do anything. Hence, the user 
 feedmaterial!(turtle::RTTurtle, g::Graph)
 ```
 
-Process a `Graph` object with a RT turtle and collect the materials defined in the graph, in  the same order in which the 3D mesh is created by the corresponding `feedgeom!()` method.
+Process a `Graph` object with a RT turtle and collect the materials defined in the graph, in  the same order in which the 3D mesh is created by the corresponding `feed!()` method.
 
 
 <a target='_blank' href='https://github.com/AleMorales/VPL.jl/blob/feaf2fa0a1116bed2290a39655c58f2588bfc402/src/RayTracer/RayTracer/Turtle.jl#LL38-L43' class='documenter-source'>source</a><br>

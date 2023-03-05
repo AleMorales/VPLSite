@@ -33,7 +33,7 @@ module rbtree
     end
 end
 
-function VPL.feedgeom!(turtle::Turtle, i::rbtree.Internode, vars)
+function VPL.feed!(turtle::Turtle, i::rbtree.Internode, vars)
     HollowCube!(turtle, length = i.length, height =  min(i.length/10, 0.3), 
                         width =  min(i.length/10, 0.3), move = true, 
                         color = RGB(0,1,0))

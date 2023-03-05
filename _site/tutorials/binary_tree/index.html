@@ -441,9 +441,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>Main.btree</code></pre>
 </div>
 </div>
-<p>As always, the 3D structure and the color of each type of node are implemented with the <code>feedgeom!</code> method. In this case, only the internodes have a 3D representation, so these methods are defined for this type only.</p>
+<p>As always, the 3D structure and the color of each type of node are implemented with the <code>feed!</code> method. In this case, only the internodes have a 3D representation, so these methods are defined for this type only.</p>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feedgeom!</span>(turtle<span class="op">::</span><span class="dt">Turtle</span>, i<span class="op">::</span><span class="dt">btree.Internode</span>, vars)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feed!</span>(turtle<span class="op">::</span><span class="dt">Turtle</span>, i<span class="op">::</span><span class="dt">btree.Internode</span>, vars)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HollowCube!</span>(turtle, length <span class="op">=</span> i.length, height <span class="op">=</span> i.length<span class="op">/</span><span class="fl">10</span>, width <span class="op">=</span> i.length<span class="op">/</span><span class="fl">10</span>, </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                move <span class="op">=</span> <span class="cn">true</span>, color <span class="op">=</span> <span class="fu">RGB</span>(<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span>))</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
@@ -519,7 +519,7 @@ Dynamic graph variables stored in struct of type Main.btree.treeparams</code></p
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>newtree <span class="op">=</span> <span class="fu">simulate</span>(tree, getInternode, <span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>Dynamic graph with 26 nodes of types VPL.Geom.RU{Float64},Main.btree.Internode,VPL.Geom.RH{Float64},Main.btree.Meristem,Main.btree.Node and 1 rewriting rules.
+<pre><code>Dynamic graph with 26 nodes of types VPL.Geom.RH{Float64},Main.btree.Node,Main.btree.Internode,VPL.Geom.RU{Float64},Main.btree.Meristem and 1 rewriting rules.
 Dynamic graph variables stored in struct of type Main.btree.treeparams</code></pre>
 </div>
 </div>
