@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-03-05">
+<meta name="dcterms.date" content="2023-03-09">
 
 <title>Virtual Plant Laboratory - Ray-traced forest of binary trees</title>
 <style>
@@ -402,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 5, 2023</p>
+      <p class="date">March 9, 2023</p>
     </div>
   </div>
   
@@ -454,7 +454,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Turtle methods</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feed!</span>(turtle<span class="op">::</span><span class="dt">Turtle</span>, i<span class="op">::</span><span class="dt">rbtree.Internode</span>, vars)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HollowCube!</span>(turtle, length <span class="op">=</span> i.length, height <span class="op">=</span>  i.width, width <span class="op">=</span>  i.width, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                move <span class="op">=</span> <span class="cn">true</span>, color <span class="op">=</span> <span class="fu">RGB</span>(<span class="fl">0</span>,<span class="fl">0.35</span>,<span class="fl">0</span>), matertial <span class="op">=</span> i.material)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                move <span class="op">=</span> <span class="cn">true</span>, color <span class="op">=</span> <span class="fu">RGB</span>(<span class="fl">0</span>,<span class="fl">0.35</span>,<span class="fl">0</span>), material <span class="op">=</span> i.material)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">nothing</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -550,7 +550,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                  Idir <span class="op">=</span> Idir_color, <span class="co"># Direct solar radiation from above</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                  nrays_dir <span class="op">=</span> <span class="fl">1_000_000</span>, <span class="co"># Number of rays for direct solar radiation</span></span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                  Idif <span class="op">=</span> Idif_color, <span class="co"># Diffuse solar radiation from above</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                  nrays_dif <span class="op">=</span> <span class="fl">10_000_000</span>, <span class="co"># Total number of rays for diffuse solar radiation</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                  nrays_dif <span class="op">=</span> <span class="fl">1_000_000</span>, <span class="co"># Total number of rays for diffuse solar radiation</span></span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>                  sky_model <span class="op">=</span> StandardSky, <span class="co"># Angular distribution of solar radiation</span></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>                  dome_method <span class="op">=</span> equal_solid_angles, <span class="co"># Discretization of the sky dome</span></span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>                  ntheta <span class="op">=</span> <span class="fl">9</span>, <span class="co"># Number of discretization steps in the zenith angle </span></span>
@@ -611,7 +611,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute length of the day</span></span>
 <span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    dec <span class="op">=</span> <span class="fu">declination</span>(DOY)</span>
 <span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    dl <span class="op">=</span> <span class="fu">day_length</span>(lat, dec)</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> dl<span class="op">/</span>nsteps</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> dl <span class="co"># Gaussian integration generates a weighted average, so this is total daylength</span></span>
 <span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate nodes and weights for Gaussian-Legendre integration</span></span>
 <span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    nodes, weights <span class="op">=</span> <span class="fu">gausslegendre</span>(nsteps)</span>
 <span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    ws   <span class="op">=</span> weights<span class="op">./</span><span class="fl">2</span> <span class="co"># Scale weights to add up to 1</span></span>

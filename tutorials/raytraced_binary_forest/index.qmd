@@ -67,7 +67,7 @@ to the argument `material` (which is a `Lambertian` object in this case).
 # Turtle methods
 function VPL.feed!(turtle::Turtle, i::rbtree.Internode, vars)
     HollowCube!(turtle, length = i.length, height =  i.width, width =  i.width, 
-                move = true, color = RGB(0,0.35,0), matertial = i.material)
+                move = true, color = RGB(0,0.35,0), material = i.material)
     return nothing
 end
 ```
@@ -187,7 +187,7 @@ function create_sky(;scene, f, lat = 52.0*π/180.0, DOY = 182)
                   Idir = Idir_color, # Direct solar radiation from above
                   nrays_dir = 1_000_000, # Number of rays for direct solar radiation
                   Idif = Idif_color, # Diffuse solar radiation from above
-                  nrays_dif = 10_000_000, # Total number of rays for diffuse solar radiation
+                  nrays_dif = 1_000_000, # Total number of rays for diffuse solar radiation
                   sky_model = StandardSky, # Angular distribution of solar radiation
                   dome_method = equal_solid_angles, # Discretization of the sky dome
                   ntheta = 9, # Number of discretization steps in the zenith angle 
@@ -272,7 +272,7 @@ function daily_PAR!(forest; nsteps = 5, DOY = 182, lat = 52.0*π/180.0)
     # Compute length of the day
     dec = declination(DOY)
     dl = day_length(lat, dec)
-    dt = dl/nsteps
+    dt = dl # Gaussian integration generates a weighted average, so this is total daylength
     # Generate nodes and weights for Gaussian-Legendre integration
     nodes, weights = gausslegendre(nsteps)
     ws   = weights./2 # Scale weights to add up to 1
