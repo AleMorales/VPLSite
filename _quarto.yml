@@ -52,7 +52,8 @@ website:
           - Sky/API.md
       - section: "Ecophys"
         contents:
-          - Ecophys/index.qmd      
+          - Ecophys/index.qmd
+          - Ecophys/Photosynthesis.md    
       - section: "GCIM"
         contents:
           - GCIM/index.qmd   

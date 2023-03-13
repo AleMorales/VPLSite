@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.242">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Virtual Plant Laboratory – photosynthesis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Virtual Plant Laboratory</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Virtual Plant Laboratory</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Julia basics</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../julia_basics/index.html" class="sidebar-item-text sidebar-link">Julia basics for VPL</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">User Manual</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Graphs</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../manual/Graphs/index.html" class="sidebar-item-text sidebar-link">Dynamic graph creation and manipulation</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Geometry</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Visualization</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../manual/Visualization/index.html" class="sidebar-item-text sidebar-link">Backends for visualization</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Tutorials - Beginner</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/algae/index.html" class="sidebar-item-text sidebar-link">Algae growth</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/binary_tree/index.html" class="sidebar-item-text sidebar-link">Binary tree</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/random_binary_forest/index.html" class="sidebar-item-text sidebar-link">Forest of binary trees</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/raytraced_binary_forest/index.html" class="sidebar-item-text sidebar-link">Ray-traced forest of binary trees</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Tutorials - Advanced</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">API</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../api/Geometry.html" class="sidebar-item-text sidebar-link">Module Geometry</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">Sky</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Sky/index.html" class="sidebar-item-text sidebar-link">Sky.jl</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Sky/API.html" class="sidebar-item-text sidebar-link">Module Sky</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">Ecophys</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Ecophys/index.html" class="sidebar-item-text sidebar-link">Ecophysiological modules</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Ecophys/Photosynthesis.html" class="sidebar-item-text sidebar-link active">Module Photosynthesis</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">GCIM</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../GCIM/index.html" class="sidebar-item-text sidebar-link">Generic crop interactions model</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src="..\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div></div></nav>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<p><a id="Module-Photosynthesis"></a></p>
+<p><a id="Module-Photosynthesis-1"></a></p>
+<section id="module-photosynthesis" class="level1">
+<h1>Module Photosynthesis</h1>
+<p><a id="CO2-assimilation-and-stomatal-conductance"></a></p>
+<p><a id="CO2-assimilation-and-stomatal-conductance-1"></a></p>
+<section id="co2-assimilation-and-stomatal-conductance" class="level2">
+<h2 class="anchored" data-anchor-id="co2-assimilation-and-stomatal-conductance">CO2 assimilation and stomatal conductance</h2>
+<p><a id="Ecophys.Photosynthesis.C3" href="#Ecophys.Photosynthesis.C3">#</a> <strong><code>Ecophys.Photosynthesis.C3</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">C3</span>(Sco25 <span class="op">=</span> <span class="fl">2800.0</span>, E_Sco <span class="op">=</span> <span class="op">-</span><span class="fl">24.46e3</span>, Kmc25 <span class="op">=</span> <span class="fl">270.0</span>, E_Kmc <span class="op">=</span> <span class="fl">80.99e3</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    Kmo25 <span class="op">=</span> <span class="fl">165.0e3</span>, E_Kmo <span class="op">=</span> <span class="fl">23.72e3</span>, Vcmax25 <span class="op">=</span> <span class="fl">120.0</span>, E_Vcmax <span class="op">=</span> <span class="fl">65.33e3</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    theta <span class="op">=</span> <span class="fl">0.7</span>, Phi2 <span class="op">=</span> <span class="fl">0.82</span>, sigma2 <span class="op">=</span> <span class="fl">0.5</span>, beta <span class="op">=</span> <span class="fl">0.85</span>, fcyc <span class="op">=</span> <span class="fl">0.1</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    fpseudo <span class="op">=</span> <span class="fl">0.05</span>, Jmax25 <span class="op">=</span> <span class="fl">230.0</span>, E_Jmax <span class="op">=</span> <span class="fl">30.0e3</span>, D_Jmax <span class="op">=</span> <span class="fl">200.0e3</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    Topt_Jmax <span class="op">=</span> <span class="fl">300.5</span>, TPU25 <span class="op">=</span> <span class="fl">12.0</span>, E_TPU <span class="op">=</span> <span class="fl">53.1e3</span>, D_TPU <span class="op">=</span> <span class="fl">20.18e3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Data structure to store all the parameters for the C3 photosynthesis model.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>Sco25</code>: Sc/o parameter at 25 C</li>
+<li><code>E_Sco</code>: Apparent activation energy of Sc/o (J/mol)</li>
+<li><code>Kmc25</code>: Km for CO2 at 25 C (μmol/mol)</li>
+<li><code>E_Kmc</code>: Activation energy of Kmc (J/mol)</li>
+<li><code>Kmo25</code>: Km for O2 at 25 C (umol/mol)</li>
+<li><code>E_Kmo</code>: Activation energy of Kmo (J/mol)</li>
+<li><code>Vcmax25</code>: Maximum rate of carboxylation at 25 C (μmol/m2/s)</li>
+<li><code>E_Vcmax</code>: Activation energy of Vcmax (J/mol)</li>
+<li><code>theta</code>: Curvature parameter</li>
+<li><code>Phi2</code>: Low-light PSII quantum yield</li>
+<li><code>sigma2</code>: Partitioning of excitation between PSII and PSI</li>
+<li><code>beta</code>: Leaf absorptance of PAR</li>
+<li><code>fcyc</code>: Fraction of electrons at PSI that follow cyclic transport around PSI</li>
+<li><code>fpseudo</code>: Fraction of electrons at PSI that are used by alternative electron sinks</li>
+<li><code>Jmax25</code>: Maximum rate of electron transport (μmol/m2/s)</li>
+<li><code>E_Jmax</code>: Activation energy Jmax (J/mol)</li>
+<li><code>D_Jmax</code>: Deactivation energy of Jmax (J/mol)</li>
+<li><code>Topt_Jmax</code>: Optimal temperature for Jmax (K)</li>
+<li><code>TPU25</code>: Maximum rate of triose phosphate utilisation (μmol/m2/s)</li>
+<li><code>E_TPU</code>: Activation energy TPU (J/mol)</li>
+<li><code>D_TPU</code>: Deactivation energy of TPU (J/mol)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/JuliaLang/julia/blob/17cfb8e65ead377bf1b4598d8a9869144142c84e/base/docs/Docs.jl#L473-L504" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.C3Q" href="#Ecophys.Photosynthesis.C3Q">#</a> <strong><code>Ecophys.Photosynthesis.C3Q</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">C3Q</span>(Sco25 <span class="op">=</span> <span class="fl">2800.0</span>, E_Sco <span class="op">=</span> <span class="op">-</span><span class="fl">24.46e3</span>J<span class="op">/</span>mol, Kmc25 <span class="op">=</span> <span class="fl">270.0</span>μmol<span class="op">/</span>mol, E_Kmc <span class="op">=</span> <span class="fl">80.99e3</span>J<span class="op">/</span>mol,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>     Kmo25 <span class="op">=</span> <span class="fl">165.0e3</span>μmol<span class="op">/</span>mol, E_Kmo <span class="op">=</span> <span class="fl">23.72e3</span>J<span class="op">/</span>mol, Vcmax25 <span class="op">=</span> <span class="fl">120.0</span>μmol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_Vcmax <span class="op">=</span> <span class="fl">65.33e3</span>J<span class="op">/</span>mol,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     theta <span class="op">=</span> <span class="fl">0.7</span>, Phi2 <span class="op">=</span> <span class="fl">0.82</span>, sigma2 <span class="op">=</span> <span class="fl">0.5</span>, beta <span class="op">=</span> <span class="fl">0.85</span>, fcyc <span class="op">=</span> <span class="fl">0.1</span>, fpseudo <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     Jmax25 <span class="op">=</span> <span class="fl">230.0</span>μmol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_Jmax <span class="op">=</span> <span class="fl">30.0e3</span>J<span class="op">/</span>mol, D_Jmax <span class="op">=</span> <span class="fl">200.0e3</span>J<span class="op">/</span>mol, Topt_Jmax <span class="op">=</span> <span class="fl">300.5</span>K, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     TPU25 <span class="op">=</span> <span class="fl">12.0</span>μmol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_TPU <span class="op">=</span> <span class="fl">53.1e3</span>J<span class="op">/</span>mol, D_TPU <span class="op">=</span> <span class="fl">201.8e3</span>J<span class="op">/</span>mol, Topt_TPU <span class="op">=</span> <span class="fl">306.5</span>K, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>     Rd25 <span class="op">=</span> <span class="fl">1.2</span>μmol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_Rd <span class="op">=</span> <span class="fl">46.39e3</span>J<span class="op">/</span>mol, gm25 <span class="op">=</span> <span class="fl">0.4</span>mol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_gm <span class="op">=</span> <span class="fl">49.6e3</span>J<span class="op">/</span>mol, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     D_gm <span class="op">=</span> <span class="fl">437.4e3</span>J<span class="op">/</span>mol, Topt_gm <span class="op">=</span> <span class="fl">308.6</span>K, gso <span class="op">=</span> <span class="fl">0.01</span>mol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, a1 <span class="op">=</span> <span class="fl">0.85</span>, b1 <span class="op">=</span> <span class="fl">0.14e-3</span><span class="op">/</span>Pa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Data structure to store all the parameters for the C3 photosynthesis model using <code>Quantity</code> objects from Unitful.jl.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>Sco25</code>: Sc/o parameter at 25 C</li>
+<li><code>E_Sco</code>: Apparent activation energy of Sc/o (J/mol)</li>
+<li><code>Kmc25</code>: Km for CO2 at 25 C (μmol/mol)</li>
+<li><code>E_Kmc</code>: Activation energy of Kmc (J/mol)</li>
+<li><code>Kmo25</code>: Km for O2 at 25 C (umol/mol)</li>
+<li><code>E_Kmo</code>: Activation energy of Kmo (J/mol)</li>
+<li><code>Vcmax25</code>: Maximum rate of carboxylation at 25 C (μmol/m2/s)</li>
+<li><code>E_Vcmax</code>: Activation energy of Vcmax (J/mol)</li>
+<li><code>theta</code>: Curvature parameter</li>
+<li><code>Phi2</code>: Low-light PSII quantum yield</li>
+<li><code>sigma2</code>: Partitioning of excitation between PSII and PSI</li>
+<li><code>beta</code>: Leaf absorptance of PAR</li>
+<li><code>fcyc</code>: Fraction of electrons at PSI that follow cyclic transport around PSI</li>
+<li><code>fpseudo</code>: Fraction of electrons at PSI that are used by alternative electron sinks</li>
+<li><code>Jmax25</code>: Maximum rate of electron transport (μmol/m2/s)</li>
+<li><code>E_Jmax</code>: Activation energy Jmax (J/mol)</li>
+<li><code>D_Jmax</code>: Deactivation energy of Jmax (J/mol)</li>
+<li><code>Topt_Jmax</code>: Optimal temperature for Jmax (K)</li>
+<li><code>TPU25</code>: Maximum rate of triose phosphate utilisation (μmol/m2/s)</li>
+<li><code>E_TPU</code>: Activation energy TPU (J/mol)</li>
+<li><code>D_TPU</code>: Deactivation energy of TPU (J/mol)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/JuliaLang/julia/blob/17cfb8e65ead377bf1b4598d8a9869144142c84e/base/docs/Docs.jl#L473-L507" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.C4" href="#Ecophys.Photosynthesis.C4">#</a> <strong><code>Ecophys.Photosynthesis.C4</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">C4</span>(Sco25 <span class="op">=</span> <span class="fl">2590.0</span>, E_Sco <span class="op">=</span> <span class="op">-</span><span class="fl">24.46e3</span>, Kmc25 <span class="op">=</span> <span class="fl">650.0</span>, E_Kmc <span class="op">=</span> <span class="fl">79.43e3</span>, Kmo25 <span class="op">=</span> <span class="fl">450e3</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>   E_Kmo <span class="op">=</span> <span class="fl">36380.0</span>, Vcmax25 <span class="op">=</span> <span class="fl">120.0</span>, E_Vcmax <span class="op">=</span> <span class="fl">65.33</span>, theta <span class="op">=</span> <span class="fl">0.7</span>, Phi2 <span class="op">=</span> <span class="fl">0.83</span>, sigma2 <span class="op">=</span> <span class="fl">0.5</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>   beta <span class="op">=</span> <span class="fl">0.85</span>, fQ <span class="op">=</span> <span class="fl">1.0</span>, fpseudo <span class="op">=</span> <span class="fl">0.1</span>, h <span class="op">=</span> <span class="fl">4.0</span>, Jmax25 <span class="op">=</span> <span class="fl">230.0</span>, E_Jmax <span class="op">=</span> <span class="fl">48e3</span>, D_Jmax <span class="op">=</span> <span class="fl">200e3</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>   Topt_Jmax <span class="op">=</span> <span class="fl">300.5</span>, x <span class="op">=</span> <span class="fl">0.4</span>, alpha <span class="op">=</span> <span class="fl">0.1</span>, kp25 <span class="op">=</span> <span class="fl">0.7</span>, E_kp <span class="op">=</span> <span class="fl">46.39e3</span>, gbs <span class="op">=</span> <span class="fl">0.003</span>, Rd25 <span class="op">=</span> <span class="fl">1.2</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>   E_Rd <span class="op">=</span> <span class="fl">46.39e3</span>, gso <span class="op">=</span> <span class="fl">0.01</span>, a1 <span class="op">=</span> <span class="fl">0.9</span>, b1 <span class="op">=</span> <span class="fl">0.15e-3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Data structure to store all the parameters for the C3 photosynthesis model.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>Sco25</code>: Sc/o parameter at 25 C</li>
+<li><code>E_Sco</code>: Apparent activation energy of Sc/o (J/mol)</li>
+<li><code>Kmc25</code>: Km for CO2 at 25 C (μmol/mol)</li>
+<li><code>E_Kmc3</code>: Activation energy of Kmc (J/mol)</li>
+<li><code>Kmo25</code>: Km for O2 at 25 C (umol/mol)</li>
+<li><code>E_Kmo</code>: Activation energy of Kmo (J/mol)</li>
+<li><code>Vcmax25</code>: Maximum rate of carboxylation at 25 C (μmol/m2/s)</li>
+<li><code>E_Vcmax</code>: Activation energy of Vcmax (J/mol)</li>
+<li><code>theta</code>: Curvature parameter</li>
+<li><code>Phi2</code>: Low-light PSII quantum yield</li>
+<li><code>sigma2</code>: Partitioning of excitation between PSII and PSI</li>
+<li><code>beta</code>: Leaf absorptance of PAR</li>
+<li><code>fQ</code>: Fraction of electrons at reduced plastoquinone that follow the Q-cycle</li>
+<li><code>fpseudo</code>: Fraction of electrons at PSI that follow cyclic transport around PSI</li>
+<li><code>h</code>: Number of protons required to produce one ATP</li>
+<li><code>Jmax25</code>: Maximum rate of electron transport (μmol/m2/s)</li>
+<li><code>E_Jmax</code>: Activation energy Jmax (J/mol)</li>
+<li><code>D_Jmax</code>: Deactivation energy of Jmax (J/mol)</li>
+<li><code>Topt_Jmax</code>: Entropy coefficient of Jmax (J/mol/K)</li>
+<li><code>x</code>: Fraction of electron transport partitioned to mesophyll cells</li>
+<li><code>alpha</code>: Fraction of O2 evolution occuring in the bundle sheath</li>
+<li><code>kp25</code>: Initial carboxylation efficiency of the PEP carboxylase (mol/m2/s)</li>
+<li><code>E_kp</code>: Activation energy of kp (J/mol)</li>
+<li><code>gbs</code>: Bundle sheath conductance (mol/m^2/s)</li>
+<li><code>Rd25:</code>: Respiration rate at 25 C (μmol/m2/s)</li>
+<li><code>E_Rd</code>: Activation energy of Rd (J/mol)</li>
+<li><code>gso</code>: Minimum stomatal conductance to fluxes of CO2 in darkness (mol/m2/s)</li>
+<li><code>a1</code>: Empirical parameter in gs formula</li>
+<li><code>b1</code>: Empirical parameter in gs formula (1/kPa)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/FvCB/C4.jl#LL9-L48" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.C4Q" href="#Ecophys.Photosynthesis.C4Q">#</a> <strong><code>Ecophys.Photosynthesis.C4Q</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">C4</span>(Sco25 <span class="op">=</span> <span class="fl">2590.0</span>, E_Sco <span class="op">=</span> <span class="op">-</span><span class="fl">24.46e3</span>J<span class="op">/</span>mol, Kmc25 <span class="op">=</span> <span class="fl">650.0</span>μmol<span class="op">/</span>mol, E_Kmc <span class="op">=</span> <span class="fl">79.43e3</span>J<span class="op">/</span>mol,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   Kmo25 <span class="op">=</span> <span class="fl">450e3</span>μmol<span class="op">/</span>mol, E_Kmo <span class="op">=</span> <span class="fl">36380.0</span>J<span class="op">/</span>mol, Vcmax25 <span class="op">=</span> <span class="fl">120.0</span>μmol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_Vcmax <span class="op">=</span> <span class="fl">65.33</span>J<span class="op">/</span>mol,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   theta <span class="op">=</span> <span class="fl">0.7</span>, Phi2 <span class="op">=</span> <span class="fl">0.83</span>, sigma2 <span class="op">=</span> <span class="fl">0.5</span>, beta <span class="op">=</span> <span class="fl">0.85</span>, fQ <span class="op">=</span> <span class="fl">1.0</span>, fpseudo <span class="op">=</span> <span class="fl">0.1</span>, h <span class="op">=</span> <span class="fl">4.0</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   Jmax25 <span class="op">=</span> <span class="fl">230.0</span>μmol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_Jmax <span class="op">=</span> <span class="fl">48e3</span>J<span class="op">/</span>mol, D_Jmax <span class="op">=</span> <span class="fl">200e3</span>J<span class="op">/</span>mol, Topt_Jmax <span class="op">=</span> <span class="fl">300.5</span>K, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>   x <span class="op">=</span> <span class="fl">0.4</span>, alpha <span class="op">=</span> <span class="fl">0.1</span>, kp25 <span class="op">=</span> <span class="fl">0.7</span>mol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_kp <span class="op">=</span> <span class="fl">46.39e3</span>J<span class="op">/</span>mol, gbs <span class="op">=</span> <span class="fl">0.003</span>mol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   Rd25 <span class="op">=</span> <span class="fl">1.2</span>μmol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, E_Rd <span class="op">=</span> <span class="fl">46.39e3</span>J<span class="op">/</span>mol, gso <span class="op">=</span> <span class="fl">0.01</span>mol<span class="op">/</span>m<span class="op">^</span><span class="fl">2</span><span class="op">/</span>s, a1 <span class="op">=</span> <span class="fl">0.9</span>, b1 <span class="op">=</span> <span class="fl">0.15e-3</span><span class="op">/</span>Pa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Data structure to store all the parameters for the C4 photosynthesis model using <code>Quantity</code> objects from Unitful.jl.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>Sco25</code>: Sc/o parameter at 25 C</li>
+<li><code>E_Sco</code>: Apparent activation energy of Sc/o (J/mol)</li>
+<li><code>Kmc25</code>: Km for CO2 at 25 C (μmol/mol)</li>
+<li><code>E_Kmc3</code>: Activation energy of Kmc (J/mol)</li>
+<li><code>Kmo25</code>: Km for O2 at 25 C (umol/mol)</li>
+<li><code>E_Kmo</code>: Activation energy of Kmo (J/mol)</li>
+<li><code>Vcmax25</code>: Maximum rate of carboxylation at 25 C (μmol/m2/s)</li>
+<li><code>E_Vcmax</code>: Activation energy of Vcmax (J/mol)</li>
+<li><code>theta</code>: Curvature parameter</li>
+<li><code>Phi2</code>: Low-light PSII quantum yield</li>
+<li><code>sigma2</code>: Partitioning of excitation between PSII and PSI</li>
+<li><code>beta</code>: Leaf absorptance of PAR</li>
+<li><code>fQ</code>: Fraction of electrons at reduced plastoquinone that follow the Q-cycle</li>
+<li><code>fpseudo</code>: Fraction of electrons at PSI that follow cyclic transport around PSI</li>
+<li><code>h</code>: Number of protons required to produce one ATP</li>
+<li><code>Jmax25</code>: Maximum rate of electron transport (μmol/m2/s)</li>
+<li><code>E_Jmax</code>: Activation energy Jmax (J/mol)</li>
+<li><code>D_Jmax</code>: Deactivation energy of Jmax (J/mol)</li>
+<li><code>Topt_Jmax</code>: Entropy coefficient of Jmax (J/mol/K)</li>
+<li><code>x</code>: Fraction of electron transport partitioned to mesophyll cells</li>
+<li><code>alpha</code>: Fraction of O2 evolution occuring in the bundle sheath</li>
+<li><code>kp25</code>: Initial carboxylation efficiency of the PEP carboxylase (mol/m2/s)</li>
+<li><code>E_kp</code>: Activation energy of kp (J/mol)</li>
+<li><code>gbs</code>: Bundle sheath conductance (mol/m^2/s)</li>
+<li><code>Rd25:</code>: Respiration rate at 25 C (μmol/m2/s)</li>
+<li><code>E_Rd</code>: Activation energy of Rd (J/mol)</li>
+<li><code>gso</code>: Minimum stomatal conductance to fluxes of CO2 in darkness (mol/m2/s)</li>
+<li><code>a1</code>: Empirical parameter in gs formula</li>
+<li><code>b1</code>: Empirical parameter in gs formula (1/kPa)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/FvCB/C4.jl#LL87-L128" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.A_gs" href="#Ecophys.Photosynthesis.A_gs">#</a> <strong><code>Ecophys.Photosynthesis.A_gs</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">A_gs</span>(par<span class="op">::</span><span class="dt">FvCB</span>, PAR, RH, Tleaf, Ca, gb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Calculate net CO2 assimilation (umol/m2/s), transpiration (mmol/m2/s) and stomatal condutance to fluxes of CO2 (mol/m2/s) as a function of photosynthetically active radiation (PAR, umol/m2/s), relative humidity (RH, %), leaf temperature (Tleaf, K), air CO2 partial pressure (Ca, μmol/mol), oxygen (O2, μmol/mol) and boundary layer conductance to CO2 (gb, mol/m2/s). Environmental inputs must be scalar.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/FvCB/C3.jl#LL162-L170" class="documenter-source">source</a><br></p>
+<p><a id="Boundary-layer-conductance"></a></p>
+<p><a id="Boundary-layer-conductance-1"></a></p>
+</section>
+<section id="boundary-layer-conductance" class="level2">
+<h2 class="anchored" data-anchor-id="boundary-layer-conductance">Boundary layer conductance</h2>
+<p><a id="Ecophys.Photosynthesis.gb" href="#Ecophys.Photosynthesis.gb">#</a> <strong><code>Ecophys.Photosynthesis.gb</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gb</span>(p<span class="op">::</span><span class="dt">gbType</span>, ws, Tl, Ta, P)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Compute boundary layer conductance for heat, water vapor and CO2.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>p</code>: Model of boundary layer conductance</li>
+<li><code>ws</code>: Wind speed (m/s)</li>
+<li><code>Tl</code>: Leaf temperature (K)</li>
+<li><code>Ta</code>: Air temperature (K)</li>
+<li><code>P</code>: Air pressure (Pa)</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>gbh</code>: Boundary layer conductance for heat (W/m²/K)</li>
+<li><code>gbw</code>: Boundary layer conductance for water vapor (mol/m²/s)</li>
+<li><code>gbc</code>: Boundary layer conductance for CO2 (mol/m²/s)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL12-L28" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.simplegb" href="#Ecophys.Photosynthesis.simplegb">#</a> <strong><code>Ecophys.Photosynthesis.simplegb</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simplegb</span>(; d <span class="op">=</span> <span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Simple model of boundary layer conductance.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>d</code>: Characteristic leaf length (m)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL78-L85" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.simplegbQ" href="#Ecophys.Photosynthesis.simplegbQ">#</a> <strong><code>Ecophys.Photosynthesis.simplegbQ</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">simplegbQ</span>(; d <span class="op">=</span> <span class="fl">0.01</span>m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Simple model of boundary layer conductance using <code>Quantity</code> from Unitful.jl.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>d</code>: Characteristic leaf length (m)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL90-L97" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.gbAngle" href="#Ecophys.Photosynthesis.gbAngle">#</a> <strong><code>Ecophys.Photosynthesis.gbAngle</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gbAngle</span>(; d <span class="op">=</span> <span class="fl">0.01</span>, ang <span class="op">=</span> <span class="fl">0.0</span>, ar <span class="op">=</span> <span class="fl">1.0</span>, fangm <span class="op">=</span> <span class="fl">1.381</span>, fangk <span class="op">=</span> <span class="fl">0.034</span>, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>α <span class="op">=</span> <span class="fl">2.738</span>, b0_0 <span class="op">=</span> <span class="fl">0.455</span>, d_b0 <span class="op">=</span> <span class="fl">2.625</span>, b0_n <span class="op">=</span> <span class="fl">0.373</span>, b0_KAR <span class="op">=</span> <span class="fl">28.125</span>,  db_0 <span class="op">=</span> <span class="fl">0.085</span>, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>d_db <span class="op">=</span> <span class="fl">0.437</span>, db_n <span class="op">=</span> <span class="fl">5.175</span>, db_KAR <span class="op">=</span> <span class="fl">0.884</span>,  β_0 <span class="op">=</span> <span class="fl">3.362</span>, d_β <span class="op">=</span> <span class="fl">17.664</span>, β_n <span class="op">=</span> <span class="fl">4.727</span>, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>β_KAR <span class="op">=</span> <span class="fl">0.677</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Model of boundary layer conductance that accounts for inclination angle and leaf aspect ratio (see documentation for details).</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>d</code>: Characteristic leaf length (m)</li>
+<li><code>ang</code>: Leaf inclination angle (°)</li>
+<li><code>ar</code>: Leaf aspect ratio (length/width)</li>
+<li><code>fangm</code>: Maximum enhancement factor due to inclination angle</li>
+<li><code>fangk</code>: Exponent in response to inclination angle</li>
+<li><code>α</code>: Effect on back boundary layer conductance due to leaf inclination angle and aspect ratio</li>
+<li><code>b0_0</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>d_b0</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>b0_n</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>b0_KAR</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>db_0</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>d_db</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>db_n</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>db_KAR</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>β_0</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>d_β</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>β_n</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>β_KAR</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL110-L138" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.gbAngleQ" href="#Ecophys.Photosynthesis.gbAngleQ">#</a> <strong><code>Ecophys.Photosynthesis.gbAngleQ</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gbAngleQ</span>(; d <span class="op">=</span> <span class="fl">0.01</span>m, ang <span class="op">=</span> <span class="fl">0.0</span>, ar <span class="op">=</span> <span class="fl">1.0</span>, fangm <span class="op">=</span> <span class="fl">1.381</span>, fangk <span class="op">=</span> <span class="fl">0.034</span>, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>α <span class="op">=</span> <span class="fl">2.738</span>, b0_0 <span class="op">=</span> <span class="fl">0.455</span>, d_b0 <span class="op">=</span> <span class="fl">2.625</span>, b0_n <span class="op">=</span> <span class="fl">0.373</span>, b0_KAR <span class="op">=</span> <span class="fl">28.125</span>,  db_0 <span class="op">=</span> <span class="fl">0.085</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>d_db <span class="op">=</span> <span class="fl">0.437</span>, db_n <span class="op">=</span> <span class="fl">5.175</span>, db_KAR <span class="op">=</span> <span class="fl">0.884</span>,  β_0 <span class="op">=</span> <span class="fl">3.362</span>, d_β <span class="op">=</span> <span class="fl">17.664</span>, β_n <span class="op">=</span> <span class="fl">4.727</span>, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>β_KAR <span class="op">=</span> <span class="fl">0.677</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Model of boundary layer conductance that accounts for inclination angle and leaf aspect ratio (see documentation for details) using <code>Quantity</code> for Unitful.jl.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>d</code>: Characteristic leaf length (m)</li>
+<li><code>ang</code>: Leaf inclination angle (°)</li>
+<li><code>ar</code>: Leaf aspect ratio (length/width)</li>
+<li><code>fangm</code>: Maximum enhancement factor due to inclination angle</li>
+<li><code>fangk</code>: Exponent in response to inclination angle</li>
+<li><code>α</code>: Effect on back boundary layer conductance due to leaf inclination angle and aspect ratio</li>
+<li><code>b0_0</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>d_b0</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>b0_n</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>b0_KAR</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>db_0</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>d_db</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>db_n</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>db_KAR</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>β_0</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>d_β</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>β_n</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+<li><code>β_KAR</code>: Parameter in the effect of aspect ratio (see documentation)</li>
+</ul>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL165-L193" class="documenter-source">source</a><br></p>
+<p><a id="Energy-balance"></a></p>
+<p><a id="Energy-balance-1"></a></p>
+</section>
+<section id="energy-balance" class="level2">
+<h2 class="anchored" data-anchor-id="energy-balance">Energy balance</h2>
+<p><a id="Ecophys.Photosynthesis.SimpleOptical" href="#Ecophys.Photosynthesis.SimpleOptical">#</a> <strong><code>Ecophys.Photosynthesis.SimpleOptical</code></strong> — <em>Type</em>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SimpleOptical</span>(; αPAR <span class="op">=</span> <span class="fl">0.85</span>, αNIR <span class="op">=</span> <span class="fl">0.20</span>, ϵ <span class="op">=</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Simple optical properties of a leaf.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>αPAR</code>: Absorption coefficient of PAR</li>
+<li><code>αNIR</code>: Absorption coefficient of NIR</li>
+<li><code>ϵ</code>: Emissivity for thermal radiation</li>
+</ul>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL10-L20" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.energybalance" href="#Ecophys.Photosynthesis.energybalance">#</a> <strong><code>Ecophys.Photosynthesis.energybalance</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">energybalance</span>(pgb, pAgs, pEb, PAR, NIR, ws, RH, Ta, Ca, P, O2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Calculate the energy balance of a leaf.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>pgb</code>: Boundary layer conductance model</li>
+<li><code>pAgs</code>: Photosynthesis and stomatal conductance model</li>
+<li><code>pEb</code>: Optical properties of the leaf</li>
+<li><code>PAR</code>: Photosynthetically active radiation (umol/m2/s)</li>
+<li><code>NIR</code>: Near-infrared radiation (W/m2)</li>
+<li><code>ws</code>: Wind speed (m/s)</li>
+<li><code>RH</code>: Relative humidity</li>
+<li><code>Ta</code>: Air temperature (K)</li>
+<li><code>Ca</code>: Atmospheric CO2 concentration (ppm)</li>
+<li><code>P</code>: Air pressure (kPa)</li>
+<li><code>O2</code>: Atmospheric O2 concentration (ppm)</li>
+</ul>
+<p><strong>Details</strong></p>
+<p>Inputs maybe be either <code>Real</code> or <code>Quantity</code> types (i.e., with physical units). If <code>Quantity</code> types are used, the output will be a <code>Quantity</code> type.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL27-L50" class="documenter-source">source</a><br></p>
+<p><a id="Ecophys.Photosynthesis.solve_energy_balance" href="#Ecophys.Photosynthesis.solve_energy_balance">#</a> <strong><code>Ecophys.Photosynthesis.solve_energy_balance</code></strong> — <em>Function</em>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve_energy_balance</span>(pgb, pAgs, pEb, PAR, NIR, ws, RH, Ta, Ca, P, O2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Solve the energy balance of a leaf coupled to photosynthesis and transpiration.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>pgb</code>: Boundary layer conductance model</li>
+<li><code>pAgs</code>: Photosynthesis and stomatal conductance model</li>
+<li><code>pEb</code>: Optical properties of the leaf</li>
+<li><code>PAR</code>: Photosynthetically active radiation (umol/m2/s)</li>
+<li><code>NIR</code>: Near-infrared radiation (W/m2)</li>
+<li><code>ws</code>: Wind speed (m/s)</li>
+<li><code>RH</code>: Relative humidity</li>
+<li><code>Ta</code>: Air temperature (K)</li>
+<li><code>Ca</code>: Atmospheric CO2 concentration (ppm)</li>
+<li><code>P</code>: Air pressure (kPa)</li>
+<li><code>O2</code>: Atmospheric O2 concentration (ppm)</li>
+</ul>
+<p><strong>Details</strong></p>
+<p>Inputs maybe be either <code>Real</code> or <code>Quantity</code> types from Unitful.jl (i.e., with physical units). If <code>Quantity</code> types are used, the output will be a <code>Quantity</code> type.</p>
+<p><a target="_blank" href="https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL86-L110" class="documenter-source">source</a><br></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
