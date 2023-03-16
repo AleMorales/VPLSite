@@ -24,9 +24,9 @@ website:
           - section: "Visualization"
             contents:
               - manual/Visualization/index.qmd
-          # - section: "Ray tracing"
-          #   contents:
-          #     - manual/RayTracer/index.qmd
+          - section: "Ray tracing"
+            contents:
+              - manual/RayTracer/index.qmd
       - section: "Tutorials - Beginner"
         contents:
           - tutorials/algae/index.qmd

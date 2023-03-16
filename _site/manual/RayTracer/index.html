@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Alejandro Morales Sierra">
+<meta name="dcterms.date" content="2022-08-09">
 
-<title>Virtual Plant Laboratory - About</title>
+<title>Virtual Plant Laboratory - Ray tracing distribution of irradiance</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -62,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar docked fullcontent">
@@ -71,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">About</h1>
+      <h1 class="quarto-secondary-nav-title">Ray tracing distribution of irradiance</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -84,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Virtual Plant Laboratory</a> 
+      <a href="../../">Virtual Plant Laboratory</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -99,12 +101,12 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">User Manual</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">User Manual</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Graphs</a>
@@ -115,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./manual/Graphs/index.html" class="sidebar-item-text sidebar-link">Dynamic graph creation and manipulation</a>
+  <a href="../../manual/Graphs/index.html" class="sidebar-item-text sidebar-link">Dynamic graph creation and manipulation</a>
   </div>
 </li>
       </ul>
@@ -130,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
+  <a href="../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
   </div>
 </li>
       </ul>
@@ -145,22 +147,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./manual/Visualization/index.html" class="sidebar-item-text sidebar-link">Backends for visualization</a>
+  <a href="../../manual/Visualization/index.html" class="sidebar-item-text sidebar-link">Backends for visualization</a>
   </div>
 </li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Ray tracing</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Ray tracing</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./manual/RayTracer/index.html" class="sidebar-item-text sidebar-link">Ray tracing distribution of irradiance</a>
+  <a href="../../manual/RayTracer/index.html" class="sidebar-item-text sidebar-link active">Ray tracing distribution of irradiance</a>
   </div>
 </li>
       </ul>
@@ -177,27 +179,27 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorials/algae/index.html" class="sidebar-item-text sidebar-link">Algae growth</a>
+  <a href="../../tutorials/algae/index.html" class="sidebar-item-text sidebar-link">Algae growth</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  <a href="../../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorials/binary_tree/index.html" class="sidebar-item-text sidebar-link">Binary tree</a>
+  <a href="../../tutorials/binary_tree/index.html" class="sidebar-item-text sidebar-link">Binary tree</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorials/random_binary_forest/index.html" class="sidebar-item-text sidebar-link">Forest of binary trees</a>
+  <a href="../../tutorials/random_binary_forest/index.html" class="sidebar-item-text sidebar-link">Forest of binary trees</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorials/raytraced_binary_forest/index.html" class="sidebar-item-text sidebar-link">Ray-traced forest of binary trees</a>
+  <a href="../../tutorials/raytraced_binary_forest/index.html" class="sidebar-item-text sidebar-link">Ray-traced forest of binary trees</a>
   </div>
 </li>
       </ul>
@@ -212,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
+  <a href="../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
   </div>
 </li>
       </ul>
@@ -227,22 +229,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
+  <a href="../../api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./api/Geometry.html" class="sidebar-item-text sidebar-link">Module Geometry</a>
+  <a href="../../api/Geometry.html" class="sidebar-item-text sidebar-link">Module Geometry</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
+  <a href="../../api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
+  <a href="../../api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
   </div>
 </li>
       </ul>
@@ -257,12 +259,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Sky/index.html" class="sidebar-item-text sidebar-link">Sky.jl</a>
+  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky.jl</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Sky/API.html" class="sidebar-item-text sidebar-link">Module Sky</a>
+  <a href="../../Sky/API.html" class="sidebar-item-text sidebar-link">Module Sky</a>
   </div>
 </li>
       </ul>
@@ -277,12 +279,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Ecophys/index.html" class="sidebar-item-text sidebar-link">Ecophys.jl</a>
+  <a href="../../Ecophys/index.html" class="sidebar-item-text sidebar-link">Ecophys.jl</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Ecophys/Photosynthesis.html" class="sidebar-item-text sidebar-link">Module Photosynthesis</a>
+  <a href="../../Ecophys/Photosynthesis.html" class="sidebar-item-text sidebar-link">Module Photosynthesis</a>
   </div>
 </li>
       </ul>
@@ -292,7 +294,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src=".\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src="../..\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
 </figure>
 </div>
 </div></div></nav>
@@ -303,14 +305,26 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">About</h1>
+<h1 class="title d-none d-lg-block">Ray tracing distribution of irradiance</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alejandro Morales Sierra </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 9, 2022</p>
+    </div>
+  </div>
   
     
   </div>
@@ -318,9 +332,38 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>About this site!</p>
+<section id="some-dev-notes" class="level1">
+<h1>Some dev notes</h1>
+<section id="general-description" class="level2">
+<h2 class="anchored" data-anchor-id="general-description">General description</h2>
+<p>Monte Carlo Ray Tracer where rays are tracer from the sources towards the scene that is representd by triangular 3D meshes. The ray tracer has the following features:</p>
+<ol type="1">
+<li><p>A Russian roulette is used for scattering such that an unbiased estimate is obtained while using a finite number of scattering events per ray</p></li>
+<li><p>Different acceleration structures may be used (kd-trees, bounday volume hierarchies and no acceleration)</p></li>
+<li><p>Different optical materials may be chosen for each element in the scene (Lambertian, Phong, LambertianPhong, Black body, Sensor) which will stored the absorbed power across the different simulated wavelengths.</p></li>
+<li><p>A SideSwitcher on top of an optical material allows to keep a separate accounting fo rays that hit on either side of a surface (e.g., different sides of a leaf)</p></li>
+<li><p>Different types of sources of irradiance (differing in their geometry of emission) are available, including area, line, point sources, directional sources that cover the entire scene and the possibility to turn any 3D mesh into a radiance source.</p></li>
+<li><p>The payload of a ray may include multiple wavelengths and the optical properties may be vary per wavelength.</p></li>
+<li><p>The package Sky is provided to facilitate constructing collections of sources of radiance that approximate the angular distribution of sky radiance, including the different CIE standard sky models.</p></li>
+<li><p>The ray tracer can optionally make use of Julia’s multithreading capabilities to spread the computation across multiple cores within the same machine.</p></li>
+<li><p>The ray tracer will establish a direct connection to the user’s defined objects that contain the optical materials, such that the absorbed power can be accessed easily by the user from within graph queries and rules.</p></li>
+<li><p>A grid cloner is provided to minimize border effects with as little overhead as possible.</p></li>
+</ol>
+</section>
+<section id="source-objects" class="level2">
+<h2 class="anchored" data-anchor-id="source-objects">Source objects</h2>
+<p>The source object contains the power of each ray. This is equivalent to the radiance emitted (measured at source or at some distance from it), times the area where the radiance is measured and divided by the number of rays emitted by the light source that cross that area of measurement. Hence, when we run the ray tracer we should get back the correct irradiance on the measurement area.</p>
+<p>In the case of directional light sources, the user should just use the <em>Sky</em> package which performs all necessary calculations for direct and diffuse solar radiation and generate the sources themselves.</p>
+<p>For other types of sources, the user should provided the total power emitted by the source, but helper functions will be provided to calculate this value from different types of measurements and source geometries.</p>
+<p>Sources are separate from the scene itself. This allows separating the construction of 3D mesh with optical properties from the different types of sources. The reasoning for this is as follows: (i) the 3D mesh may be built incrementally, especially when elements not include in the graphs are needed (typical examples are the soil surface or structural elements in the scene), (ii) different sources may be used for different simulations in the same scene (e.g., different times of the day, different solar wavelengths, thermal radiation)</p>
+</section>
+<section id="grid-cloner" class="level2">
+<h2 class="anchored" data-anchor-id="grid-cloner">Grid cloner</h2>
+<p>This should be implemented inside the <code>trace!()</code> function as that is where the new rays are generated. It should somehow make use of the gbox? Look for a previous implementation of the grid cloner approach.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
