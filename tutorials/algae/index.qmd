@@ -26,7 +26,7 @@ The rewriting rules of the L-system are as follows:
 
 **rule 2**:  B $\rightarrow$ A  
 
-In VPL, this L-system would be implemented as a graph where the nodes can be of type `A` or `B` and inherit from the abstract type `Node`. As indicated in the [Julia Basics](../../julia_basics/index.qmd) section, it is advised to include type definitions in a module to avoid having to restart the Julia session whenever we want to redefine them. Because each module is an independent namespace, we need to import `Node` from the VPL package inside the module:
+In VPL, this L-system would be implemented as a graph where the nodes can be of type `A` or `B` and inherit from the abstract type `Node`. It is advised to include type definitions in a module to avoid having to restart the Julia session whenever we want to redefine them. Because each module is an independent namespace, we need to import `Node` from the VPL package inside the module:
 
 ```{julia}
 module algae

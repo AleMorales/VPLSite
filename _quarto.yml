@@ -13,9 +13,6 @@ website:
     collapse-level: 1
     search: true
     contents:
-      - section: "Julia basics"
-        contents:
-          - julia_basics/index.qmd
       - section: "User Manual"
         contents:
           - section: "Graphs"
@@ -54,9 +51,6 @@ website:
         contents:
           - Ecophys/index.qmd
           - Ecophys/Photosynthesis.md    
-      - section: "GCIM"
-        contents:
-          - GCIM/index.qmd   
 format:
   html:
     css: styles.css

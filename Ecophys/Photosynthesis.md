@@ -54,7 +54,7 @@ Data structure to store all the parameters for the C3 photosynthesis model.
   * `D_TPU`: Deactivation energy of TPU (J/mol)
 
 
-<a target='_blank' href='https://github.com/JuliaLang/julia/blob/17cfb8e65ead377bf1b4598d8a9869144142c84e/base/docs/Docs.jl#L473-L504' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/FvCB/C3.jl#LL9-L40' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.C3Q' href='#Ecophys.Photosynthesis.C3Q'>#</a>
 **`Ecophys.Photosynthesis.C3Q`** &mdash; *Type*.
@@ -98,7 +98,7 @@ Data structure to store all the parameters for the C3 photosynthesis model using
   * `D_TPU`: Deactivation energy of TPU (J/mol)
 
 
-<a target='_blank' href='https://github.com/JuliaLang/julia/blob/17cfb8e65ead377bf1b4598d8a9869144142c84e/base/docs/Docs.jl#L473-L507' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/FvCB/C3.jl#LL84-L118' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.C4' href='#Ecophys.Photosynthesis.C4'>#</a>
 **`Ecophys.Photosynthesis.C4`** &mdash; *Type*.
@@ -148,7 +148,7 @@ Data structure to store all the parameters for the C3 photosynthesis model.
   * `b1`: Empirical parameter in gs formula (1/kPa)
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/FvCB/C4.jl#LL9-L48' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/FvCB/C4.jl#LL9-L48' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.C4Q' href='#Ecophys.Photosynthesis.C4Q'>#</a>
 **`Ecophys.Photosynthesis.C4Q`** &mdash; *Type*.
@@ -199,21 +199,24 @@ Data structure to store all the parameters for the C4 photosynthesis model using
   * `b1`: Empirical parameter in gs formula (1/kPa)
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/FvCB/C4.jl#LL87-L128' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/FvCB/C4.jl#LL87-L128' class='documenter-source'>source</a><br>
 
-<a id='Ecophys.Photosynthesis.A_gs' href='#Ecophys.Photosynthesis.A_gs'>#</a>
-**`Ecophys.Photosynthesis.A_gs`** &mdash; *Function*.
+<a id='Ecophys.Photosynthesis.photosynthesis' href='#Ecophys.Photosynthesis.photosynthesis'>#</a>
+**`Ecophys.Photosynthesis.photosynthesis`** &mdash; *Function*.
 
 
 
 ```julia
-A_gs(par::FvCB, PAR, RH, Tleaf, Ca, gb)
+photosynthesis(par::C3, PAR = 1000.0, RH = 0.75, Tleaf = 298.0, Ca = 400.0, O2 = 210e3, gb = 0.5)
+photosynthesis(par::C4, PAR = 1000.0, RH = 0.75, Tleaf = 298.0, Ca = 400.0, O2 = 210e3, gb = 0.5)
+photosynthesis(par::C3Q, PAR = 1000.0μmol/m^2/s, RH = 0.75, Tleaf = 298.0K, Ca = 400.0μmol/mol, O2 = 210e3μmol/mol, gb = 0.5mol/m^2/s)
+photosynthesis(par::C4Q, PAR = 1000.0μmol/m^2/s, RH = 0.75, Tleaf = 298.0K, Ca = 400.0μmol/mol, O2 = 210e3μmol/mol, gb = 0.5mol/m^2/s)
 ```
 
-Calculate net CO2 assimilation (umol/m2/s), transpiration (mmol/m2/s) and stomatal condutance to fluxes of CO2 (mol/m2/s) as a function of photosynthetically active radiation (PAR, umol/m2/s), relative humidity (RH, %), leaf temperature (Tleaf, K), air CO2 partial pressure (Ca, μmol/mol), oxygen (O2, μmol/mol) and boundary layer  conductance to CO2 (gb, mol/m2/s). Environmental inputs must be scalar. 
+Calculate net CO2 assimilation (umol/m2/s), transpiration (mmol/m2/s) and stomatal condutance to fluxes of CO2 (mol/m2/s) as a function of photosynthetically active radiation (PAR, umol/m2/s), relative humidity (RH), leaf temperature (Tleaf, K), air CO2 partial pressure (Ca, μmol/mol), oxygen (O2, μmol/mol) and boundary layer  conductance to CO2 (gb, mol/m2/s). Environmental inputs must be scalar. 
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/FvCB/C3.jl#LL162-L170' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/FvCB/C3.jl#LL162-L173' class='documenter-source'>source</a><br>
 
 
 <a id='Boundary-layer-conductance'></a>
@@ -228,7 +231,7 @@ Calculate net CO2 assimilation (umol/m2/s), transpiration (mmol/m2/s) and stomat
 
 
 ```julia
-gb(p::gbType, ws, Tl, Ta, P)
+gb(p::gbType, ws, Tleaf, Tair, P)
 ```
 
 Compute boundary layer conductance for heat, water vapor and CO2.
@@ -237,8 +240,8 @@ Compute boundary layer conductance for heat, water vapor and CO2.
 
   * `p`: Model of boundary layer conductance
   * `ws`: Wind speed (m/s)
-  * `Tl`: Leaf temperature (K)
-  * `Ta`: Air temperature (K)
+  * `Tleaf`: Leaf temperature (K)
+  * `Tair`: Air temperature (K)
   * `P`: Air pressure (Pa)
 
 **Returns**
@@ -248,7 +251,7 @@ Compute boundary layer conductance for heat, water vapor and CO2.
   * `gbc`: Boundary layer conductance for CO2 (mol/m²/s)
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL12-L28' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL12-L28' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.simplegb' href='#Ecophys.Photosynthesis.simplegb'>#</a>
 **`Ecophys.Photosynthesis.simplegb`** &mdash; *Type*.
@@ -266,7 +269,7 @@ Simple model of boundary layer conductance.
   * `d`: Characteristic leaf length (m)
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL78-L85' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL78-L85' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.simplegbQ' href='#Ecophys.Photosynthesis.simplegbQ'>#</a>
 **`Ecophys.Photosynthesis.simplegbQ`** &mdash; *Type*.
@@ -284,7 +287,7 @@ Simple model of boundary layer conductance using `Quantity` from Unitful.jl.
   * `d`: Characteristic leaf length (m)
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL90-L97' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL90-L97' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.gbAngle' href='#Ecophys.Photosynthesis.gbAngle'>#</a>
 **`Ecophys.Photosynthesis.gbAngle`** &mdash; *Type*.
@@ -322,7 +325,7 @@ Model of boundary layer conductance that accounts for inclination angle and leaf
   * `β_KAR`: Parameter in the effect of aspect ratio (see documentation)
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL110-L138' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL110-L138' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.gbAngleQ' href='#Ecophys.Photosynthesis.gbAngleQ'>#</a>
 **`Ecophys.Photosynthesis.gbAngleQ`** &mdash; *Type*.
@@ -360,7 +363,7 @@ Model of boundary layer conductance that accounts for inclination angle and leaf
   * `β_KAR`: Parameter in the effect of aspect ratio (see documentation)
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL165-L193' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/BoundaryLayer.jl#LL165-L193' class='documenter-source'>source</a><br>
 
 
 <a id='Energy-balance'></a>
@@ -387,7 +390,7 @@ Simple optical properties of a leaf.
   * `ϵ`: Emissivity for thermal radiation
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL10-L20' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL10-L20' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.energybalance' href='#Ecophys.Photosynthesis.energybalance'>#</a>
 **`Ecophys.Photosynthesis.energybalance`** &mdash; *Function*.
@@ -395,7 +398,7 @@ Simple optical properties of a leaf.
 
 
 ```julia
-energybalance(pgb, pAgs, pEb, PAR, NIR, ws, RH, Ta, Ca, P, O2)
+energybalance(pgb, pAgs, pEb, PAR, NIR, ws, RH, Tair, Ca, P, O2)
 ```
 
 Calculate the energy balance of a leaf.
@@ -409,17 +412,17 @@ Calculate the energy balance of a leaf.
   * `NIR`: Near-infrared radiation (W/m2)
   * `ws`: Wind speed (m/s)
   * `RH`: Relative humidity
-  * `Ta`: Air temperature (K)
-  * `Ca`: Atmospheric CO2 concentration (ppm)
+  * `Tair`: Air temperature (K)
+  * `Ca`: Atmospheric CO2 concentration (μmol/mol)
   * `P`: Air pressure (kPa)
-  * `O2`: Atmospheric O2 concentration (ppm)
+  * `O2`: Atmospheric O2 concentration (μmol/mol)
 
 **Details**
 
 Inputs maybe be either `Real` or `Quantity` types (i.e., with physical units).  If `Quantity` types are used, the output will be a `Quantity` type.
 
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL27-L50' class='documenter-source'>source</a><br>
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL27-L50' class='documenter-source'>source</a><br>
 
 <a id='Ecophys.Photosynthesis.solve_energy_balance' href='#Ecophys.Photosynthesis.solve_energy_balance'>#</a>
 **`Ecophys.Photosynthesis.solve_energy_balance`** &mdash; *Function*.
@@ -427,29 +430,70 @@ Inputs maybe be either `Real` or `Quantity` types (i.e., with physical units).  
 
 
 ```julia
-solve_energy_balance(pgb, pAgs, pEb, PAR, NIR, ws, RH, Ta, Ca, P, O2)
+solve_energy_balance(Ags::Union{C3Q, C4Q}; gb = simplegbQ(), 
+                     opt = SimpleOptical(), PAR = 1000.0μmol/m^2/s, 
+                     NIR = 250.0W/m^2, ws = 1.0m/s, RH = 0.75, 
+                     Tair = 298.0K, Ca = 400.0μmol/mol, P = 101.0kPa, 
+                     O2 = 210.0mmol/mol, order = Order2(), xatol = 0.01, 
+                     maxfnevals = 100)
+solve_energy_balance(Ags::Union{C3, C4}; gb = simplegb(), 
+                     opt = SimpleOptical(), PAR = 1000.0, NIR = 250.0, 
+                     ws = 1.0, RH = 0.75, Tair = 298.0, Ca = 400.0, 
+                     P = 101.0e3, O2 = 210.0e3, order = Order2(), xatol = 0.01, 
+                     maxfnevals = 100)
 ```
 
-Solve the energy balance of a leaf coupled to photosynthesis and transpiration.
+Solve the leaf energy balance coupled to photosynthesis and transpiration.
 
 **Arguments**
 
-  * `pgb`: Boundary layer conductance model
-  * `pAgs`: Photosynthesis and stomatal conductance model
-  * `pEb`: Optical properties of the leaf
+  * `Ags`: Photosynthesis and stomatal conductance model
+  * `gb`: Boundary layer conductance model
+  * `opt`: Optical properties of the leaf
   * `PAR`: Photosynthetically active radiation (umol/m2/s)
   * `NIR`: Near-infrared radiation (W/m2)
   * `ws`: Wind speed (m/s)
   * `RH`: Relative humidity
-  * `Ta`: Air temperature (K)
-  * `Ca`: Atmospheric CO2 concentration (ppm)
-  * `P`: Air pressure (kPa)
-  * `O2`: Atmospheric O2 concentration (ppm)
+  * `Tair`: Air temperature (K)
+  * `Ca`: Atmospheric CO2 concentration (μmol/mol)
+  * `P`: Air pressure (Pa)
+  * `O2`: Atmospheric O2 concentration (μmol/mol)
+  * `order`: Order of the root solving algorithm that finds leaf temperature         (see Roots.jl package for more information).
+  * `xatol`: Absolute tolerance of the root solving algorithm (see Roots.jl package for more information),
+  * `maxfnevals`: Maximum number of function evaluations of the root solving algorithm (see Roots.jl package for more information).
 
 **Details**
 
 Inputs maybe be either `Real` or `Quantity` types from Unitful.jl (i.e., with  physical units). If `Quantity` types are used, the output will be a `Quantity`  type.
 
+**Returns**
 
-<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/55df7383847197fc17020ade993be9a25c0177dc/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL86-L110' class='documenter-source'>source</a><br>
+A named tuple with net CO2 assimilation (`A`, μmol/m^2/s), transpiration (`Tr`,  mol/m^2/s) and leaf temperature (`Tleaf`, K).
+
+
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL86-L129' class='documenter-source'>source</a><br>
+
+<a id='Ecophys.Photosynthesis.transpiration' href='#Ecophys.Photosynthesis.transpiration'>#</a>
+**`Ecophys.Photosynthesis.transpiration`** &mdash; *Function*.
+
+
+
+```julia
+transpiration(;gsw = 0.1, gbw = 1.0, Tleaf = 300.0, Tair = 298.0, P = 101e3,
+               RH = 0.75)
+```
+
+Compute transpiration rate (mol/m^2/s) from conductance to water vapor and  environmental variables.
+
+**Arguments**
+
+  * `gsw`: Stomatal conductance to water vapor (mol/m^2/s)
+  * `gbw`: Boundary layer conductance to water vapor (mol/m^2/s)
+  * `Tleaf`: Leaf temperature (K)
+  * `Tair`: Air temperature (K)
+  * `P`: Air pressure (Pa)
+  * `RH`: Relative humidity
+
+
+<a target='_blank' href='https://github.com/AleMorales/Ecophys.jl/blob/440e31c217ee4c624ba6eaceee041761101214bf/src/Photosynthesis/EnergyBalance/EnergyBalance.jl#LL178-L192' class='documenter-source'>source</a><br>
 
