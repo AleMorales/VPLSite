@@ -1,0 +1,65 @@
+project:
+  type: website
+
+execute:
+  freeze: auto
+
+website:
+  title: "Virtual Plant Laboratory"
+  sidebar:
+    footer: | 
+      [![](/img/wur.svg){width=100%}](https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm)
+    style: "docked"
+    collapse-level: 1
+    search: true
+    contents:
+      - section: "User Manual"
+        contents:
+          - manual/index.qmd
+          - manual/Graphs/index.qmd
+          - manual/Geometry/Primitives/index.qmd
+          - manual/Geometry/Turtle/index.qmd
+          - manual/Visualization/index.qmd
+          - manual/RayTracer/index.qmd
+      - section: "Tutorials"
+        contents:
+          - section: "Beginner"
+            contents:
+              - tutorials/algae/index.qmd
+              - tutorials/context/index.qmd
+              - tutorials/snowflakes/index.qmd
+              - tutorials/binary_tree/index.qmd
+              - tutorials/random_binary_forest/index.qmd
+              - tutorials/raytraced_binary_forest/index.qmd
+          - section: "Intermediate"
+            contents:
+              - tutorials/beyond_VPL/index.qmd
+              - tutorials/turtle_message/index.qmd
+          - section: "Advanced"
+            contents:
+              - tutorials/relational_queries/index.qmd
+              - tutorials/advanced_raytracing/index.qmd
+              - tutorials/meshes/index.qmd
+      - section: "API"
+        contents:
+          - api/Core.md
+          - api/Geometry.md
+          - api/Render.md
+          - api/RayTracer.md
+      - section: "Sky"
+        contents:
+          - Sky/index.qmd
+          - Sky/API.md
+      - section: "Ecophys"
+        contents:
+          - Ecophys/index.qmd
+          - Ecophys/Photosynthesis.md    
+format:
+  html:
+    css: styles.css
+    theme:
+      light: default
+      dark: darkly
+
+
+

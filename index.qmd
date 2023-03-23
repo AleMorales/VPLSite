@@ -9,7 +9,7 @@ execute:
 ---
 
 :::{.callout-important}
-The Virtual Plant Laboratory is in an early developmental stage and it is released for the purposes of testing and early feedback. It is not intended for research or commercial use at this stage.
+The Virtual Plant Laboratory is in an early developmental stage and it is released for the purposes of early testing and user feedback. Please contact me if you intend to use it for research or commercial purposes at this stage.
 :::
 
 ## Introduction
@@ -69,7 +69,7 @@ The packages currently planned for *VPLverse* are:
 
 * *Sky* - Algorithms to simulate different sky conditions in terms of the intensity of solar radiation and its spatial distribution.
 
-* *GCIM* - A generic model that allows simulating multiple types of crops with an emphasis on plant-plant interactions as part of mixed cropping systems.
+In addition, all the tutorials on this website can be found at the [VPLTutorials](https://github.com/AleMorales/VPLTutorials) package.
 
 ## Documentation
 

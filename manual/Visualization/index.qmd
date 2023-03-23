@@ -1,14 +1,12 @@
 ---
-title: "Backends for visualization"
-author: "Alejandro Morales Sierra"
+title: "3D rendering"
+author: 
+    - name: "Alejandro Morales Sierra"
+      affiliation: "Centre for Crop Systems Analysis - Wageningen University"
 date: last-modified
 execute: 
-  cache: true
+    enabled: false
 ---
-
-:::{.callout-warning}
-Some of the details may change in the short term due to changes to the Makie package (e.g., inlining of native graphics in Jupyter notebooks)
-:::
 
 # Introduction
 
@@ -22,7 +20,66 @@ VPL has two forms of visualization that are specific to a model: (i) a network r
 
 Depending on the context where the code is being executed and the backend being used, different forms of visualization will be obtained with different scenarios listed below (see section on [Visualization](#exporting-visualization)). It is also possible to export static versions of any visualization in a wide range of formats (see section on [Export visualization](#exporting-visualization)).
 
-# Visualization
+# Drawing graphs
+
+The function `draw()` can be applied to a `Graph` object or any subgraph (e.g.,
+the axiom of graph) to visualize the network structure. This will produce a 
+static 2D representation of the graph.
+By default, each node will be labelled with the type of object stored in it
+(e.g., a turtle movement object or an user-defined object) and the internal ID
+that the object has in the graph.
+
+For example, a simple graph would be as follows:
+
+```{julia}
+module L
+    using VPL
+
+    struct N <: Node end
+end
+import .L
+using VPL
+axiom = L.N() + (L.N(), L.N()) + L.N() + (L.N(), L.N())
+draw(axiom)
+graph = Graph(axiom = axiom)
+draw(graph)
+```
+
+See section on [Graphs](../Graphs)) and how to access nodes directly from their
+internal ID for more details.
+
+# 3D visualization
+
+A `Scene` can be rendered in 3D using the function `render()`. To facilitate 
+usage, the function `render()` can be applied to a `Graph` object or an array
+of `Graph` objects and it will automatically generated the corresponding `Scene`
+object internally. It can also be applied to a 3D mesh (e.g., the result of a 
+primitive constructor, see section on [Primitives](../Primitives)). 
+
+When a mesh is being rendered directly, a default color will be used for the 
+mesh that the user can override (see API documentation for [`render()`](../../api/Render.md#VPL.Render.render)).
+Otherwise, `render()` will use the corresponding colors stored in the scene. It
+is also possible to add a mesh to an existing 3D visualization by using `render!()`.
+
+For debugging purposes, the `render()` function also allows to visualize the
+edges of the triangles (`wireframe = true`) and the normal vectors (`normals = true`).
+
+When `render()` is applied to a `Graph` object or array of `Graph` objects, it
+will create internally a `Turtle` object to traverse the graph and generate the
+`Scene` object. As shown in documentation for [Scenes](../Turtle), the `feed`
+method takes an optional `message` argument that the user may use to control
+the generation of geometry and/or colors. The `render` function allows to define
+such message (any user-defined data) which will be passed along to the `feed`
+methods.
+
+Ultimately, `render()` will call the Makie function `mesh()` (or `mesh!()` for 
+`render!()`) and the `Figure` object from Makie. This means that any keyword argument
+that is accepted by `mesh()` or `mesh!()` can be used to `render()` or `render!()`.
+It also means that the use can access and modify the `Figure()` object being returned.
+For example, it is possible to change the camera position, lighting, etc.
+See [Makie documentation](https://docs.makie.org/stable/) for details.
+
+# Visualization in context
 
 Depending on the context and backend used, a different form of visualization will be obtained. The different scenarios are described below:
 
@@ -108,7 +165,7 @@ When drawing a graph or rendering a scene it is possible specify the resolution 
 ```{julia}
 #| eval: false
 # Compute pixel resolution to ensure a width of 6 cm, height of 16 cm and a dpi of 300
-res = calculate_resolution(6, 16, dpi = 300)
+res = calculate_resolution(height = 6, width = 16, dpi = 300)
 f = draw(graph, resolution = res);
 export_graph(f, "<filename>.png")
 ```
@@ -118,14 +175,9 @@ In the case of vector formats, we only need to specify the width and height as t
 ```{julia}
 #| eval: false
 # Compute pixel resolution to ensure a width of 6 cm, height of 16 cm and a dpi of 300
-res = calculate_resolution(6, 16, format = "svg")
+res = calculate_resolution(height = 6, width = 16, format = "svg")
 f = draw(graph, resolution = res);
 export_graph(f, "<filename>.svg")
 ```
 
 Regarding dpi, please consider that the dpi is not a property of a png image (some software include a dpi header in the image metadata, but VPL will not). It is still the responsibility of the user to ensure that the image is printed (or inserted in some document) with the correct dimensions. The `calculate_resolution()` function will simply guarantee that, once the user enforces those dimensions, the image will have the correct dpi.
-
-# Examples for `draw()`
-
-
-# Examples for `render()`
