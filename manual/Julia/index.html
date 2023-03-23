@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alejandro Morales Sierra">
+<meta name="dcterms.date" content="2023-03-20">
+
+<title>Virtual Plant Laboratory - Julia basic concepts</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Julia basic concepts</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Virtual Plant Laboratory</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">User Manual</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Introduction/index.html" class="sidebar-item-text sidebar-link">What is VPL?</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Julia/index.html" class="sidebar-item-text sidebar-link active">Julia basic concepts</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Graphs/index.html" class="sidebar-item-text sidebar-link">Dynamic graph creation and manipulation</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Geometry/Turtle/index.html" class="sidebar-item-text sidebar-link">Turtle graphics and scenes</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Visualization/index.html" class="sidebar-item-text sidebar-link">3D rendering</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/RayTracer/index.html" class="sidebar-item-text sidebar-link">Ray tracing distribution of irradiance</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Tutorials</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/algae/index.html" class="sidebar-item-text sidebar-link">Algae growth</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/context/index.html" class="sidebar-item-text sidebar-link">Context sensitive rules</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/tree/index.html" class="sidebar-item-text sidebar-link">Tree</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/forest/index.html" class="sidebar-item-text sidebar-link">Forest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/growth_forest/index.html" class="sidebar-item-text sidebar-link">Growth forest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link">Ray-traced forest of binary trees</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/photosynthesis_forest/index.html" class="sidebar-item-text sidebar-link">Photosynthesis-driven forest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/beyond_VPL/index.html" class="sidebar-item-text sidebar-link">Beyond VPL</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/turtle_message/index.html" class="sidebar-item-text sidebar-link">Turtle messages</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/advanced_raytracing/index.html" class="sidebar-item-text sidebar-link">Advanced ray tracing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/meshes/index.html" class="sidebar-item-text sidebar-link">3D meshes</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">API</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Geometry.html" class="sidebar-item-text sidebar-link">Module Geometry</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Sky</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky.jl</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Sky/API.html" class="sidebar-item-text sidebar-link">Module Sky</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Ecophys</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Ecophys/index.html" class="sidebar-item-text sidebar-link">Ecophys.jl</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Ecophys/Photosynthesis.html" class="sidebar-item-text sidebar-link">Module Photosynthesis</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src="../..\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div></div></nav>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Julia basic concepts</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Alejandro Morales Sierra 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Centre for Crop Systems Analysis - Wageningen University
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 20, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>This is not a tutorial or introduction to Julia, but a collection of basic concepts about Julia that are particularly useful to understand VPL. It is assumed that the reader has some experience with programming in other languages, such as Matlab, R or Python. These concepts should be complemented with general introductory material about Julia, which can be found at the official <a href="https://julialang.org/">Julia website</a>.</p>
+<p>Julia is a dynamic, interactive programming language, like Matlab, R or Python. Thus, it is very easy to use and learn incrementally. The language is young and well designed, with an emphasis on numerical/scientific computation although it is starting to occupy some space in areas such as data science and machine learning. It has a clear syntax and better consistency than older programming languages.</p>
+<p>Unlike Matlab, R or Python, Julia was designed from the beginning to be fast (as fast as statically compiled languages like C, C++ or Fortran). However, achieving this goal does require paying attention to certain aspects of the language, such as <em>type stability</em> and <em>dynamic memory allocation</em>, which are not always obvious to the user coming from other scientific dynamic languages. In the different sections below, a few basic Julia concepts are presented, first by ignoring performance considerations and focusing on syntax, and then by showing how to improve the performance of the code. Some concepts are ignored as they are not deemed relevant for the use of VPL.</p>
+</section>
+<section id="running-julia" class="level1">
+<h1>Running Julia</h1>
+<p>There are different ways of executing Julia code (most popular ones are VS Code and Jupyter notebook):</p>
+<ul>
+<li>Interactive Julia console from terminal/console (REPL)</li>
+<li>Plugins for code editors
+<ul>
+<li>Visual Studio Code (most popular)</li>
+<li>Atom/Juno (less popular now)</li>
+<li>vim, Emacs and others (less popular)</li>
+</ul></li>
+<li>Code cells inside a Jupyter notebook</li>
+<li>Code cells inside Pluto notebook (a Julia implementation of a reactive notebook)</li>
+</ul>
+<p>The first time in a Julia session that a method is called it will take extra time as the method will have to be compiled (i.e.&nbsp;Julia uses a Just-in-Time compiler as opposed to an interpreter). Also, the first time you load a package after installation/update it will take extra time to load due to precompilation (this reduces JIT compilation times somewhat). Also, code editors and notebooks may need to run additional code to achieve their full functionality, which may add some delays in executing the code.</p>
+</section>
+<section id="basic-concepts" class="level1">
+<h1>Basic concepts</h1>
+<section id="functions" class="level2">
+<h2 class="anchored" data-anchor-id="functions">Functions</h2>
+<p>A function is defined with the following syntax.</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">foo</span>(x)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">foo</span>(<span class="fl">2.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>4.0</code></pre>
+</div>
+</div>
+<p>Very short functions can also be defined in one line</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">foo2</span>(x) <span class="op">=</span> x<span class="op">^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>foo2 (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">foo2</span>(<span class="fl">2.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>4.0</code></pre>
+</div>
+</div>
+<p>Functions can also be defined with the “<span class="math inline">\(\to\)</span>” syntax. The result can be assigned to any variable.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>foo3 <span class="op">=</span> x <span class="op">-&gt;</span> x<span class="op">^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>#11 (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">foo3</span>(<span class="fl">2.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>4.0</code></pre>
+</div>
+</div>
+<p>A <code>begin</code> - <code>end</code> block can be used to store a sequence of statements in multiple lines and assign them to “short function or a”<span class="math inline">\(\to\)</span> function.</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>foo4 <span class="op">=</span> <span class="cf">begin</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">-&gt;</span> x<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>#13 (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">foo4</span>(<span class="fl">2.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>4.0</code></pre>
+</div>
+</div>
+<p>Once created, there is no difference among <code>foo</code>, <code>foo2</code>, <code>foo3</code> and <code>foo4</code>.</p>
+<p>Anonymous functions are useful when passing a function to another function as argument. For example, the function <code>bar</code> below allows applying any function <code>f</code> to an argument <code>x</code>. In this case we could pass any of the variables defined above, or just create an anonymous funcion in-place.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">bar</span>(x, f)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">f</span>(x)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bar</span>(<span class="fl">2.0</span>, x <span class="op">-&gt;</span> x<span class="op">^</span><span class="fl">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>4.0</code></pre>
+</div>
+</div>
+</section>
+<section id="types" class="level2">
+<h2 class="anchored" data-anchor-id="types">Types</h2>
+<p>A Type in Julia is a data structure that can contain one or more fields. Types are used to keep related data together, and to select the right method implementation of a function (see below). It shares some of the properties of Classes in Object-Oriented Programming but there are also important differences.</p>
+<p>Julia types can be immutable or mutable.</p>
+<p>Immutable means that, once created, the fields of an object cannot be changed. They are defined with the following syntax:</p>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Point</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  y</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  z</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fu">Point</span>(<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>Point(0.0, 0.0, 0.0)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p.x <span class="op">=</span> <span class="fl">1.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>LoadError: setfield!: immutable struct of type Point cannot be changed</code></pre>
+</div>
+</div>
+<p>Mutable means that the fields of an object can be modified after creation. The definition is similar, just needs to add the keyword <code>mutable</code></p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> mPoint</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  y</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  z</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mp <span class="op">=</span> <span class="fu">mPoint</span>(<span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>mPoint(0.0, 0.0, 0.0)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mp.x <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>mPoint(1.0, 0.0, 0.0)</code></pre>
+</div>
+</div>
+<p>We can always check the type of an object with the function <code>typeof</code></p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>Point</code></pre>
+</div>
+</div>
+<p>If you forget the fields of a type, try to using <code>fieldnames</code> in the type (not the object). It will return the name of all the fields it contains (the “:” in front of each name can be ignored)</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fieldnames</span>(Point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>(:x, :y, :z)</code></pre>
+</div>
+</div>
+<p>Note that, for performance reasons, the type of each field should be annotated in the type definition as in:</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> pPoint</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  x<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  y<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  z<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pPoint</span>(<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>pPoint(1.0, 2.0, 3.0)</code></pre>
+</div>
+</div>
+<p>Also, note that there are no private fields in a Julia type (like Python, unlike C++ or Java).</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Methods are functions with the same name but specialized for different types.</p>
+<p>Methods are automatically created by specifying the type of (some of) the arguments of a function, like in the following example</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">dist</span>(p1<span class="op">::</span><span class="dt">pPoint</span>, p2<span class="op">::</span><span class="dt">pPoint</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    dx <span class="op">=</span> p1.x <span class="op">-</span> p2.x</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    dy <span class="op">=</span> p1.y <span class="op">-</span> p2.y</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    dz <span class="op">=</span> p1.z <span class="op">-</span> p2.z</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sqrt</span>(dx<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> dy<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> dz<span class="op">^</span><span class="fl">2</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>dist (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> <span class="fu">pPoint</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="fu">pPoint</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(p1, p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>1.4142135623730951</code></pre>
+</div>
+</div>
+<p>Note that this function will not work for <code>mPoint</code>s</p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mp1 <span class="op">=</span> <span class="fu">mPoint</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>mp2 <span class="op">=</span> <span class="fu">mPoint</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(mp1, mp2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>LoadError: MethodError: no method matching dist(::mPoint, ::mPoint)</code></pre>
+</div>
+</div>
+<p>So we need to define <code>dist</code> for <code>mPoint</code> as arguments, or use inheritance (see below).</p>
+</section>
+<section id="abstract-types" class="level2">
+<h2 class="anchored" data-anchor-id="abstract-types">Abstract types</h2>
+<p>Types cannot inherit from other types.</p>
+<p>However, when multiple types share analogus functionality, it is possible to group them by “abstract types” from which they can inherit. Note that abstract types do not contain any fields, so inheritance only works for methods. “abstract types are defined by how they act” (C. Rackauckas)</p>
+<p>For example, we may define an abstract type <code>Vec3</code> defined as any type for which a distance (<code>dist</code>) can be calculated. The default implementation assumes that the type contains fields <code>x</code>, <code>y</code> and <code>z</code>, though inherited methods can always be overriden.</p>
+<p>Inheritance is indicated by the “&lt;:” syntax after the name of the type in its declaration.</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vec3 contains no data, but dist actually assumes that x, y and z are fields of any type inheriting from Vec3</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="kw">abstract type</span> Vec3 <span class="kw">end</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">dist</span>(p1<span class="op">::</span><span class="dt">Vec3</span>, p2<span class="op">::</span><span class="dt">Vec3</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    dx <span class="op">=</span> p1.x <span class="op">-</span> p2.x</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    dy <span class="op">=</span> p1.y <span class="op">-</span> p2.y</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    dz <span class="op">=</span> p1.z <span class="op">-</span> p2.z</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sqrt</span>(dx<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> dy<span class="op">^</span><span class="fl">2</span> <span class="op">+</span> dz<span class="op">^</span><span class="fl">2</span>)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Like before, but inhering from Vec3</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Point2 <span class="op">&lt;:</span><span class="dt"> Vec3</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  x<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  y<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  z<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="kw">mutable struct</span> mPoint2 <span class="op">&lt;:</span><span class="dt"> Vec3</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  x<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  y<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  z<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Point3 <span class="op">&lt;:</span><span class="dt"> Vec3</span></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>  x<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>  y<span class="op">::</span><span class="dt">Float64</span></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The method now works with <code>Point2</code> and <code>mPoint2</code></p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> <span class="fu">Point2</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="fu">Point2</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(p1, p2)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>mp1 <span class="op">=</span> <span class="fu">mPoint2</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>mp2 <span class="op">=</span> <span class="fu">mPoint2</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(mp1, mp2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>1.4142135623730951</code></pre>
+</div>
+</div>
+<p>The method will try to run with <code>Point3</code> but it will raise an error because <code>Point3</code> does not have the field <code>z</code>.</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="op">=</span> <span class="fu">Point3</span>(<span class="fl">1.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(p1, p3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>LoadError: type Point3 has no field z</code></pre>
+</div>
+</div>
+<section id="optional-and-keyword-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="optional-and-keyword-arguments">Optional and keyword arguments</h3>
+<p>Functions can have optional arguments (i.e.&nbsp;arguments with default values) as well as keyword arguments, which are like optional arguments but you need to use their name (rather than position) to assign a value.</p>
+<p>An example of a function with optional arguments:</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">opfoo</span>(a, b<span class="op">::</span><span class="dt">Int </span><span class="op">=</span> <span class="fl">0</span>) <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">opfoo</span>(<span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>1</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">opfoo</span>(<span class="fl">1</span>,<span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>2</code></pre>
+</div>
+</div>
+<p>An example of a function with keyword arguments</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kwfoo</span>(a; b<span class="op">::</span><span class="dt">Int </span><span class="op">=</span> <span class="fl">0</span>) <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kwfoo</span>(<span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>1</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kwfoo</span>(<span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<pre><code>2</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="modules" class="level2">
+<h2 class="anchored" data-anchor-id="modules">Modules</h2>
+<p>Within a Julia session you cannot redefine Types. Also, if you assign different data to the same name, it will simply overwrite the previous data (note: these statements are simplifications of what it actually happens, but it suffices for now).</p>
+<p>To avoid name clashes, Julia allows collecting functions, methods, types and abstract types into Modules. Every Julia package includes at least one module.</p>
+<p>A module allows exporting a subset of the the names defined inside of it:</p>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> Mod</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="kw">export</span> fooz</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fooz</span>(x) <span class="op">=</span> <span class="fu">abs</span>(x)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> bar</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>   data</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>Main.Mod</code></pre>
+</div>
+</div>
+<p>In order to use a module the <code>using</code> command must be used (the <code>.</code> is required and indicates that the module was defined in the current scoppe, as modules can be nested).</p>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">.Mod</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Exportednames can be used directly</p>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fooz</span>(<span class="op">-</span><span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>1</code></pre>
+</div>
+</div>
+<p>Unexported names can still be retrieved, but must be qualified by the module name.</p>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Mod.<span class="fu">fooz</span>(<span class="op">-</span><span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<pre><code>1.0</code></pre>
+</div>
+</div>
+</section>
+<section id="adding-methods-to-existing-functions" class="level2">
+<h2 class="anchored" data-anchor-id="adding-methods-to-existing-functions">Adding methods to existing functions</h2>
+<p>If a function is defined inside a module (e.g., a Julia package) we can add methods to that function by accessing it through the module name. Let’s define a function <code>abs_dist</code> that calculates the Manhattan (as opposed to Euclidean) distance between two points. We will put it inside a module called <code>Funs</code> to emulate a Julia package.</p>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> Funs</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">export</span> manhattan</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">function</span> <span class="fu">manhattan</span>(p1, p2)</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>      dx <span class="op">=</span> p1.x <span class="op">-</span> p2.x</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>      dy <span class="op">=</span> p1.y <span class="op">-</span> p2.y</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>      dz <span class="op">=</span> p1.z <span class="op">-</span> p2.z</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">abs</span>(dx <span class="op">+</span> dy <span class="op">+</span> dz)</span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">.Funs</span></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(p1, p2)</span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(p1, p3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>LoadError: type Point3 has no field z</code></pre>
+</div>
+</div>
+<p>We see that we have the same error as before when using <code>p3</code>. Let’s add methods for when one the first or second argument is a <code>Point3</code> that ignores the <code>z</code>:</p>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>Funs.<span class="fu">manhattan</span>(p1<span class="op">::</span><span class="dt">Point3</span>, p2) <span class="op">=</span> <span class="fu">abs</span>(p1.x <span class="op">-</span> p2.x <span class="op">+</span> p1.y <span class="op">-</span> p2.y)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>Funs.<span class="fu">manhattan</span>(p1, p2<span class="op">::</span><span class="dt">Point3</span>) <span class="op">=</span> <span class="fu">abs</span>(p1.x <span class="op">-</span> p2.x <span class="op">+</span> p1.y <span class="op">-</span> p2.y)</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(p1, p3)</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="fu">manhattan</span>(p3, p1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<pre><code>0.0</code></pre>
+</div>
+</div>
+<p>You can find all the methods of a function by using <code>methods()</code> on the function name:</p>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">methods</span>(manhattan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+# 3 methods for generic function <b>manhattan</b>:<ul><li> manhattan(p1::<b>Point3</b>, p2) in Main at In[34]:1</li> <li> manhattan(p1, p2::<b>Point3</b>) in Main at In[34]:2</li> <li> manhattan(p1, p2) in Main.Funs at In[33]:3</li> </ul>
+</div>
+</div>
+</section>
+<section id="macros" class="level2">
+<h2 class="anchored" data-anchor-id="macros">Macros</h2>
+<p>A macro is a function or statement that starts with <code>@</code>. The details of macros are not explained here, but it is important to know that they work by <strong>modifying the code</strong> that you write inside the macro, usually to provided specific features or to achieve higher performance. That is, a macro will take the code that you write and substitute it by some new code that then gets executed.</p>
+<p>An useful macro is <code>@kwdef</code> provided by the module <code>Base</code>, which allows assigning default values to the fields of a type and use the fields as keyword arguments in the constructors. This macro needs to be written before the type definition. For example, a point constructed in this manner would be:</p>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Base</span>.<span class="pp">@kwdef</span> <span class="kw">struct</span> kwPoint</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    y<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    z<span class="op">::</span><span class="dt">Float64 </span><span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kwPoint</span>()</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kwPoint</span>(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>)</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kwPoint</span>(y <span class="op">=</span> <span class="fl">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<pre><code>kwPoint(0.0, 1.0, 0.0)</code></pre>
+</div>
+</div>
+</section>
+<section id="dot-notation" class="level2">
+<h2 class="anchored" data-anchor-id="dot-notation">Dot notation</h2>
+<p>Dot notation is a very useful feature of Julia that allows you to apply a function to each element of a vector. For example, if you want to calculate the square of each element of a vector you can do:</p>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>]</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x<span class="op">.^</span><span class="fl">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>3-element Vector{Int64}:
+ 1
+ 4
+ 9</code></pre>
+</div>
+</div>
+<p>The dot notation can be used with any function, not just mathematical functions. For example, if you want to calculate the absolute value of each element of a vector you can do:</p>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>.(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>3-element Vector{Int64}:
+ 1
+ 4
+ 9</code></pre>
+</div>
+</div>
+<p>If the operation is more complex, the ‘.’ should be used in all the steps or, alternatively, use the macro <code>@.</code> that does the same:</p>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>.(y) <span class="op">.+</span> x<span class="op">.^</span><span class="fl">3</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>@. <span class="fu">abs</span>(y) <span class="op">+</span> x<span class="op">^</span><span class="fl">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>3-element Vector{Int64}:
+  2
+ 12
+ 36</code></pre>
+</div>
+</div>
+<p>The dot notation can also be used with functions that take more than one argument, but make sure that all the arguments have the same length</p>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>.(x, y)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>.(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>3-element Vector{Int64}:
+ 1
+ 4
+ 9</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="improving-performance" class="level1">
+<h1>Improving performance</h1>
+<section id="type-instability" class="level2">
+<h2 class="anchored" data-anchor-id="type-instability">Type instability</h2>
+<p>As indicated above, annotating the fields of a data type (<code>struct</code> or <code>mutable struct</code>) is required for achieve good performance. However, neither arguments of functions nor variables created through assignment require type annotation. This is because Julia uses type inference (i.e.&nbsp;it tries to infer the type of data to be stored in each newly created varaible) and compiles the code to machine level based on this inference. This leads to the concept of <em>type instability</em>: if the type of data stored in a variable changes over time, the compiler will need to accomodate for this, which results (for technical reasons beyond the scope of this document) in a loss of performance.</p>
+<p>Here is a classic example of type instability. The following function will add up the squares of all the values in a vector:</p>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">add_squares</span>(x)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  out <span class="op">=</span> <span class="fl">0</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x)</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>    out <span class="op">+=</span> x[i]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> out</span>
+<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>add_squares (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>It looks innocent enough. The issue here is that <code>out</code> is initialized as an integer (<code>0</code>), but then it is assigned the result of <code>sqrt(x)</code>, which may be a real value (e.g.&nbsp;<code>1.0</code>), which would have to be stored as a floating point number. Because <code>out</code> has different types at different points in the code, the resulting code will be slower than it could be, but still correct (this is why Julia is useful for rapid code development compared to static languages like C++ or Java).</p>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add_squares</span>(<span class="fu">collect</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>)) <span class="co"># type stable</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add_squares</span>(<span class="fu">collect</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">1000.0</span>)) <span class="co"># not type stable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>3.338335e8</code></pre>
+</div>
+</div>
+<p>How do we measure performance then? The <code>@time</code> macro is useful for this if dealing with a slow function. Otherwise it is better to use <code>@btime</code> from the <em>BenchmarkTools</em> package (see documentation of the package to understand why we use <code>$</code>).</p>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">BenchmarkTools</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>v1 <span class="op">=</span> <span class="fu">collect</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>v2 <span class="op">=</span> <span class="fu">collect</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">1000.0</span>)</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="pp">@btime</span> <span class="fu">add_squares</span>(<span class="op">$</span>v1)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="pp">@btime</span> <span class="fu">add_squares</span>(<span class="op">$</span>v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  136.448 ns (0 allocations: 0 bytes)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  1.650 μs (0 allocations: 0 bytes)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<pre><code>3.338335e8</code></pre>
+</div>
+</div>
+<p>The second code is 12 times slower than the first one. We can detect type instability by using the <code>@code_warntype</code> macro. This macro will print a internal representation of the code before it is compiled. The details are complex, but you just need to look for things in red (which indicate type instability).</p>
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@code_warntype</span> <span class="fu">add_squares</span>(v1)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@code_warntype</span> <span class="fu">add_squares</span>(v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MethodInstance for add_squares(::</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Vector{Int64})
+  from add_squares(x) in Main at In[41]:1
+Arguments
+  #self#::Core.Const(add_squares)
+  x::Vector{Int64}
+Locals
+  @_3::Union{Nothing, Tuple{Int64, Int64}}
+  out::Int64
+  i::Int64
+Body::Int64</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+1 ─ </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      (out = 0)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+│   %2  = Main.eachindex(x)::Base.OneTo{Int64}
+│         (@_3 = Base.iterate(%2))
+│   %4  = (@_3 === nothing)::Bool
+│   %5  = Base.not_int(%4)::Bool
+└──       goto #4 if not %5
+2 ┄ %7  = @_3::Tuple{Int64, Int64}
+│         (i = Core.getfield(%7, 1))
+│   %9  = Core.getfield(%7, 2)::Int64
+│   %10 = out::Int64
+│   %11 = Base.getindex(x, i)::Int64
+│   %12 = Core.apply_type(Base.Val, 2)::Core.Const(Val{2})
+│   %13 = (%12)()::Core.Const(Val{2}())
+│   %14 = Base.literal_pow(Main.:^, %11, %13)::Int64
+│         (out = %10 + %14)
+│         (@_3 = Base.iterate(%2, %9))
+│   %17 = (@_3 === nothing)::Bool
+│   %18 = Base.not_int(%17)::Bool
+└──       goto #4 if not %18
+3 ─       </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>goto #2
+4 ┄       return out
+
+MethodInstance for add_squares(::Vector{Float64})
+  from add_squares(x) in Main at In[41]:1
+Arguments
+  #self#::Core.Const(add_squares)
+  x::Vector{Float64}
+Locals
+  @_3::Union{Nothing, Tuple{Int64, Int64}}
+  out::Union{Float64, Int64}
+  i::Int64
+Body::Union{Float64, Int64}
+1 ─       (out = 0)
+│   %2  = Main.eachindex(x)::Base.OneTo{Int64}
+│         (@_3 = Base.iterate(%2))
+│   %4  = (@_3 === nothing)::Bool
+│   %5  = Base.not_int(%4)::Bool
+└──       goto #4 if not %5
+2 ┄ %7  = @_3::Tuple{Int64, Int64}
+│         (i = Core.getfield(%7, 1))
+│   %9  = Core.getfield(%7, 2)::Int64
+│   %10 = out::Union{Float64, Int64}
+│   %11 = Base.getindex(x, i)::Float64
+│   %12 = Core.apply_type(Base.Val, 2)::Core.Const(Val{2})
+│   %13 = (%12)()::Core.Const(Val{2}())
+│   %14 = Base.literal_pow(Main.:^, %11, %13)::Float64
+│         (out = %10 + %14)
+│         (@_3 = Base.iterate(%2, %9))
+│   %17 = (@_3 === </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>nothing)::Bool
+│   %18 = Base.not_int(%17)::Bool
+└──       goto #4 if not %18
+3 ─       goto #2
+4 ┄       return out
+</code></pre>
+</div>
+</div>
+<p>How do we fix this? We could write different methods for different types of x, but this is not very practical. Instead, we can use the <code>zero()</code> function combined with <code>eltype()</code> to initialize <code>out</code> with the correct type.</p>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">add_squares</span>(x)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  out <span class="op">=</span> <span class="fu">zero</span>(<span class="fu">eltype</span>(x)) <span class="co"># Initialize out with the correct type with value of zero</span></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x)</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>    out <span class="op">+=</span> x[i]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> out</span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre><code>add_squares (generic function with 1 method)</code></pre>
+</div>
+</div>
+<p>You could also initialize out to the first element of x and iterate over the rest of the elements, but this may not always possible (e.g.&nbsp;if <code>x</code> is empty or has one value only), so the logic will get more complex.</p>
+<p>Now the code is type stable:</p>
+<div class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@code_warntype</span> <span class="fu">add_squares</span>(v1)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@code_warntype</span> <span class="fu">add_squares</span>(v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MethodInstance for add_squares(::Vector{Int64})
+  from add_squares(x) in Main at In[45]:1
+Arguments
+  #self#::Core.Const(add_squares)
+  x::Vector{Int64}
+Locals
+  @_3::Union{Nothing, Tuple{Int64, Int64}}
+  out::Int64
+  i::Int64
+Body::Int64
+1 ─ %1  = Main.eltype(x)::Core.Const(Int64)
+│         (out = Main.zero(%1))
+│   %3  = Main.eachindex(x)::Base.OneTo{Int64}
+│         (@_3 = Base.iterate(%3))
+│   %5  = (@_3 === nothing)::Bool
+│   %6  = Base.not_int(%5)::Bool
+└──       goto #4 if not %6
+2 ┄ %8  = @_3::Tuple{Int64, Int64}
+│         (i = Core.getfield(%8, 1))
+│   %10 = Core.getfield(%8, 2)::Int64
+│   %11 = out::Int64
+│   %12 = Base.getindex(x, i)::Int64
+│   %13 = Core.apply_type(Base.Val, 2)::Core.Const(Val{2})
+│   %14 = (%13)()::Core.Const(Val{2}())
+│   %15 = Base.literal_pow(Main.:^, %12, %14)::Int64
+│         (out = %11 + %15)
+│         (@_3 = Base.iterate(%3, %10))
+│   %18 = (@_3 === nothing)::Bool
+│   %19 = Base.not_int(%18)::Bool
+└──       goto #4 if not %19
+3 ─       goto #2
+4 ┄       return out
+
+MethodInstance for add_squares(::Vector{Float64})
+  from add_squares(x) in Main at In[45]:1
+Arguments
+  #self#::Core.Const(add_squares)
+  x::Vector{Float64}
+Locals
+  @_3::Union{Nothing, Tuple{Int64, Int64}}
+  out::Float64
+  i::Int64
+Body::Float64
+1 ─ %1  = Main.eltype(x)::Core.Const(Float64)
+│         (out = Main.zero(%1))
+│   %3  = Main.eachindex(x)::Base.OneTo{Int64}
+│         (@_3 = Base.iterate(%3))
+│   %5  = (@_3 === nothing)::Bool
+│   %6  = Base.not_int(%5)::Bool
+└──       goto #4 if not %6
+2 ┄ %8  = @_3::Tuple{Int64, Int64}
+│         (i = Core.getfield(%8, 1))
+│   %10 = Core.getfield(%8, 2)::Int64
+│   %11 = out::Float64
+│   %12 = Base.getindex(x, i)::Float64
+│   %13 = Core.apply_type(Base.Val, 2)::Core.Const(Val{2})
+│   %14 = (%13)()::Core.Const(Val{2}())
+│   %15 = Base.literal_pow(Main.:^, %12, %14)::Float64
+│         (out = %11 + %15)
+│         (@_3 = Base.iterate(%3, %10))
+│   %18 = (@_3 === nothing)::Bool
+│   %19 = Base.not_int(%18)::Bool
+└──       goto #4 if not %19
+3 ─       goto #2
+4 ┄       return out
+</code></pre>
+</div>
+</div>
+<p>And the performance is more similar:</p>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@btime</span> <span class="fu">add_squares</span>(<span class="op">$</span>v1)</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@btime</span> <span class="fu">add_squares</span>(<span class="op">$</span>v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  136.541 ns (0 allocations: 0 bytes)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  812.644 ns (0 allocations: 0 bytes)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre><code>3.338335e8</code></pre>
+</div>
+</div>
+</section>
+<section id="performance-annotations" class="level2">
+<h2 class="anchored" data-anchor-id="performance-annotations">Performance annotations</h2>
+<p>Sometimes code can be annotated to improve performance. For example, the <code>@simd</code> can be used in simple loops to indicate that the loop can be vectorized inside the CPU (it allows to run simple CPU instructions on small sets of data simultaneously). The <code>@inbounds</code> macro can be used to indicate that the code will not access elements outside the bounds of an array.</p>
+<div class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">add_squares</span>(x)</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  out <span class="op">=</span> <span class="fu">zero</span>(<span class="fu">eltype</span>(x)) <span class="co"># Initialize out with the correct type with value of zero</span></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="pp">@simd</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x)</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@inbounds</span> out <span class="op">+=</span> x[i]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> out</span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a><span class="pp">@btime</span> <span class="fu">add_squares</span>(<span class="op">$</span>v1)</span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="pp">@btime</span> <span class="fu">add_squares</span>(<span class="op">$</span>v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  135.771 ns (0 allocations: 0 bytes)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  54.619 ns (0 allocations: 0 bytes)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="48">
+<pre><code>3.338335e8</code></pre>
+</div>
+</div>
+<p>Now we actually get faster performance for floating point number, which is related to the fact that the CPU can vectorize floating point operations more efficiently than integer operations (at least in this example). You can see the actual assembly code being generated (or an approximation of it) by using the <code>@code_native</code> macro. Any instruction that starts with <code>v</code> is a vectorized instruction. Note that sometimes Julia will automatically vectorize code without the need for the <code>@simd</code> but this is not always the case.</p>
+<div class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@code_native</span> <span class="fu">add_squares</span>(v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    .text
+    .file   "add_squares"
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.globl  julia_add_squares_3992          # -- Begin function julia_add_squares_3992
+    .p2align    4, 0x90
+    .type   julia_add_squares_3992,@function
+julia_add_squares_3992:                 # @julia_add_squares_3992
+; ┌ @ In[48]:1 within `add_squares`
+    .cfi_startproc
+# %bb.0:                                # %top
+    pushq   %rbp
+    .cfi_def_cfa_offset 16
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.cfi_offset %rbp, -16
+    movq    %rsp, %rbp
+    .cfi_def_cfa_register %rbp
+    subq    $32, %rsp
+    vmovapd %xmm7, -16(%rbp)                # 16-byte Spill
+    vmovapd %xmm6, -32(%rbp)                # 16-byte Spill
+; │ @ In[48]:3 within `add_squares`
+; │┌ @ simdloop.jl:69 within `macro expansion`
+; ││┌ @ abstractarray.jl:285 within `eachindex`
+; │││┌ @ abstractarray.jl:116 within `axes1`
+; ││││┌ @ abstractarray.jl:95 within `axes`
+; │││││┌ @ array.jl:151 within `size`
+    movq    8(%rcx), %r8
+; ││└└└└
+; ││ @ simdloop.jl:72 within `macro expansion`
+; ││┌ @ int.jl:83 within `&lt;`
+    testq   %r8, %r8
+; ││└
+    je  .LBB0_1
+# %bb.2:                                # %L14.lr.ph
+    movq    (%rcx), %rcx
+; ││ @ simdloop.jl:75 within `macro expansion`
+    cmpq    $16, %r8
+    jae .LBB0_4
+# %bb.3:
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>vxorpd  %xmm0, %xmm0, %xmm0
+    xorl    %edx, %edx
+    jmp .LBB0_7
+.LBB0_1:
+    vxorpd  %xmm0, %xmm0, %xmm0
+    jmp .LBB0_8
+.LBB0_4:                                # %vector.ph
+    movq    %r8, %rdx
+    andq    $-16, %rdx
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>vxorpd  %xmm0, %xmm0, %xmm0
+    xorl    %eax, %eax
+    vxorpd  %xmm1, %xmm1, %xmm1
+    vxorpd  %xmm2, %xmm2, %xmm2
+    vxorpd  %xmm3, %xmm3, %xmm3
+    .p2align    4, 0x90
+.LBB0_5:                                # %vector.body
+                                        # =&gt;This Inner Loop Header: Depth=1
+; ││ @ simdloop.jl:77 within `macro expansion` @ In[48]:4
+; ││┌ @ array.jl:924 within `getindex`
+    vmovupd (%rcx,%rax,8), %ymm4
+    vmovupd 32(%rcx,%rax,8), %ymm5
+    vmovupd 64(%rcx,%rax,8), %ymm6
+    vmovupd 96(%rcx,%rax,8), %ymm7
+; ││└
+; ││┌ @ float.jl:383 within `+`
+    vfmadd231pd %ymm4, %ymm4, %ymm0     # ymm0 = (ymm4 * ymm4) + ymm0
+    vfmadd231pd %ymm5, %ymm5, %ymm1     # ymm1 = (ymm5 * ymm5) + ymm1
+    vfmadd231pd %ymm6, %ymm6, %ymm2     # ymm2 = (ymm6 * ymm6) + ymm2
+    vfmadd231pd %ymm7, %ymm7, %ymm3     # ymm3 = (ymm7 * ymm7) + ymm3
+; ││└
+; ││ @ simdloop.jl:78 within `macro expansion`
+; ││┌ @ int.jl:87 within `+`
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>addq    $16, %rax
+    cmpq    %rax, %rdx
+    jne .LBB0_5
+# %bb.6:                                # %middle.block
+; ││└
+; ││ @ simdloop.jl:75 within `macro expansion`
+    vaddpd  %ymm0, %ymm1, %ymm0
+    vaddpd  %ymm0, %ymm2, %ymm0
+    vaddpd  %ymm0, %ymm3, %ymm0
+    vextractf128    $1, %ymm0, %xmm1
+    vaddpd  %xmm1, %xmm0, %xmm0
+    vpermilpd   $1, %xmm0, %xmm1        # xmm1 = xmm0[1,0]
+    vaddsd  %xmm1, %xmm0, %xmm0
+    cmpq    %rdx, %r8
+    je  .LBB0_8
+    .p2align    4, 0x90
+.LBB0_7:                                # %L14
+                                        # =&gt;This Inner Loop Header: Depth=1
+; ││ @ simdloop.jl:77 within `macro expansion` @ In[48]:4
+; ││┌ @ array.jl:924 within `getindex`
+    vmovsd  (%rcx,%rdx,8), %xmm1            # xmm1 = mem[0],zero
+; ││└
+; ││┌ @ float.jl:383 within `+`
+    vfmadd231sd %xmm1, %xmm1, %xmm0     # xmm0 = (xmm1 * xmm1) + xmm0
+; ││└
+; ││ @ simdloop.jl:78 within `macro expansion`
+; ││┌ @ int.jl:87 within `+`
+    </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>incq    %rdx
+; ││└
+; ││ @ simdloop.jl:75 within `macro expansion`
+; ││┌ @ int.jl:83 within `&lt;`
+    cmpq    %rdx, %r8
+; ││└
+    jne .LBB0_7
+.LBB0_8:                                # %L32
+    vmovaps -32(%rbp), %xmm6                # 16-byte Reload
+    vmovaps -16(%rbp), %xmm7                # 16-byte Reload
+; │└
+; │ @ In[48]:6 within `add_squares`
+    addq    $32, %rsp
+    popq    %rbp
+    vzeroupper
+    retq
+.Lfunc_end0:
+    .size   julia_add_squares_3992</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, .Lfunc_end0-julia_add_squares_3992
+    .cfi_endproc
+; └
+                                        # -- End function
+    .section    ".note.GNU-stack","",@progbits</code></pre>
+</div>
+</div>
+<p>Notice how with some simple annotations and reorganizing the code to deal with type instability we were able to get a 30x speedup. Obviously this was a simple function with minimal runtime, so the speedup is not particularly useful, but this type of small functions are often the ones that are called many times in complex computations (e.g., ray tracing), so the speedup can be significant in actual applications. Whether you need to worry about performance depends on where the bottleneck is in your code.</p>
+<p>For more details, see the sections of the manual on <a href="https://docs.julialang.org/en/v1/manual/profile/">profiling</a> and <a href="https://docs.julialang.org/en/v1/manual/performance-tips/">performance tips</a>.</p>
+</section>
+<section id="global-variables-and-type-instability" class="level2">
+<h2 class="anchored" data-anchor-id="global-variables-and-type-instability">Global variables and type instability</h2>
+<p>Global variables are any variable defined in a module outside of a function that is accessed from within a function. Global variables are not recommended in general as they can easily introduce bugs in your code by making the logic of the program much harder to reason about. However, they can also introduce performance issues as any global variable that is not annotated with its type will lead to type instability.</p>
+<p>For example, let’s say we modify the <code>add_squares</code> function to use a global variable (a bit odd, but it is just to illustrate the point) to enable differen options in the code.</p>
+<div class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">add_squares</span>(x)</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>  out <span class="op">=</span> <span class="fu">zero</span>(<span class="fu">eltype</span>(x))</span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> criterion <span class="op">&gt;</span> <span class="fl">0</span></span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@simd</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x)</span>
+<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>      <span class="pp">@inbounds</span> out <span class="op">+=</span> x[i]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb111-7"><a href="#cb111-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb111-8"><a href="#cb111-8" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@simd</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x)</span>
+<span id="cb111-9"><a href="#cb111-9" aria-hidden="true" tabindex="-1"></a>      <span class="pp">@inbounds</span> out <span class="op">-=</span> x[i]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb111-10"><a href="#cb111-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb111-11"><a href="#cb111-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb111-12"><a href="#cb111-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> out</span>
+<span id="cb111-13"><a href="#cb111-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb111-14"><a href="#cb111-14" aria-hidden="true" tabindex="-1"></a>criterion <span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb111-15"><a href="#cb111-15" aria-hidden="true" tabindex="-1"></a><span class="pp">@code_warntype</span> <span class="fu">add_squares</span>(v2)</span>
+<span id="cb111-16"><a href="#cb111-16" aria-hidden="true" tabindex="-1"></a><span class="pp">@btime</span> <span class="fu">add_squares</span>(v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MethodInstance for add_squares(::Vector{Float64})
+  from add_squares(x) in Main at In[50]:1
+Arguments
+  #self#::Core.Const(add_squares)
+  x::Vector{Float64}
+Locals
+  out::Float64
+  @_4::Union{Nothing, Tuple{Int64, Int64}}
+  r#370::Base.OneTo{Int64}
+  i#371::Int64
+  n#372::Int64
+  i#373::Int64
+  val@_9::Float64
+  i@_10::Int64
+  @_11::Union{Nothing, Tuple{Int64, Int64}}
+  r#374::Base.OneTo{Int64}
+  i#375::Int64
+  n#376::Int64
+  i#377::Int64
+  val@_16::Float64
+  i@_17::Int64
+Body::Float64
+1 ── %1  = Main.eltype(x)::Core.Const(Float64)
+│          (out = Main.zero(%1))
+│    %3  = (Main.criterion &gt; 0)::Any
+└───       goto #10 if not %3
+2 ── %5  = Main.eachindex(x)::Base.OneTo{Int64}
+│          (r#370 = %5)
+│    %7  = Base.simd_outer_range::Core.Const(Base.SimdLoop.simd_outer_range)
+│    %8  = (%7)(r#370)::Core.Const(0:0)
+│          (@_4 = Base.iterate(%8))
+│    %10 = (</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>@_4</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>::Core.Const((0, 0)) === nothing)::Core.Const(false)
+│    %11 = Base.not_int(%10)::Core.Const(true)
+└───       goto #9 if not %11
+3 ── %13 = @_4::Core.Const((0, 0))
+│          (i#371 = Core.getfield(%13, 1))
+│    %15 = Core.getfield(%13, 2)::Core.Const(0)
+│    %16 = Base.simd_inner_length::Core.Const(Base.SimdLoop.simd_inner_length)
+│    %17 = r#370::Base.OneTo{Int64}
+│    %18 = (%16)(%17, i#371::Core.Const(0))::Int64
+│          (n#372 = %18)
+│    %20 = Main.zero(n#372)::Core.Const(0)
+│    %21 = (%20 &lt; n#372)::Bool
+└───       goto #7 if not %21
+4 ── %23 = Main.zero(n#372)::Core.Const(0)
+└───       (i#373 = %23)
+5 ┄─ %25 = (i#373 &lt; n#372)::Bool
+└───       goto #7 if not %25
+6 ── %27 = Base.simd_index::Core.Const(Base.SimdLoop.simd_index)
+│    %28 = r#370::Base.OneTo{Int64}
+│    %29 = i#371::Core.Const(0)
+│          (i@_10 = (%27)(%28, %29, i#373))
+│          nothing
+│    %32 = out::Float64
+│    %33 = Base.getindex(x, i@_10)::Float64
+│    %34 = Core.apply_type(Base.Val, 2)::Core.Const(Val{2})
+│    %35 = (%34)()::Core.Const(Val{2}())
+│    %36 = Base.literal_pow(Main.:^, %33, %35)::Float64
+│    %37 = (%32 + %36)::Float64
+│          (out = %37)
+│          (val@_9 = %37)
+│          nothing
+│          val@_9
+│          (i#373 = i#373 + 1)
+│          $(Expr(:loopinfo, Symbol("julia.simdloop"), nothing))
+└───       goto #5
+7 ┄─       (@_4 = Base.iterate(%8, %15))
+│    %46 = (@_4::Core.Const(nothing) === nothing)::Core.Const(true)
+│    %47 = Base.not_int(%46)::Core.Const(false)
+└───       goto #9 if not %47
+8 ──       Core.Const(:(goto %13))
+9 ┄─       Main.nothing
+└───       goto #18
+10 ─ %</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>52 = Main.eachindex(x)::Base.OneTo{Int64}
+│          (r#374 = %52)
+│    %54 = Base.simd_outer_range::Core.Const(Base.SimdLoop.simd_outer_range)
+│    %55 = (%54)(r#374)::Core.Const(0:0)
+│          (@_11 = Base.iterate(%55))
+│    %57 = (@_11::Core.Const((0, 0)) === nothing)::Core.Const(false)
+│    %58 = Base.not_int(%57)::Core.Const(true)
+└───       goto #17 if not %58
+11 ─ %60 = @_11::Core.Const((0, 0))
+│          (i#375 = Core.getfield(%60, 1))
+│    %62 = Core.getfield(%60, 2)::Core.Const(0)
+│    %63 = Base.simd_inner_length::Core.Const(Base.SimdLoop.simd_inner_length)
+│    %64 = r#374::Base.OneTo{Int64}
+│    %65 = (%63)(%64, i#375::Core.Const(0))::Int64
+│          (n#376 = %65)
+│    %67 = Main.zero(n#376)::Core.Const(0)
+│    %68 = (%67 &lt; n#376)::Bool
+└───       goto #15 if not %68
+12 ─ %70 = Main.zero(n#376)::Core.Const(0)
+└───       (i#377 = %70)
+13 ┄ %72 = (i#377 &lt; n#376)::Bool
+└───       goto #15 if not %72
+14 ─ %74 = Base.simd_index::Core.Const(Base.SimdLoop.simd_index)
+│    %75 = r#374::Base.OneTo{Int64}
+│    %76 = i#375::Core.Const(0)
+│          (i@_17 = (%74)(%75, %76, i#377))
+│          nothing
+│    %79 = out::Float64
+│    %80 = Base.getindex(x, i@_17)::Float64
+│    %81 = Core.apply_type(Base.Val, 2)::Core.Const(Val{2})
+│    %82 = (%81)()::Core.Const(Val{2}())
+│    %83 = Base.literal_pow(Main.:^, %80, %82)::Float64
+│    %84 = (%79 - %83)::Float64
+│          (out = %84)
+│          (val@_16 = %84)
+│          nothing
+│          val@_16
+│          (i#377 = i#377 + 1)
+│          $(Expr(:loopinfo, Symbol("julia.simdloop"), nothing))
+└───       goto #13
+15 ┄       (@_11 = Base.iterate(%55, %62))
+│    %93 = (@_11::Core.Const(nothing) === nothing)::Core.Const(true)
+│    %94 = Base.not_int(%93)::Core.Const(false)
+└───       goto #17 if not %94
+16 ─       Core.Const(:(goto %60))
+17 ┄       Main.nothing
+18 ┄       return out</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  94.864 ns (1 allocation: 16 bytes)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<pre><code>3.338335e8</code></pre>
+</div>
+</div>
+<p>It is not a major hit in performance as <code>criterion</code> is only accessed once, but this can be a problem if the global variable is accessed many times in the code. The short term solution is to annotate the type of the global variable (but really we should be writing code without global variables). This can be frustating as once a global variable is created, you cannot annotate its type (even if it does not change!) without restarting the Julia session (unless it is inside a module).</p>
+<div class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">add_squares</span>(x)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>  out <span class="op">=</span> <span class="fu">zero</span>(<span class="fu">eltype</span>(x))</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> criterion2 <span class="op">&gt;</span> <span class="fl">0</span></span>
+<span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@simd</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x)</span>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>      <span class="pp">@inbounds</span> out <span class="op">+=</span> x[i]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb118-8"><a href="#cb118-8" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@simd</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="fu">eachindex</span>(x)</span>
+<span id="cb118-9"><a href="#cb118-9" aria-hidden="true" tabindex="-1"></a>      <span class="pp">@inbounds</span> out <span class="op">-=</span> x[i]<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb118-10"><a href="#cb118-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb118-11"><a href="#cb118-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end</span></span>
+<span id="cb118-12"><a href="#cb118-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> out</span>
+<span id="cb118-13"><a href="#cb118-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb118-14"><a href="#cb118-14" aria-hidden="true" tabindex="-1"></a>criterion2<span class="op">::</span><span class="dt">Int64 </span><span class="op">=</span> <span class="fl">1</span></span>
+<span id="cb118-15"><a href="#cb118-15" aria-hidden="true" tabindex="-1"></a><span class="pp">@code_warntype</span> <span class="fu">add_squares</span>(v2)</span>
+<span id="cb118-16"><a href="#cb118-16" aria-hidden="true" tabindex="-1"></a><span class="pp">@btime</span> <span class="fu">add_squares</span>(v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MethodInstance for add_squares(::Vector{Float64})
+  from add_squares(x) in Main at In[51]:1
+Arguments
+  #self#::Core.Const(add_squares)
+  x::Vector{Float64}
+Locals
+  out::Float64
+  @_4::Union{Nothing, Tuple{Int64, Int64}}
+  r#385::Base.OneTo{Int64}
+  i#386::Int64
+  n#387::Int64
+  i#388::Int64
+  val@_9::Float64
+  i@_10::Int64
+  @_11::Union{Nothing, Tuple{Int64, Int64}}
+  r#389::Base.OneTo{Int64}
+  i#390::Int64
+  n#391::Int64
+  i#392::Int64
+  val@_16::Float64
+  i@_17::Int64
+Body::Float64
+1 ── %1  = Main.eltype(x)::Core.Const(Float64)
+│          (out = Main.zero(%1))
+│    %3  = (Main.criterion2 &gt; 0)::Bool
+└───       goto #10 if not %3
+2 ── %5  = Main.eachindex(x)::Base.OneTo{Int64}
+│          (r#385 = %5)
+│    %7  = Base.simd_outer_range::Core.Const(Base.SimdLoop.simd_outer_range)
+│    %8  = (%7)(r#385)::Core.Const(0:0)
+│          (@_4 = Base.iterate(%8))
+│    %10 = (@_4::Core.Const((0, 0)) === nothing)::Core.Const(false)
+│    %11 = Base.not_int(%10)::Core.Const(true)
+└───       goto #9 if not %11
+3 ── %13 = @_4::Core.Const((0, 0))
+│          (i#386 = Core.getfield(%13, 1))
+│    %15 = Core.getfield(%13, 2)::Core.Const(0)
+│    %16 = Base.simd_inner_length::Core.Const(Base.SimdLoop.simd_inner_length)
+│    %17 = r#385::Base.OneTo{Int64}
+│    %18 = (%16)(%17, i#386::Core.Const(0))::Int64
+│          (n#387 = %18)
+│    %20 = Main.zero(n#387)::Core.Const(0)
+│    %21 = (%20 &lt; n#387)::Bool
+└───       goto #7 if not %21
+4 ── %23 = Main.zero(n#387)::Core.Const(0)
+└───       (i#388 = %23)
+5 ┄─ %25 = (i#388 &lt; n#387)::Bool
+└───       goto #7 if not %25
+6 ── %27 = Base.simd_index::Core.Const(Base.SimdLoop.simd_index)
+│    %28 = r#385::Base.OneTo{Int64}
+│    %29 = i#386::Core.Const(0)
+│          (i@_10 = (%27)(%28, %29, i#388))
+│          nothing
+│    %32 = out::Float64
+│    %33 = Base.getindex(x, i@_10)::Float64
+│    %34 = Core.apply_type(Base.Val, 2)::Core.Const(Val{2})
+│    %35 = (%34)()::Core.Const(Val{2}())
+│    %36 = Base.literal_pow(Main.:^, %33, %35)::Float64
+│    %37 = (%32 + %36)::Float64
+│          (out = %37)
+│          (val@_9 = %37)
+│          nothing
+│          val@_9
+│          (i#388 = i#388 + 1)
+│          $(Expr(:loopinfo, Symbol("julia.simdloop"), nothing))
+└───       goto #5
+7 ┄─       (@_4 = Base.iterate(%8, %15))
+│    %46 = (@_4::Core.Const(nothing) === nothing)::Core.Const(true)
+│    %47 = Base.not_int(%46)::Core.Const(false)
+└───       goto #9 if not %47
+8 ──       Core.Const(:(goto %13))
+9 ┄─       Main.nothing
+└───       goto #18
+10 ─ %52 = Main.eachindex(x)::Base.OneTo{Int64}
+│          (r#389 = %52)
+│    %54 = Base.simd_outer_range::Core.Const(Base.SimdLoop.simd_outer_range)
+│    %55 = (%54)(r#389)::Core.Const(0:0)
+│          (@_11 = Base.iterate(%55))
+│    %57 = (@_11::Core.Const((0, 0)) === nothing)::Core.Const(false)
+│    %58 = Base.not_int(%57)::Core.Const(true)
+└───       goto #17 if not %58
+11 ─ %60 = @_11::Core.Const((0, 0))
+│          (i#390 = Core.getfield(%60, 1))
+│    %62 = Core.getfield(%60, 2)::Core.Const(0)
+│    %63 = Base.simd_inner_length::Core.Const(Base.SimdLoop.simd_inner_length)
+│    %64 = r#389::Base.OneTo{Int64}
+│    %65 = (%63)(%64, i#390::Core.Const(0))::Int64
+│          (n#391 = %65)
+│    %67 = Main.zero(n#391)::Core.Const(0)
+│    %68 = (%67 &lt; n#391)::Bool
+└───       goto #15 if not %68
+12 ─ %70 = Main.zero(n#391)::Core.Const(0)
+└───       (i#392 = %70)
+13 ┄ %72 = (i#392 &lt; n#391)::Bool
+└───       goto #15 if not %72
+14 ─ %74 = Base.simd_index::Core.Const(Base.SimdLoop.simd_index)
+│    %75 = r#389::Base.OneTo{Int64}
+│    %76 = i#390::Core.Const(0)
+│          (i@_17 = (%74)(%75, %76, i#392))
+│          nothing
+│    %79 = out::Float64
+│    %80 = Base.getindex(x, i@_17)::Float64
+│    %81 = Core.apply_type(Base.Val, 2)::Core.Const(Val{2})
+│    %82 = (%81)()::Core.Const(Val{2}())
+│    %83 = Base.literal_pow(Main.:^, %80, %82)::Float64
+│    %84 = (%79 - %83)::Float64
+│          (out = %84)
+│          (val@_16 = %84)
+│          nothing
+│          val@_16
+│          (i#392 = i#392 + 1)
+│          $(Expr(:loopinfo, Symbol("julia.simdloop"), nothing))
+└───       goto #13
+15 ┄       (@_11 = Base.iterate(%55, %62))
+│    %93 = (@_11::Core.Const(nothing) === nothing)::Core.Const(true)
+│    %94 = Base.not_int(%93)::Core.Const(false)
+└───       goto #17 if not %94
+16 ─       Core.Const(:(goto %60))
+17 ┄       Main.nothing
+18 ┄       return out</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  79.072 ns (1 allocation: 16 bytes)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<pre><code>3.338335e8</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

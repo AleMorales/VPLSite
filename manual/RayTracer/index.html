@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.242">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2022-08-09">
+<meta name="dcterms.date" content="2023-03-22">
 
 <title>Virtual Plant Laboratory - Ray tracing distribution of irradiance</title>
 <style>
@@ -101,65 +101,42 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Julia basics</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">User Manual</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../julia_basics/index.html" class="sidebar-item-text sidebar-link">Julia basics for VPL</a>
+  <a href="../../manual/Introduction/index.html" class="sidebar-item-text sidebar-link">What is VPL?</a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">User Manual</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Graphs</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Julia/index.html" class="sidebar-item-text sidebar-link">Julia basic concepts</a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../manual/Graphs/index.html" class="sidebar-item-text sidebar-link">Dynamic graph creation and manipulation</a>
   </div>
 </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Visualization</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../manual/Visualization/index.html" class="sidebar-item-text sidebar-link">Backends for visualization</a>
+  <a href="../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
   </div>
 </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Ray tracing</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Geometry/Turtle/index.html" class="sidebar-item-text sidebar-link">Turtle graphics and scenes</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Visualization/index.html" class="sidebar-item-text sidebar-link">3D rendering</a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../manual/RayTracer/index.html" class="sidebar-item-text sidebar-link active">Ray tracing distribution of irradiance</a>
@@ -167,19 +144,22 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
-      </ul>
-  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Tutorials - Beginner</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Tutorials</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/algae/index.html" class="sidebar-item-text sidebar-link">Algae growth</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/context/index.html" class="sidebar-item-text sidebar-link">Context sensitive rules</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -189,39 +169,64 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/binary_tree/index.html" class="sidebar-item-text sidebar-link">Binary tree</a>
+  <a href="../../tutorials/tree/index.html" class="sidebar-item-text sidebar-link">Tree</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/random_binary_forest/index.html" class="sidebar-item-text sidebar-link">Forest of binary trees</a>
+  <a href="../../tutorials/forest/index.html" class="sidebar-item-text sidebar-link">Forest</a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Tutorials - Advanced</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/growth_forest/index.html" class="sidebar-item-text sidebar-link">Growth forest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link">Ray-traced forest of binary trees</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/photosynthesis_forest/index.html" class="sidebar-item-text sidebar-link">Photosynthesis-driven forest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/beyond_VPL/index.html" class="sidebar-item-text sidebar-link">Beyond VPL</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/turtle_message/index.html" class="sidebar-item-text sidebar-link">Turtle messages</a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/advanced_raytracing/index.html" class="sidebar-item-text sidebar-link">Advanced ray tracing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/meshes/index.html" class="sidebar-item-text sidebar-link">3D meshes</a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">API</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">API</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
@@ -237,56 +242,62 @@ ul.task-list li input[type="checkbox"] {
   <a href="../../api/Render.html" class="sidebar-item-text sidebar-link">Module Render</a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">Sky</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky solar radiation</a>
+  <a href="../../api/RayTracer.html" class="sidebar-item-text sidebar-link">Module RayTracing</a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">Ecophys</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Sky</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Ecophys/index.html" class="sidebar-item-text sidebar-link">Ecophysiological modules</a>
+  <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky.jl</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Sky/API.html" class="sidebar-item-text sidebar-link">Module Sky</a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">GCIM</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Ecophys</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../GCIM/index.html" class="sidebar-item-text sidebar-link">Generic crop interactions model</a>
+  <a href="../../Ecophys/index.html" class="sidebar-item-text sidebar-link">Ecophys.jl</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Ecophys/Photosynthesis.html" class="sidebar-item-text sidebar-link">Module Photosynthesis</a>
   </div>
 </li>
       </ul>
   </li>
     </ul>
     </div>
-</nav>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src="../..\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
+</figure>
+</div>
+</div></div></nav>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -298,20 +309,27 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    Alejandro Morales Sierra 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Centre for Crop Systems Analysis - Wageningen University
+          </p>
+      </div>
+    </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Alejandro Morales Sierra </p>
-          </div>
-  </div>
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 9, 2022</p>
+      <p class="date">March 22, 2023</p>
     </div>
   </div>
   
@@ -321,34 +339,53 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="some-dev-notes" class="level1">
-<h1>Some dev notes</h1>
-<section id="general-description" class="level2">
-<h2 class="anchored" data-anchor-id="general-description">General description</h2>
-<p>Monte Carlo Ray Tracer where rays are tracer from the sources towards the scene that is representd by triangular 3D meshes. The ray tracer has the following features:</p>
-<ol type="1">
-<li><p>A Russian roulette is used for scattering such that an unbiased estimate is obtained while using a finite number of scattering events per ray</p></li>
-<li><p>Different acceleration structures may be used (kd-trees, bounday volume hierarchies and no acceleration)</p></li>
-<li><p>Different optical materials may be chosen for each element in the scene (Lambertian, Phong, LambertianPhong, Black body, Sensor) which will stored the absorbed power across the different simulated wavelengths.</p></li>
-<li><p>A SideSwitcher on top of an optical material allows to keep a separate accounting fo rays that hit on either side of a surface (e.g., different sides of a leaf)</p></li>
-<li><p>Different types of sources of irradiance (differing in their geometry of emission) are available, including area, line, point sources, directional sources that cover the entire scene and the possibility to turn any 3D mesh into a radiance source.</p></li>
-<li><p>The payload of a ray may include multiple wavelengths and the optical properties may be vary per wavelength.</p></li>
-<li><p>The package Sky is provided to facilitate constructing collections of sources of radiance that approximate the angular distribution of sky radiance, including the different CIE standard sky models.</p></li>
-<li><p>The ray tracer can optionally make use of Julia’s multithreading capabilities to spread the computation across multiple cores within the same machine.</p></li>
-<li><p>The ray tracer will establish a direct connection to the user’s defined objects that contain the optical materials, such that the absorbed power can be accessed easily by the user from within graph queries and rules.</p></li>
-<li><p>A grid cloner is provided to minimize border effects with as little overhead as possible.</p></li>
-</ol>
+<section id="ray-tracing" class="level1">
+<h1>Ray tracing</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<!-- Finish the overview -->
+<p>Basics of ray tracing</p>
+<p>Russian roulette</p>
+<p>RTSettings()</p>
+<p>Raytracer()</p>
+<p>trace()!</p>
 </section>
-<section id="source-objects" class="level2">
-<h2 class="anchored" data-anchor-id="source-objects">Source objects</h2>
-<p>The source object contains the power of each ray. This is equivalent to the radiance emitted (measured at source or at some distance from it), times the area where the radiance is measured and divided by the number of rays emitted by the light source that cross that area of measurement. Hence, when we run the ray tracer we should get back the correct irradiance on the measurement area.</p>
-<p>In the case of directional light sources, the user should just use the <em>Sky</em> package which performs all necessary calculations for direct and diffuse solar radiation and generate the sources themselves.</p>
-<p>For other types of sources, the user should provided the total power emitted by the source, but helper functions will be provided to calculate this value from different types of measurements and source geometries.</p>
-<p>Sources are separate from the scene itself. This allows separating the construction of 3D mesh with optical properties from the different types of sources. The reasoning for this is as follows: (i) the 3D mesh may be built incrementally, especially when elements not include in the graphs are needed (typical examples are the soil surface or structural elements in the scene), (ii) different sources may be used for different simulations in the same scene (e.g., different times of the day, different solar wavelengths, thermal radiation)</p>
+<section id="radiation-sources" class="level2">
+<h2 class="anchored" data-anchor-id="radiation-sources">Radiation sources</h2>
+<!-- Finish the radiation sources section -->
+<p>Because of the way directional sources are implemented (i.e., as rays emitted from upper face of the scene bounding box), it is recommended that a grid cloner is used as otherwise there will parts of the scene that will recieve no rays.</p>
 </section>
-<section id="grid-cloner" class="level2">
-<h2 class="anchored" data-anchor-id="grid-cloner">Grid cloner</h2>
-<p>This should be implemented inside the <code>trace!()</code> function as that is where the new rays are generated. It should somehow make use of the gbox? Look for a previous implementation of the grid cloner approach.</p>
+<section id="materials" class="level2">
+<h2 class="anchored" data-anchor-id="materials">Materials</h2>
+<p>Several types of materials are available for ray tracing, which all inherit from the <code>Material</code> abstract type. The materials play two roles: (i) they define the optical properties of the surface (i.e., reflectance and transmittance) for the different wavelengths being simulated, and (ii) store the radiant power absorbed by the surface. If the radiant power of a surface is needed, it is important that the material object is stored in a data structure that the user can have access to (e.g., within a node in a graph) as the raytracer will simply modify in-place (without creating a copy) the material object when a ray is absorbed. The radiant power in a material can be retrieved by applying <code>power()</code> to the object.</p>
+<p>Materials are added to the scene at ther same time as the geometry either via <code>feed()</code> or <code>add!()</code>. It is possible to add one material per mesh (in which case all triangles within that mesh will share the same material object) or one material per triangle. In either case, VPL will take care of creating the corresponding association between the material and the triangles.</p>
+<p>VPL will not check that the number of wavelengths in the material matches the equivalent number in the radiation source or that the same ordering is used. This is entirely up to the user.</p>
+<p>The following material types are available in VPL:</p>
+<ul>
+<li><p><code>Black</code>: A material that absorbs all the rays that hit it (equivalent to no reflectance or transmittance). It is not a realistic material but it is useful for debugging purposes or for special uses of a ray tracer (e.g., to compute ground cover).</p></li>
+<li><p><code>Sensor</code>: A material that registers the rays that hit and their radian power but it does not alter the radiant power or the direction of the rays themselves. This is useful for measuring the distribution of irradiance within canopy without disturbing the system. Note that a <code>Sensor</code> will not add to the scattering counter either so there is no need to modify the settings of the Russian roulette.</p></li>
+<li><p><code>Lambertian</code>: A material that describes a perfect diffuser with user-defined reflectance and transmittance per wavelength.</p></li>
+<li><p><code>Phong</code>: A modified Phong material that implements the equations by <a href="https://www.cs.princeton.edu/courses/archive/fall03/cs526/papers/lafortune94.pdf">Lafortune &amp; Willems (1994)</a>. Reflectance is modelled as a combination of a diffuse and a specular component per wavelength.</p></li>
+</ul>
+</section>
+<section id="acceleration-of-ray-tracing" class="level2">
+<h2 class="anchored" data-anchor-id="acceleration-of-ray-tracing">Acceleration of ray tracing</h2>
+<p>In order to accelerate the tracing of rays within the 3D scene, a <a href="https://en.wikipedia.org/wiki/Bounding_interval_hierarchy">bounding volume hierarchy</a> may be used by setting <code>acceleration = BVH</code> in the call to <code>RayTracer()</code>. This will create a series of nested <a href="https://en.wikipedia.org/wiki/Bounding_volume">axis-aligned bounding boxes</a> organized as a binary tree. The purpose of this structure is to reduce the number of triangles that need to be tested against each ray (i.e., if a ray does not intersect a particular box, it will not intersect any of the triangles inside of it). This does add some additional cost due to the need to test the intersection of rays against the bounding boxes, but ideally this is much less than the cost of testing against all the excluded triangles.</p>
+<p>The tree is constructed by recursively splitting each box into two halves and allocating the different triangles in the mesh to the corresponding boxes. Two rules are available for splitting the boxes, which must also be specified in the call to <code>RayTracer()</code>:</p>
+<ul>
+<li><p><code>rule = AvgSplit(N, L)</code>: It splits each node along the longest axis at the average coordinate of the triangles in the node. The splitting is repeated until the number of triangles in a node is lessor equal than <code>N</code> or the total number of recursive splits (i.e., the depth of the binary tree) reaches <code>L</code>.</p></li>
+<li><p><code>rule = SAH{K}(N, L)</code>: It splits each node using the <a href="https://medium.com/@bromanz/how-to-create-awesome-accelerators-the-surface-area-heuristic-e14b5dec6160">Surface Area Heuristic</a> that defines the expected computation of ray tracing a splitted node versus not doing it. This method computes the cost of splitting each box along each of its three axes at different positions given by the value <code>K</code>. When <code>K = 1</code> the split occurs at the median of the triangles in the box. For <code>K &gt; 1</code> the splits occur at different quantiles of the triangles in the box. The splitting is repeated until the number of triangles in a node is lessor equal than <code>N</code> or the total number of recursive splits reaches <code>L</code> or the cost of splitting a node exceeds the cost of not splitting it.</p></li>
+</ul>
+<p>For debugging purposes (or for very small scenes), the user may also specify <code>acceleration = Naive</code> which will basically not implement any acceleration structured and all rays will be tested against all triangles.</p>
+<p>The acceleration structure is created from a <code>Scene</code> object via the <code>accelerate()</code> function, and allows specifying the <code>acceleration</code> and <code>rule</code> arguments. This will also be responsible of translating the triangular mesh into the data structure used by the ray tracer (triangles in <a href="https://en.wikipedia.org/wiki/Barycentric_coordinate_system">barycentric coordinates</a>) as well as fitting a grid cloner to the scene (see below).</p>
+</section>
+<section id="grid-cloner-for-edge-effects" class="level2">
+<h2 class="anchored" data-anchor-id="grid-cloner-for-edge-effects">Grid cloner for edge effects</h2>
+<p>The grid cloner is used to minimize border effects when tracing rays from the sources towards the scene. The grid cloner is a form of <a href="https://en.wikipedia.org/wiki/Geometry_instancing">geometric <em>instancing</em></a> where the same scene is repeated multiple times along the X, Y or Z direction. In practice, to avoid excessive memory usage, the scene is not actually replicated but rather the rays positions are modified to account to emulate the effect of the scene being repeated.</p>
+<p>In order a grid cloner structure on top of a scene, the user needs to specify the number of duplications to perform in each direction (<code>nx</code>, <code>ny</code> and <code>nz</code>) as well as the offsets between the different copies (<code>dx</code>, <code>dy</code> and <code>dz</code>). The grid cloner is created from a <code>Scene</code> object via the <code>accelerate()</code> function, but the settings to control the grid cloner must be set when creating the <code>RTSettings</code> object.</p>
+<p>By default, the grid cloner is enabled in the X and Y directions by replicating the scene three times in each direction (this means creating a grid of 7 x 7 = 49 copies of the scene including the original). The offsets between the copies are set by default to width of the scene in the X and Y directions such that there is no overlapping. The grid cloner is disabled in the Z direction by default.</p>
+<p>Note that whereas a grid cloner will not increase significantly the memory used by the ray tracer, it will increase ray tracing times as fewer rays will be able to leave the scene. On the other hand, a small (or no) grid cloner will create an edge effect such that only plants in the center of the scene will be able to capture the behaviour within a large canopy.</p>
+<p>The actual number of copies to use will depend on plant dimension and solar angles, so a general recommendation is not possible. Regarding the offsets, these would be related to the sowing/planting pattern in the case of plant production systems on a regular grid and in many case this would mean that the copies overlap (and this would be correct) so the defaults should be overriden in most cases. Using a grid cloner should not be substitute for using a sufficient number of plants in the scene in order to capture the plant-to-plant variability, but simply to avoid edge effects.</p>
 
 
 </section>

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.242">
+<meta name="generator" content="quarto-1.2.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-01-10">
+<meta name="dcterms.date" content="2023-03-22">
 
 <title>Virtual Plant Laboratory - Relational queries</title>
 <style>
@@ -170,64 +170,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Graphs</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Introduction/index.html" class="sidebar-item-text sidebar-link">What is VPL?</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Julia/index.html" class="sidebar-item-text sidebar-link">Julia basic concepts</a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../manual/Graphs/index.html" class="sidebar-item-text sidebar-link">Dynamic graph creation and manipulation</a>
   </div>
 </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Geometry</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
   </div>
 </li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Visualization</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../manual/Visualization/index.html" class="sidebar-item-text sidebar-link">Backends for visualization</a>
+  <a href="../../manual/Geometry/Turtle/index.html" class="sidebar-item-text sidebar-link">Turtle graphics and scenes</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/Visualization/index.html" class="sidebar-item-text sidebar-link">3D rendering</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../manual/RayTracer/index.html" class="sidebar-item-text sidebar-link">Ray tracing distribution of irradiance</a>
   </div>
 </li>
       </ul>
   </li>
-      </ul>
-  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Tutorials - Beginner</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Tutorials</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/algae/index.html" class="sidebar-item-text sidebar-link">Algae growth</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/context/index.html" class="sidebar-item-text sidebar-link">Context sensitive rules</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -237,44 +232,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/binary_tree/index.html" class="sidebar-item-text sidebar-link">Binary tree</a>
+  <a href="../../tutorials/tree/index.html" class="sidebar-item-text sidebar-link">Tree</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/random_binary_forest/index.html" class="sidebar-item-text sidebar-link">Forest of binary trees</a>
+  <a href="../../tutorials/forest/index.html" class="sidebar-item-text sidebar-link">Forest</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/raytraced_binary_forest/index.html" class="sidebar-item-text sidebar-link">Ray-traced forest of binary trees</a>
+  <a href="../../tutorials/growth_forest/index.html" class="sidebar-item-text sidebar-link">Growth forest</a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Tutorials - Advanced</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link">Ray-traced forest of binary trees</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/photosynthesis_forest/index.html" class="sidebar-item-text sidebar-link">Photosynthesis-driven forest</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/beyond_VPL/index.html" class="sidebar-item-text sidebar-link">Beyond VPL</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/turtle_message/index.html" class="sidebar-item-text sidebar-link">Turtle messages</a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link active">Relational queries</a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/advanced_raytracing/index.html" class="sidebar-item-text sidebar-link">Advanced ray tracing</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/meshes/index.html" class="sidebar-item-text sidebar-link">3D meshes</a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">API</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">API</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../api/Core.html" class="sidebar-item-text sidebar-link">Module Core</a>
@@ -299,12 +314,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">Sky</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Sky</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Sky/index.html" class="sidebar-item-text sidebar-link">Sky.jl</a>
@@ -319,12 +334,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">Ecophys</a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Ecophys</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Ecophys/index.html" class="sidebar-item-text sidebar-link">Ecophys.jl</a>
@@ -359,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="quarto-title-meta-author">
   <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading"></div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
     Alejandro Morales Sierra 
@@ -377,7 +392,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 10, 2023</p>
+      <p class="date">March 22, 2023</p>
     </div>
   </div>
   
@@ -390,7 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this example we illustrate how to test relationships among nodes inside queries. Relational queries allow to establish relationships between nodes in the graph, which generally requires a intimiate knowledge of the graph. For this reason, relational queries are inheretly complex as graphs can become complex and there may be solutions that do not require relational queries in many instances. Nevertheless, they are integral part of VPL and can sometimes be useful. As they can be hard to grasp, this tutorial will illustrate with a relatively simple graph a series of relational queries with increasing complexity with the aim that users will get a better understanding of relational queries. For this purpose, an abstract graph with several branching levels will be used, so that we can focus on the relations among the nodes without being distracted by case-specific details.</p>
 <p>The graph will be composed of two types of nodes: the inner nodes (<code>A</code> and <code>C</code>) and the leaf nodes (<code>B</code>). Each leaf node will be identified uniquely with an index and the objective is to write queries that can identify a specific subset of the leaf nodes, without using the data stored in the nodes themselves. That is, the queries should select the right nodes based on their relationships to the rest of nodes in the graph. Note that <code>C</code> nodes contain a single value that may be positive or negative, whereas <code>A</code> nodes contain no data.</p>
 <p>As usual, we start with defining the types of nodes in the graph</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">VPL</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> Queries</span>
@@ -408,7 +423,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">.Queries </span>as Q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We generate the graph directly, rather than with rewriting rules. The graph has a motif that is repeated three times (with a small variation), so we can create the graph in a piecewise manner. Note how we can use the function <code>sum</code> to add nodes to the graph (i.e.&nbsp;<code>sum(A() for i in 1:3)</code> is equivalent to <code>A() + A() + A()</code>)</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">motif</span>(n, i <span class="op">=</span> <span class="fl">0</span>) <span class="op">=</span> Q.<span class="fu">A</span>() <span class="op">+</span> (Q.<span class="fu">C</span>(<span class="fl">45.0</span>) <span class="op">+</span> Q.<span class="fu">A</span>() <span class="op">+</span> (Q.<span class="fu">C</span>(<span class="fl">45.0</span>) <span class="op">+</span>  Q.<span class="fu">A</span>() <span class="op">+</span> Q.<span class="fu">B</span>(i <span class="op">+</span> <span class="fl">1</span>), </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                                           Q.<span class="fu">C</span>(<span class="op">-</span><span class="fl">45.0</span>) <span class="op">+</span> Q.<span class="fu">A</span>() <span class="op">+</span> Q.<span class="fu">B</span>(i <span class="op">+</span> <span class="fl">2</span>), </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                                       Q.<span class="fu">A</span>() <span class="op">+</span> Q.<span class="fu">B</span>(i <span class="op">+</span> <span class="fl">3</span>)), </span>
@@ -421,7 +436,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>By default, VPL will use as node label the type of node and the internal ID generated by VPL itself. This ID is useful if we want to extract a particular node from the graph, but it is not controlled by the user. However, the user can specialized the function <code>node_label()</code> to specify exactly how to label the nodes of a particular type. In this case, we want to just print <code>A</code> or <code>C</code> for nodes of type <code>A</code> and <code>C</code>, whereas for nodes of type <code>B</code> we want to use the <code>ID</code> field that was stored inside the node during the graph generation.</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>VPL.<span class="fu">node_label</span>(n<span class="op">::</span><span class="dt">Q.B</span>, id) <span class="op">=</span> <span class="st">"B-</span><span class="sc">$</span>(n.ID)<span class="st">"</span></span>
@@ -434,18 +449,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>To clarify, the <code>id</code> argument of the function <code>node_label()</code> refers to the internal id generated by VPL (used by the default method for <code>node_label()</code>, whereas the the first argument is the data stored inside a node (in the case of <code>B</code> nodes, there is a field called <code>ID</code> that will not be modified by VPL as that is user-provided data).</p>
-<p>The goal of this exercise is then to write queries that retrieve specific <code>B</code> nodes (without using the data stored in the node in the query, that is, we have to identify nodes based on their topological connections to other nodes).</p>
+<p>The goal of this exercise is then to write queries that retrieve specific <code>B</code> nodes without using the data stored in the node in the query. That is, we have to identify nodes based on their relationships to other nodes.</p>
 <section id="all-nodes-of-type-b" class="level2">
 <h2 class="anchored" data-anchor-id="all-nodes-of-type-b">All nodes of type <code>B</code></h2>
 <p>First, we create the query object. In this case, there is no special condition as we want to retrieve all the nodes of type <code>B</code></p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Q1 <span class="op">=</span> <span class="fu">Query</span>(Q.B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>Query object for nodes of type Main.Queries.B</code></pre>
 </div>
 </div>
 <p>Applying the query to the graph returns an array with all the <code>B</code> nodes</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>A1 <span class="op">=</span> <span class="fu">apply</span>(graph, Q1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>13-element Vector{Main.Queries.B}:
@@ -470,7 +485,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="node-containing-value-13">Node containing value 13</h2>
 <p>Since the <code>B</code> node 13 is the leaf node of the main branch of the graph (e.g.&nbsp;this could be the apical meristem of the main stem of a plant), there are no rotations between the root node of the graph and this node. Therefore, the only condition require to single out this node is that it has no ancestor node of type <code>C</code>.</p>
 <p>Checking whether a node has an ancestor that meets a certain condition can be achieved with the function <code>hasAncestor()</code>. Similarly to the condition of the <code>Query</code> object, the <code>hasAncestor()</code> function also has a condition, in this case applied to the parent node of the node being tested, and moving upwards in the graph recursively (until reaching the root node). Note that, in order to access the object stored inside the node, we need to use the <code>data()</code> function, and then we can test if that object is of type <code>C</code>. The <code>B</code> node 13 is the only node for which <code>hasAncestor()</code> should return <code>false</code>:</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q2_fun</span>(n)</span>
@@ -483,7 +498,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>As before, we just need to apply the <code>Query</code> object to the graph:</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Q2 <span class="op">=</span> <span class="fu">Query</span>(Q.B, condition <span class="op">=</span> Q2_fun)</span>
@@ -498,12 +513,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="nodes-containing-values-1-2-and-3" class="level2">
 <h2 class="anchored" data-anchor-id="nodes-containing-values-1-2-and-3">Nodes containing values 1, 2 and 3</h2>
 <p>These three nodes belong to one of the branch motifs repeated through the graph. Thus, we need to identify the specific motif they belong to and chose all the <code>B</code> nodes inside that motif. The motif is defined by an <code>A</code> node that has a <code>C</code> child with a negative <code>val</code> and parent node <code>C</code> with positive <code>val</code>. This <code>A</code> node should then be 2 nodes away from the root node to separate it from upper repetitions of the motif. Therefore, we need to test for two conditions, first find those nodes inside a branch motif, then retrieve the root of the branch motif (i.e., the <code>A</code> node described in the above) and then check the distance of that node from the root:</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">branch_motif</span>(p)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data</span>(p) isa Q.A <span class="op">&amp;&amp;</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hasDescendent</span>(p, condition <span class="op">=</span> x <span class="op">-&gt;</span> <span class="fu">data</span>(x) isa Q.C <span class="op">&amp;&amp;</span> <span class="fu">data</span>(x).val <span class="op">&lt;</span> <span class="fl">0.0</span>) <span class="op">&amp;&amp;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hasDescendent</span>(p, condition <span class="op">=</span> x <span class="op">-&gt;</span> <span class="fu">data</span>(x) isa Q.C <span class="op">&amp;&amp;</span> <span class="fu">data</span>(x).val <span class="op">&lt;</span> <span class="fl">0.0</span>)[<span class="fl">1</span>] <span class="op">&amp;&amp;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hasAncestor</span>(p, condition <span class="op">=</span> x <span class="op">-&gt;</span> <span class="fu">data</span>(x) isa Q.C <span class="op">&amp;&amp;</span> <span class="fu">data</span>(x).val <span class="op">&gt;</span> <span class="fl">0.0</span>)[<span class="fl">1</span>]</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -523,7 +538,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>And applying the query to the object results in the required nodes:</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Q3 <span class="op">=</span> <span class="fu">Query</span>(Q.B, condition <span class="op">=</span> n <span class="op">-&gt;</span> <span class="fu">Q3_fun</span>(n, <span class="fl">2</span>))</span>
@@ -540,7 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="node-containing-value-4" class="level2">
 <h2 class="anchored" data-anchor-id="node-containing-value-4">Node containing value 4</h2>
 <p>The node <code>B</code> with value 4 can be singled-out because there is no branching point between the root node and this node. This means that no ancestor node should have more than one children node except the root node. Remember that <code>hasAncestor()</code> returns two values, but we are only interested in the first value. You do not need to assign the returned object from a Julia function, you can just index directly the element to be selected from the returned tuple:</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q4_fun</span>(n)</span>
@@ -552,7 +567,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>And applying the query to the object results in the required node:</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Q4 <span class="op">=</span> <span class="fu">Query</span>(Q.B, condition <span class="op">=</span> Q4_fun)</span>
@@ -567,7 +582,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="node-containing-value-3" class="level2">
 <h2 class="anchored" data-anchor-id="node-containing-value-3">Node containing value 3</h2>
 <p>This node is the only <code>B</code> node that is four steps from the root node, which we can retrieve from the second argument returned by <code>hasAncestor()</code>:</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="12">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q5_fun</span>(n)</span>
@@ -587,7 +602,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="node-containing-value-7" class="level2">
 <h2 class="anchored" data-anchor-id="node-containing-value-7">Node containing value 7</h2>
 <p>Node <code>B</code> 7 belongs to the second lateral branch motif and the second parent node is of type <code>A</code>. Note that we can reuse the <code>Q3_fun</code> from before in the condition required for this node:</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="13">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q6_fun</span>(n, nA)</span>
@@ -609,7 +624,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="nodes-containing-values-11-and-13" class="level2">
 <h2 class="anchored" data-anchor-id="nodes-containing-values-11-and-13">Nodes containing values 11 and 13</h2>
 <p>The <code>B</code> nodes 11 and 13 actually have different relationships to the rest of the graph, so we just need to define two different condition functions and combine them. The condition for the <code>B</code> node 11 is similar to the <code>B</code> node 7, whereas the condition for node 13 was already constructed before, so we just need to combined them with an OR operator:</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Q7 <span class="op">=</span> <span class="fu">Query</span>(Q.B, condition <span class="op">=</span> n <span class="op">-&gt;</span> <span class="fu">Q6_fun</span>(n, <span class="fl">4</span>) <span class="op">||</span> <span class="fu">Q2_fun</span>(n))</span>
@@ -625,7 +640,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="nodes-containing-values-1-5-and-9" class="level2">
 <h2 class="anchored" data-anchor-id="nodes-containing-values-1-5-and-9">Nodes containing values 1, 5 and 9</h2>
 <p>These nodes play the same role in the three lateral branch motifs. They are the only <code>B</code> nodes preceded by the sequence A C+ A. We just need to check the sequence og types of objects for the the first three parents of each <code>B</code> node:</p>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="15">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q8_fun</span>(n)</span>
@@ -649,7 +664,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="nodes-contaning-values-2-6-and-10" class="level2">
 <h2 class="anchored" data-anchor-id="nodes-contaning-values-2-6-and-10">Nodes contaning values 2, 6 and 10</h2>
 <p>This exercise is similar to the previous one, but the C node has a negative <code>val</code>. The problem is that node 12 would also match the pattern A C- A. We can differentiate between this node and the rest by checking for a fourth ancestor node of class <code>C</code>:</p>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="16">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q9_fun</span>(n)</span>
@@ -676,7 +691,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="nodes-containg-values-6-7-and-8">Nodes containg values 6, 7 and 8</h2>
 <p>We already came up with a condition to extract node 7. We can also modify the previous condition so that it only node 6. Node 8 can be identified by checking for the third parent node being of type <code>C</code> and being 5 nodes from the root of the graph.</p>
 <p>As always, we can reusing previous conditions since they are just regular Julia functions:</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="17">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q10_fun</span>(n)</span>
@@ -699,7 +714,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="nodes-containig-values-3-7-11-and-12" class="level2">
 <h2 class="anchored" data-anchor-id="nodes-containig-values-3-7-11-and-12">Nodes containig values 3, 7, 11 and 12</h2>
 <p>We already have conditions to select nodes 3, 7 and 11 so we just need a new condition for node 12 (similar to the condition for 8).</p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="18">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q11_fun</span>(n)</span>
@@ -725,7 +740,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="nodes-containing-values-7-and-12" class="level2">
 <h2 class="anchored" data-anchor-id="nodes-containing-values-7-and-12">Nodes containing values 7 and 12</h2>
 <p>We just need to combine the conditions for the nodes 7 and 12</p>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="19">
 <details>
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">Q12_fun</span>(n)</span>
