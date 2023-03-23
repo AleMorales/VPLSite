@@ -1,0 +1,30 @@
+---
+title: "Turtle graphics and scenes"
+author: 
+    - name: "Alejandro Morales Sierra"
+      affiliation: "Centre for Crop Systems Analysis - Wageningen University"
+date: last-modified
+execute: 
+    enabled: false
+---
+
+# Turtle graphics
+
+General concepts
+
+Movement operators
+
+Meshes, include I/O
+
+# Scenes
+
+feed!()
+
+Primitive constructors
+
+Merging multiple scenes
+
+Parallel construction of scenes
+
+Manually adding elements to an existing scene
+

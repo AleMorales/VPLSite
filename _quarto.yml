@@ -15,28 +15,28 @@ website:
     contents:
       - section: "User Manual"
         contents:
-          - section: "Graphs"
-            contents:
-              - manual/Graphs/index.qmd
-          - section: "Geometry"
-            contents:
-              - manual/Geometry/Primitives/index.qmd
-          - section: "Visualization"
-            contents:
-              - manual/Visualization/index.qmd
-          - section: "Ray tracing"
-            contents:
-              - manual/RayTracer/index.qmd
-      - section: "Tutorials - Beginner"
+          - manual/Introduction/index.qmd
+          - manual/Julia/index.qmd
+          - manual/Graphs/index.qmd
+          - manual/Geometry/Primitives/index.qmd
+          - manual/Geometry/Turtle/index.qmd
+          - manual/Visualization/index.qmd
+          - manual/RayTracer/index.qmd
+      - section: "Tutorials"
         contents:
-          - tutorials/algae/index.qmd
-          - tutorials/snowflakes/index.qmd
-          - tutorials/binary_tree/index.qmd
-          - tutorials/random_binary_forest/index.qmd
-          - tutorials/raytraced_binary_forest/index.qmd
-      - section: "Tutorials - Advanced"
-        contents:
-          - tutorials/relational_queries/index.qmd
+            - tutorials/algae/index.qmd
+            - tutorials/context/index.qmd
+            - tutorials/snowflakes/index.qmd
+            - tutorials/tree/index.qmd
+            - tutorials/forest/index.qmd
+            - tutorials/growth_forest/index.qmd
+            - tutorials/raytraced_forest/index.qmd
+            - tutorials/photosynthesis_forest/index.qmd
+            - tutorials/beyond_VPL/index.qmd
+            - tutorials/turtle_message/index.qmd
+            - tutorials/relational_queries/index.qmd
+            - tutorials/advanced_raytracing/index.qmd
+            - tutorials/meshes/index.qmd
       - section: "API"
         contents:
           - api/Core.md

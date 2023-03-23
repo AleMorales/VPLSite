@@ -58,7 +58,7 @@ function Kochsnowflake(x)
 The model is then created by constructing the graph
 
 ```{julia}
-Koch = Graph(axiom = axiom, rules = Tuple(rule))
+Koch = Graph(axiom = axiom, rules = rule)
 ```
 
 In order to be able to generate a 3D structure we need to define a method for the function `VPL.feed!` (notice the need to prefix it with `VPL.` as we are going to define a method for this function). The method needs to two take two arguments, the first one is always an object of type Turtle and the second is an object of the type for which the method is defined (in this case, E).
@@ -110,7 +110,7 @@ function Kochsnowflake2(x)
    sn.E(L/3) + RU(60.0) + sn.E(L/3) + RU(-120.0) + sn.E(L/3) + RU(60.0) + sn.E(L/3)
 end
 rule2 = Rule(sn.E, rhs = Kochsnowflake2)
-Koch2 = Graph(axiom = axiom, rules = Tuple(rule2))
+Koch2 = Graph(axiom = axiom, rules = rule2)
 ```
 
 The axiom is the same, but now the edges added by the rule will generate the edges towards the inside of the initial triangle. Let's execute the first three iterations and render the results
@@ -131,7 +131,7 @@ This is know as [Koch antisnowflake](https://mathworld.wolfram.com/KochAntisnowf
 
 ```{julia}
 axiomCesaro = sn.E(L) + RU(90.0) + sn.E(L) + RU(90.0) + sn.E(L) + RU(90.0) + sn.E(L)
-Cesaro = Graph(axiom = axiomCesaro, rules = (rule2,))
+Cesaro = Graph(axiom = axiomCesaro, rules = rule2)
 render(Cesaro, axes = false)
 ```
 

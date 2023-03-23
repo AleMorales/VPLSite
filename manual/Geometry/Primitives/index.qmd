@@ -1,19 +1,34 @@
 ---
 title: "Geometry primitives"
-author: "Alejandro Morales Sierra"
+author: 
+    - name: "Alejandro Morales Sierra"
+      affiliation: "Centre for Crop Systems Analysis - Wageningen University"
 date: last-modified
-execute: 
-  cache: true
 ---
 
 ```{julia}
 using VPL
 ```
 
-List of primitives with example of code for direct construction. See API for
-turtle constructors (the keyword arguments remain the same).
+VPL offers several functions to created 3D meshes that correspond to common 
+geometric shapes (i.e., primitives). They are meant to represent simple geometry
+elements or to build more complex geometries through the use of turtle-based
+procedural geometry. For that reason, there are two versions of each primitive
+constructor: one that constructs the mesh directly (with a standard location
+and orientation) and one that *feeds* the mesh to a turtle. The former is meant
+to be used when manually adding geometries to am existing scene (e.g., soil, 
+structural elements) whereas the latter is mean to be used within the `feed`
+methods associated to nodes in a graph. Additional functions are able to 
+translate and rotate these meshes to the desired location and orientation (see
+API of the Geometry module for details).
 
-The 3D visualizations keep the axes to help understand what the standard location
+Below, the functions for direct construction of the meshes are listed. The
+turtle-based constructor have the same argument plus the turtle arugment itself 
+as well as optional arguments for color and optical materias (see API of the 
+Geometry module for more details).
+
+Each primitive is visualized using the `render` function form VPL. These 3D 
+visualizations keep the axes to help understand what the standard location
 and orientation are (use `axes = false` to turn off). They also set `normals = true` 
 and `wireframe = true` to highlight how the mesh is partitioned into triangles 
 and the normal vectors of each triangle (this is important for the ray tracer and 
