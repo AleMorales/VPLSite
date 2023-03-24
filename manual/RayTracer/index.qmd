@@ -1,5 +1,5 @@
 ---
-title: "Ray tracing distribution of irradiance"
+title: "Ray tracing"
 author: 
     - name: "Alejandro Morales Sierra"
       affiliation: "Centre for Crop Systems Analysis - Wageningen University"
@@ -8,30 +8,120 @@ execute:
     enabled: false
 ---
 
-# Ray tracing
-
 ## Overview
 
-<!-- Finish the overview -->
+VPL offers a built-in ray tracer that can be used to simulate the distribution
+of irradiance within a 3D scene. It is a Monte Carloy ray tracer written 100% 
+in Julia with the following features:
+    
+ - Multiple wavelengths.     
+ - Most common types of materials and radiation sources are provided, but 
+additional ones can be added by the user.  
+ - Support for multi-threaded execution.   
+ - An Bounding Volume Hierarchy to speed up the computation.  
+ - A grid cloner that duplicates (implicitly) the scene in a grid to
+approximate large canopies.   
+ - A Russian roulette mechanism to reduce the number of iterations per ray
+needed while avoiding introducing biases in the computations.  
 
-Basics of ray tracing
+## How ray tracing works
 
-Russian roulette
+Rays are generated from the radiation soures. A ray is defined by an origin, a
+direction and a ray *payload* that contains the radiant power per wavelength 
+(this would usually be W or umol/s, but the ray tracer is agnostic with respect 
+to units). Ray tracing is a recursive process in which a ray is traced through 
+the scene (by testing whether the ray intersects different parts of the scenes
+and triangles in it) until it either hits a triangle in a mesh or leaves the 
+scene through its boundaries.
 
-RTSettings()
+When a ray hits a triangle inside a mesh, the ray is
+modified according to the `Material` object associated to that triangle (see 
+below). In most cases this would result in a new ray being generated (either
+as reflected or transmitted radiation) which is then traced. Also, in 
+most cases, a fraction of the radiant power carried by the ray will be transferred
+to the `Material` object.
 
-Raytracer()
+The recursive nature of the ray tracer allows simulating scattering within the
+scene and, if multiple wavelengths are used and optical properties vary per
+wavelength, also changes in the spectral composition of the radiation (e.g., 
+red/far red). As the rays are scattered, their radiant power decreases such that
+at some point it is not worth tracing them any further. The user can control the
+maximum number of iterations per ray after which termination may be considered
+(this is `maxiter` in [`RTSettings()`](../../api/RayTracer.md#VPL.RayTracing.Source)). 
 
-trace()!
+If `maxiter = 1`, the ray tracer will effectively behave as a *ray caster*, 
+meaning than only primary rays are traced (e.g., for a field crop, this means
+that only direct and diffuse radiation will be simulated, not the scattered 
+component).
+
+Once `maxiter` is reached though, the ray is not guaranteed to be terminated.
+The reason is that terminating all rays will introduce a bias in the results
+(i.e., total radiation in the scene will be underestimated), especially when a 
+large number of raus is simulated. To avoid this, VPL implements a Russian roulette
+mechanism that will terminate a ray with a probability (`pkill`) and increase the
+payload of the rays that survive. This introduces variance
+
+The ray tracer supports the construction of a bounding volume hierarchy (BVH) 
+that can be used to speed up the computations (by minimizing the number of ray
+triangle intersections), especially for scenes with a  large number of triangles. 
+The BVH is constructed automatically (see below) but the user can specific some 
+settings to control its construction. It is also possible to turn off this
+structure altogether, in which case all rays will be tested against all triangles.
+
+In order to simulate large canopies, VPL implements a grid cloner that will 
+duplicated (with minimum memory and computational overhead) the scene in a grid
+along the different axes. This is particularly useful for reducing edge effects
+without having to simulate a large number of plants (see below for details).
+
+## Usage
+
+To use ray tracing the user will need to define a `Scene` object 
+(see [documentation](../Turtle)) and the radiation sources (see below) which
+are then combined with `RayTracer()`. This results in a `Raytracer` object
+that contains all the necessary information to perform the ray tracing. To
+actually execute the ray tracing the user will need to call `trace!()` on this
+object. 
+
+Executing the ray tracer will return the total number of rays that were tracer 
+(including secondary rays) but the most important change is that radiant power 
+stored in the `Material` objects in the scene will be updated automatically. 
+This means that the user will need to store the `Material` objects in a data
+structure that is accesible (e.g., within a node in a graph).
+
+Most of the settings for the ray tracer are defined in the `RTSettings` object
+which is passed to `RayTracer()` when creating the ray tracer. These settings
+include `maxiter` and `pkill` for the Russian roulette, the settings for the 
+grid cloner and whether the tracing should be run in parallel or not.
 
 ## Radiation sources
 
-<!-- Finish the radiation sources section -->
+VPL define radiation sources as a combination of of a *geometry* component and
+an *angle* component. The geometry component determines where are the rays being
+generated, whereas the angle component determines the direction of the rays. Each
+radiation source is thus constructed by specifying the geometry and the angle, plus
+the number of rays and radiant power per wavelength to be stored in the ray. See
+documentation on [`Source`](../../api/RayTracer.md#VPL.RayTracing.Source) for more details.
 
+The followig geometry components are available in VPL:
 
-Because of the way directional sources are implemented (i.e., as rays emitted 
-from upper face of the scene bounding box), it is recommended that a grid cloner
-is used as otherwise there will parts of the scene that will recieve no rays.
+   - `PointSource`: All rays are generated from a single point in space.  
+   - `LineSource`: All rays are generated from a line in space.  
+   - `AreaSource`: All rays are generated from the surface of a user-defined mesh.  
+
+The following angle components are available in VPL:
+
+   - `FixedSource`: All rays have the same direction.  
+   - `LambertianSource`: The direction of the rays follows Lambert's cosine law.
+This means that the irradiance is the same when viewed from any angle.  
+
+A special type of radiation source is the `DirectionalSource` which is used to
+simulate solar radiation. Rays from this source are generated from the upper face
+of the scene bounding box and their direction is defined in polar coordinates 
+(i.e., by a zenith and azimuth angle). Because of the way directional sources 
+are implemented it is recommended that a grid cloner is used (this is the 
+default) as otherwise there will parts of the scene that will recieve no rays.
+See documentation on [`DirectionalSource`](../../api/RayTracer.md#VPL.RayTracing.DirectionalSource) 
+for more details.
 
 ## Materials
 
@@ -124,7 +214,7 @@ The grid cloner is used to minimize border effects when tracing rays from the
 sources towards the scene. The grid cloner is a form of [geometric *instancing*](https://en.wikipedia.org/wiki/Geometry_instancing)
 where the same scene is repeated multiple times along the X, Y or Z direction. In
 practice, to avoid excessive memory usage, the scene is not actually replicated
-but rather the rays positions are modified to account to emulate the effect of
+but rather the rays positions are modified to emulate the effect of
 the scene being repeated.
 
 In order a grid cloner structure on top of a scene, the user needs to specify

@@ -178,11 +178,11 @@ VPL addresses four main components in FSPM:
 
 ## Short term
 
-- Add more tutorials and examples of models
-    - Refacor/add features to VPL
-    - Further develop Ecophys.jl
-- Technical documentation for developers and setup VPL for collaboration 
+- Finish tutorials
+- Develop reference models and extend Ecophys.jl and Sky.jl    
+- Technical documentation for developers
 - Move rendering and raytracing to separate packages in the VPLverse
+- Prepare package for collaboration and register it
 
 ## Long term
 
@@ -190,4 +190,4 @@ VPL addresses four main components in FSPM:
 - Interface with environment (soil and atmosphere)  
     - Mapping 3D geometry to a 3D grid  
     - Support PDE models for environment  
-- Hybrid models (e.g. FSPM + MAESPA-like models)  
+- Hybrid models (e.g. FSPM + MAESPA-like models, Raycaster + radiative transfer)  

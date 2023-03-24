@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-03-22">
+<meta name="dcterms.date" content="2023-03-24">
 
-<title>Virtual Plant Laboratory - Ray tracing distribution of irradiance</title>
+<title>Virtual Plant Laboratory - Ray tracing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -73,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Ray tracing distribution of irradiance</h1>
+      <h1 class="quarto-secondary-nav-title">Ray tracing</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -124,12 +124,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
+  <a href="../../manual/Geometry/Turtle/index.html" class="sidebar-item-text sidebar-link">Turtle geometry and scenes</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../manual/Geometry/Turtle/index.html" class="sidebar-item-text sidebar-link">Turtle graphics and scenes</a>
+  <a href="../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -139,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../manual/RayTracer/index.html" class="sidebar-item-text sidebar-link active">Ray tracing distribution of irradiance</a>
+  <a href="../../manual/RayTracer/index.html" class="sidebar-item-text sidebar-link active">Ray tracing</a>
   </div>
 </li>
       </ul>
@@ -159,12 +159,17 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../tutorials/context/index.html" class="sidebar-item-text sidebar-link">Context sensitive rules</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  <a href="../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -200,11 +205,6 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../tutorials/turtle_message/index.html" class="sidebar-item-text sidebar-link">Turtle messages</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -305,7 +305,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Ray tracing distribution of irradiance</h1>
+<h1 class="title d-none d-lg-block">Ray tracing</h1>
 </div>
 
 
@@ -329,7 +329,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 22, 2023</p>
+      <p class="date">March 24, 2023</p>
     </div>
   </div>
   
@@ -339,21 +339,57 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="ray-tracing" class="level1">
-<h1>Ray tracing</h1>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<!-- Finish the overview -->
-<p>Basics of ray tracing</p>
-<p>Russian roulette</p>
-<p>RTSettings()</p>
-<p>Raytracer()</p>
-<p>trace()!</p>
+<p>VPL offers a built-in ray tracer that can be used to simulate the distribution of irradiance within a 3D scene. It is a Monte Carloy ray tracer written 100% in Julia with the following features:</p>
+<ul>
+<li>Multiple wavelengths.<br>
+</li>
+<li>Most common types of materials and radiation sources are provided, but additional ones can be added by the user.<br>
+</li>
+<li>Support for multi-threaded execution.<br>
+</li>
+<li>An Bounding Volume Hierarchy to speed up the computation.<br>
+</li>
+<li>A grid cloner that duplicates (implicitly) the scene in a grid to approximate large canopies.<br>
+</li>
+<li>A Russian roulette mechanism to reduce the number of iterations per ray needed while avoiding introducing biases in the computations.</li>
+</ul>
+</section>
+<section id="how-ray-tracing-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-ray-tracing-works">How ray tracing works</h2>
+<p>Rays are generated from the radiation soures. A ray is defined by an origin, a direction and a ray <em>payload</em> that contains the radiant power per wavelength (this would usually be W or umol/s, but the ray tracer is agnostic with respect to units). Ray tracing is a recursive process in which a ray is traced through the scene (by testing whether the ray intersects different parts of the scenes and triangles in it) until it either hits a triangle in a mesh or leaves the scene through its boundaries.</p>
+<p>When a ray hits a triangle inside a mesh, the ray is modified according to the <code>Material</code> object associated to that triangle (see below). In most cases this would result in a new ray being generated (either as reflected or transmitted radiation) which is then traced. Also, in most cases, a fraction of the radiant power carried by the ray will be transferred to the <code>Material</code> object.</p>
+<p>The recursive nature of the ray tracer allows simulating scattering within the scene and, if multiple wavelengths are used and optical properties vary per wavelength, also changes in the spectral composition of the radiation (e.g., red/far red). As the rays are scattered, their radiant power decreases such that at some point it is not worth tracing them any further. The user can control the maximum number of iterations per ray after which termination may be considered (this is <code>maxiter</code> in <a href="../../api/RayTracer.html#VPL.RayTracing.Source"><code>RTSettings()</code></a>).</p>
+<p>If <code>maxiter = 1</code>, the ray tracer will effectively behave as a <em>ray caster</em>, meaning than only primary rays are traced (e.g., for a field crop, this means that only direct and diffuse radiation will be simulated, not the scattered component).</p>
+<p>Once <code>maxiter</code> is reached though, the ray is not guaranteed to be terminated. The reason is that terminating all rays will introduce a bias in the results (i.e., total radiation in the scene will be underestimated), especially when a large number of raus is simulated. To avoid this, VPL implements a Russian roulette mechanism that will terminate a ray with a probability (<code>pkill</code>) and increase the payload of the rays that survive. This introduces variance</p>
+<p>The ray tracer supports the construction of a bounding volume hierarchy (BVH) that can be used to speed up the computations (by minimizing the number of ray triangle intersections), especially for scenes with a large number of triangles. The BVH is constructed automatically (see below) but the user can specific some settings to control its construction. It is also possible to turn off this structure altogether, in which case all rays will be tested against all triangles.</p>
+<p>In order to simulate large canopies, VPL implements a grid cloner that will duplicated (with minimum memory and computational overhead) the scene in a grid along the different axes. This is particularly useful for reducing edge effects without having to simulate a large number of plants (see below for details).</p>
+</section>
+<section id="usage" class="level2">
+<h2 class="anchored" data-anchor-id="usage">Usage</h2>
+<p>To use ray tracing the user will need to define a <code>Scene</code> object (see <a href="../Turtle">documentation</a>) and the radiation sources (see below) which are then combined with <code>RayTracer()</code>. This results in a <code>Raytracer</code> object that contains all the necessary information to perform the ray tracing. To actually execute the ray tracing the user will need to call <code>trace!()</code> on this object.</p>
+<p>Executing the ray tracer will return the total number of rays that were tracer (including secondary rays) but the most important change is that radiant power stored in the <code>Material</code> objects in the scene will be updated automatically. This means that the user will need to store the <code>Material</code> objects in a data structure that is accesible (e.g., within a node in a graph).</p>
+<p>Most of the settings for the ray tracer are defined in the <code>RTSettings</code> object which is passed to <code>RayTracer()</code> when creating the ray tracer. These settings include <code>maxiter</code> and <code>pkill</code> for the Russian roulette, the settings for the grid cloner and whether the tracing should be run in parallel or not.</p>
 </section>
 <section id="radiation-sources" class="level2">
 <h2 class="anchored" data-anchor-id="radiation-sources">Radiation sources</h2>
-<!-- Finish the radiation sources section -->
-<p>Because of the way directional sources are implemented (i.e., as rays emitted from upper face of the scene bounding box), it is recommended that a grid cloner is used as otherwise there will parts of the scene that will recieve no rays.</p>
+<p>VPL define radiation sources as a combination of of a <em>geometry</em> component and an <em>angle</em> component. The geometry component determines where are the rays being generated, whereas the angle component determines the direction of the rays. Each radiation source is thus constructed by specifying the geometry and the angle, plus the number of rays and radiant power per wavelength to be stored in the ray. See documentation on <a href="../../api/RayTracer.html#VPL.RayTracing.Source"><code>Source</code></a> for more details.</p>
+<p>The followig geometry components are available in VPL:</p>
+<ul>
+<li><code>PointSource</code>: All rays are generated from a single point in space.<br>
+</li>
+<li><code>LineSource</code>: All rays are generated from a line in space.<br>
+</li>
+<li><code>AreaSource</code>: All rays are generated from the surface of a user-defined mesh.</li>
+</ul>
+<p>The following angle components are available in VPL:</p>
+<ul>
+<li><code>FixedSource</code>: All rays have the same direction.<br>
+</li>
+<li><code>LambertianSource</code>: The direction of the rays follows Lambert’s cosine law. This means that the irradiance is the same when viewed from any angle.</li>
+</ul>
+<p>A special type of radiation source is the <code>DirectionalSource</code> which is used to simulate solar radiation. Rays from this source are generated from the upper face of the scene bounding box and their direction is defined in polar coordinates (i.e., by a zenith and azimuth angle). Because of the way directional sources are implemented it is recommended that a grid cloner is used (this is the default) as otherwise there will parts of the scene that will recieve no rays. See documentation on <a href="../../api/RayTracer.html#VPL.RayTracing.DirectionalSource"><code>DirectionalSource</code></a> for more details.</p>
 </section>
 <section id="materials" class="level2">
 <h2 class="anchored" data-anchor-id="materials">Materials</h2>
@@ -381,14 +417,13 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="grid-cloner-for-edge-effects" class="level2">
 <h2 class="anchored" data-anchor-id="grid-cloner-for-edge-effects">Grid cloner for edge effects</h2>
-<p>The grid cloner is used to minimize border effects when tracing rays from the sources towards the scene. The grid cloner is a form of <a href="https://en.wikipedia.org/wiki/Geometry_instancing">geometric <em>instancing</em></a> where the same scene is repeated multiple times along the X, Y or Z direction. In practice, to avoid excessive memory usage, the scene is not actually replicated but rather the rays positions are modified to account to emulate the effect of the scene being repeated.</p>
+<p>The grid cloner is used to minimize border effects when tracing rays from the sources towards the scene. The grid cloner is a form of <a href="https://en.wikipedia.org/wiki/Geometry_instancing">geometric <em>instancing</em></a> where the same scene is repeated multiple times along the X, Y or Z direction. In practice, to avoid excessive memory usage, the scene is not actually replicated but rather the rays positions are modified to emulate the effect of the scene being repeated.</p>
 <p>In order a grid cloner structure on top of a scene, the user needs to specify the number of duplications to perform in each direction (<code>nx</code>, <code>ny</code> and <code>nz</code>) as well as the offsets between the different copies (<code>dx</code>, <code>dy</code> and <code>dz</code>). The grid cloner is created from a <code>Scene</code> object via the <code>accelerate()</code> function, but the settings to control the grid cloner must be set when creating the <code>RTSettings</code> object.</p>
 <p>By default, the grid cloner is enabled in the X and Y directions by replicating the scene three times in each direction (this means creating a grid of 7 x 7 = 49 copies of the scene including the original). The offsets between the copies are set by default to width of the scene in the X and Y directions such that there is no overlapping. The grid cloner is disabled in the Z direction by default.</p>
 <p>Note that whereas a grid cloner will not increase significantly the memory used by the ray tracer, it will increase ray tracing times as fewer rays will be able to leave the scene. On the other hand, a small (or no) grid cloner will create an edge effect such that only plants in the center of the scene will be able to capture the behaviour within a large canopy.</p>
 <p>The actual number of copies to use will depend on plant dimension and solar angles, so a general recommendation is not possible. Regarding the offsets, these would be related to the sowing/planting pattern in the case of plant production systems on a regular grid and in many case this would mean that the copies overlap (and this would be correct) so the defaults should be overriden in most cases. Using a grid cloner should not be substitute for using a sufficient number of plants in the scene in order to capture the plant-to-plant variability, but simply to avoid edge effects.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
