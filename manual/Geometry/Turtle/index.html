@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-03-22">
+<meta name="dcterms.date" content="2023-03-24">
 
-<title>Virtual Plant Laboratory - Turtle graphics and scenes</title>
+<title>Virtual Plant Laboratory - Turtle geometry and scenes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -73,7 +136,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Turtle graphics and scenes</h1>
+      <h1 class="quarto-secondary-nav-title">Turtle geometry and scenes</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -124,12 +187,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
+  <a href="../../../manual/Geometry/Turtle/index.html" class="sidebar-item-text sidebar-link active">Turtle geometry and scenes</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../manual/Geometry/Turtle/index.html" class="sidebar-item-text sidebar-link active">Turtle graphics and scenes</a>
+  <a href="../../../manual/Geometry/Primitives/index.html" class="sidebar-item-text sidebar-link">Geometry primitives</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -139,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../manual/RayTracer/index.html" class="sidebar-item-text sidebar-link">Ray tracing distribution of irradiance</a>
+  <a href="../../../manual/RayTracer/index.html" class="sidebar-item-text sidebar-link">Ray tracing</a>
   </div>
 </li>
       </ul>
@@ -159,12 +222,17 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../tutorials/context/index.html" class="sidebar-item-text sidebar-link">Context sensitive rules</a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../tutorials/snowflakes/index.html" class="sidebar-item-text sidebar-link">The Koch snowflake</a>
+  <a href="../../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -200,11 +268,6 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../tutorials/turtle_message/index.html" class="sidebar-item-text sidebar-link">Turtle messages</a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../tutorials/relational_queries/index.html" class="sidebar-item-text sidebar-link">Relational queries</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -305,7 +368,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Turtle graphics and scenes</h1>
+<h1 class="title d-none d-lg-block">Turtle geometry and scenes</h1>
 </div>
 
 
@@ -329,7 +392,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 22, 2023</p>
+      <p class="date">March 24, 2023</p>
     </div>
   </div>
   
@@ -339,21 +402,75 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="turtle-graphics" class="level1">
-<h1>Turtle graphics</h1>
-<p>General concepts</p>
-<p>Movement operators</p>
-<p>Meshes, include I/O</p>
+<section id="meshes" class="level2">
+<h2 class="anchored" data-anchor-id="meshes">Meshes</h2>
+<p>The geometry in VPL consist of 3D triangular meshes. These meshes are used for 3D visualization and for ray tracing, buy may also be exported to external formats or used in other Julia packages. Most of the time, the geometry is generated from graphs using the concept of turtle geometry. In addition to generating the meshes, it will also be necessary to associated colors (for rendering) and material objects (for ray tracing) for each triangle in the mesh. All these components are then stored in a <code>Scene</code> object.</p>
+<p>Meshes are collections of vertices, normal vectors and faces (which specify combinations of vertices that form triangles). They are implemented in the object <code>Mesh</code>. All vectors and points are represented by the type <code>Vec</code>. Any vector may be constructed by calling <code>Vec(x, y, z)</code> with the coordinates of the vector.</p>
+<p>Meshes can be imported from external formats using the <a href="../../../api/Geometry.html#VPL.Geom.loadmesh-Tuple{Any}"><code>loadmesh()</code></a> function and exported using the <a href="../../../api/Geometry.html#VPL.Geom.savemesh-Tuple{Any}"><code>savemesh()</code></a> functions. The file formats supported include STL, OBJ and PLY (see documentation on functions for details).</p>
+<p>Meshes are not meant to be modified directly by the user (unless adhoc geometry is needed). Instead, a series of functions are provided to generate meshes associated to different geometries. These functions are called <em>primitive constructors</em> and can be combined to generate more complex geometries. The primitive constructors maybe used to generate geometry procedurally with a turtle (see below), or to create the mesh directly (e.g., when adding geometry to an existing scene).</p>
 </section>
-<section id="scenes" class="level1">
-<h1>Scenes</h1>
-<p>feed!()</p>
-<p>Primitive constructors</p>
-<p>Merging multiple scenes</p>
-<p>Parallel construction of scenes</p>
-<p>Manually adding elements to an existing scene</p>
+<section id="turtle-geometry" class="level2">
+<h2 class="anchored" data-anchor-id="turtle-geometry">Turtle geometry</h2>
+<p>The idea behind turtle geometry is to generate geometry procedurally by imagining a turtle that moves through the scene and is fed triangular meshes. This allows to generate any geometry by defining a sequence of instructions that the turtle will execute. These instructions are defined locally (e.g., turn right, move forward, etc.) and update the turtle position and orientation, such that a global geometry is generated after the instructions are executed.</p>
+<p>The internal state of the turtle is defined by its position and three axis of rotation:</p>
+<ul>
+<li>Position (<code>pos</code>): The location of the turtle in the scene.<br>
+</li>
+<li>Heading (<code>head</code>): The direction in which the turtle is heading. Moving forward would mean moving along this direction. A rotation around the <code>head</code> vector is called a <em>roll</em> (imagine a turtle spinning on its head).<br>
+</li>
+<li>Arm (<code>arm</code>): A direction perpendicular to <code>head</code> but on the same plane. A rotation around the <code>arm</code> vector is called a <em>pitch</em> (imagine a turtle turning up or down).</li>
+<li>Up (<code>up</code>): A direction perpendicular to the plane of the turtle. A rotation around the <code>up</code> vector is called a <em>yaw</em> (imagine a turtle turning left or right).</li>
+</ul>
+<p>To generate geometry, that matches the morphology of a plant, the turtle in VPL is fed a graph. This means that the first instructions to the turtle will be given by the first node in the graph. The turtle will then traverse the entire graph, resetting its state at each branching point in the graph. The instructions to the turtle are given by methods of the <code>feed!()</code> function, defined for all the possible nodes in graph.</p>
+<p>Two types of instructions are available to the turtle: movement operators and primitive constructors. The former are used to change the internal state of the turtle without adding geometry to the scene, while the latter generate a 3D mesh associated to a particular geometry (a special primitive constructor <code>Mesh!</code> accepts any mesh generated by the user). The different movement operators are given below, while the primitive constructors are given <a href="../Primitives/">here</a>.</p>
+<p>In addition, the turtle will contain a <code>message</code> field that can be assigned any user-defined value. This is useful to pass information to <code>feed!()</code> methods described below (e.g., to control the code executed by those methods). All the methods that create an internal turtle (e.g., <code>Scene</code> or <code>render</code>) will accept an optional <code>message</code> argument that will be passed on to the turtle.</p>
+</section>
+<section id="movement-operators" class="level2">
+<h2 class="anchored" data-anchor-id="movement-operators">Movement operators</h2>
+<p>Movement operators as provided as functions that manipulate the state of the turtle in-place (e.g.&nbsp;<code>ra!</code>), as well as nodes that can be used inside a <code>Graph</code> object (e.g., <code>RA</code>). The functional version will be in lowercase, while the node version will be in uppercase. The functional version can be used inside any <code>feed!()</code> method, which reduces the number of nodes that need to be inserted into a graph.</p>
+<p>Below are all the movement operators available in VPL (in their node form):</p>
+<ul>
+<li><a href="../../../api/Geometry.html#VPL.Geom.T"><code>T</code></a>: Move the turtle to a new absolute position.<br>
+</li>
+<li><a href="../../../api/Geometry.html##VPL.Geom.RA"><code>RA</code></a>: Rotate the turtle around the <code>arm</code> axis.</li>
+<li><a href="../../../api/Geometry.html##VPL.Geom.RH"><code>RH</code></a>: Rotate the turtle around the <code>head</code> axis.</li>
+<li><a href="../../../api/Geometry.html##VPL.Geom.RU"><code>RU</code></a>: Rotate the turtle around the <code>up</code> axis.</li>
+<li><a href="../../../api/Geometry.html##VPL.Geom.OR"><code>OR</code></a>: Orient the turtle in a new direction by explicitly changing the <code>head</code>, <code>arm</code> and <code>up</code> vectors.</li>
+<li><a href="../../../api/Geometry.html##VPL.Geom.F"><code>F</code></a>: Move the turtle forward.</li>
+<li><a href="../../../api/Geometry.html##VPL.Geom.SET"><code>SET</code></a>: Completely change the state of the turtle by setting the <code>pos</code>, <code>head</code>, <code>arm</code> and <code>up</code> vectors.</li>
+<li><a href="../../../api/Geometry.html##VPL.Geom.RV"><code>RV</code></a>: A special rotation that emulates gravitropism (it rotates the turtle towards the Z axis of the scene).</li>
+</ul>
+</section>
+<section id="scenes" class="level2">
+<h2 class="anchored" data-anchor-id="scenes">Scenes</h2>
+<p>A <code>Scene</code> object contains three elements that are connected:</p>
+<ul>
+<li>A triangular mesh (a <code>Mesh</code> object) that contains all the geometry of the scene.<br>
+</li>
+<li>The colors associated to each triangle in the mesh (objects that inherit from <code>Colorant</code> from the ColorTypes.jl package). This is needed for 3D rendering.<br>
+</li>
+<li>The <code>Material</code> objects that defined the optical properties of each triangle. This is needed for ray tracing of radiation.</li>
+</ul>
+<p>Only the first element is required to create a scene. The other two are optional and are only necessary if you want to render the scene or perform ray tracing on the scene.</p>
+<section id="creating-a-scene" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-scene">Creating a scene</h3>
+<p>The simplest way to create a scene is to use the <code>Scene</code> constructor on a <code>Graph</code> object or a vector of <code>Graph</code> objects. This will create internally a <code>Turtle</code> which then generates the geometry, colors and materials of the scene via the <code>feed!()</code> methods defined by the user. VPL will take care of ensuring that triangles are connected to their corresponding colors and material objects.</p>
+<p>A scene may also be created internally by <code>render()</code> when applied to a <code>Graph</code> object or a vector of <code>Graph</code> objects. However, this scene cannot be retrieved so it is not possible to modify it or reuse it for ray tracing. The ray tracer will not create a scene internally, so for that purpose the user will need to create the scene explicitly.</p>
+<p>It is possible to add elements to an existing scene using the <code>add!()</code> method which allows to add a mesh to the scene (and optionally the corresponding colors and/or materials).</p>
+<p>Multiple scenes can also be merged into a single one by calling <code>Scene()</code> on a vector of <code>Scene</code> objects. This allows for parallel construction of scenes which are then merged together.</p>
+</section>
+<section id="the-feed-method" class="level3">
+<h3 class="anchored" data-anchor-id="the-feed-method">The <code>feed!()</code> method</h3>
+<p>In order to use the turtle to generate a scene from a graph, the user will need to define a <code>feed!()</code> method for each type of node stored in the graph (at least the ones that require geometry). This method will be called by the turtle when it encounters a node of that type. When no method is present, the turtle will simply move to the next node in the graph.</p>
+<p>The <code>feed!()</code> method takes three arguments: the <code>Turtle</code>, the node and the graph- level variables (of the graph the node belongs to). The latter does not have to be used, but it may be useful if information at the plant level is required to generate geometry, colors or material objects (most often the information is stored inside the node itself). It is important that the second argument (the node) is annotated by its type and that the <code>VPL</code> prefix is used to ensure that a method is created. For example, for a node of type <code>Internode</code> the function should be defined as:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> VPL.<span class="fu">feed!</span>(t<span class="op">::</span><span class="dt">Turtle</span>, n<span class="op">::</span><span class="dt">Internode</span>, vars) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>code here<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Inside the <code>feed!()</code> method, the user can apply any of the movement operators described in the previous section as well as the turtle-specific primitive constructors (see section on <a href="../Primitives">Primitives</a>). All these changes will be applied to the turtle’s internal state. The <code>feed!()</code> method should not return anything.</p>
+<p>It is also possible to execute different code inside the <code>feed!()</code> method based on the <code>message</code> stored in the turtle. This allows for example to generate different geometries for visualizations and ray tracing, or to use different colors for visualization. Since the <code>message</code> can be any object created by the user, it may also be used to pass information to the <code>feed!()</code> method, though most often the relevant information is stored in the node or graph.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
