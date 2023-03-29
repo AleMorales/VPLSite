@@ -56,7 +56,7 @@ module TreeTypes
     end
 end
 
-import .tree
+import .TreeTypes
 
 # Create geometry + color for the internodes
 function VPL.feed!(turtle::Turtle, i::TreeTypes.Internode, vars)

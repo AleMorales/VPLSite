@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.2.242">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-03-23">
+<meta name="dcterms.date" content="2023-03-29">
 
-<title>Virtual Plant Laboratory - Ray-traced forest of binary trees</title>
+<title>Virtual Plant Laboratory - RUE-drive forest</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -136,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Ray-traced forest of binary trees</h1>
+      <h1 class="quarto-secondary-nav-title">RUE-drive forest</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -170,11 +170,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../manual/Introduction/index.html" class="sidebar-item-text sidebar-link">What is VPL?</a>
-  </div>
-</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../manual/Julia/index.html" class="sidebar-item-text sidebar-link">Julia basic concepts</a>
@@ -252,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link active">Ray-traced forest of binary trees</a>
+  <a href="../../tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link active">RUE-drive forest</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -272,7 +267,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/advanced_raytracing/index.html" class="sidebar-item-text sidebar-link">Advanced ray tracing</a>
+  <a href="../../tutorials/ground_cover/index.html" class="sidebar-item-text sidebar-link">Using ray tracer for ground cover</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/point_clouds/index.html" class="sidebar-item-text sidebar-link">Using ray tracer for point clouds</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -368,13 +368,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Ray-traced forest of binary trees</h1>
+<h1 class="title d-none d-lg-block">RUE-drive forest</h1>
 </div>
 
 
 <div class="quarto-title-meta-author">
   <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
+  <div class="quarto-title-meta-heading"></div>
   
     <div class="quarto-title-meta-contents">
     Alejandro Morales Sierra 
@@ -392,7 +392,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 23, 2023</p>
+      <p class="date">March 29, 2023</p>
     </div>
   </div>
   
@@ -406,13 +406,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The following packages are needed:</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">VPL</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Base.Threads</span>: @threads</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Sky</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Random</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">FastGaussQuadrature</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Sky</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">123456789</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Random</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">123456789</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Base.Threads</span>: @threads</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="model-definition" class="level2">
 <h2 class="anchored" data-anchor-id="model-definition">Model definition</h2>
@@ -632,10 +631,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In addition <code>RTSettings()</code>, an acceleration structure and a splitting rule can be defined when creating the <code>RayTracer</code> object (see ray tracing documentation for details). The acceleration structure allows speeding up the ray tracing by avoiding testing all rays against all objects in the scene.</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">create_raytracer</span>(scene, sources)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    settings <span class="op">=</span> <span class="fu">RTSettings</span>(pkill <span class="op">=</span> <span class="fl">0.9</span>, maxiter <span class="op">=</span> <span class="fl">4</span>, nx <span class="op">=</span> <span class="fl">5</span>, ny <span class="op">=</span> <span class="fl">5</span>, parallel <span class="op">=</span> <span class="cn">true</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">RayTracer</span>(scene, sources, settings <span class="op">=</span> settings, acceleration <span class="op">=</span> BVH,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                     rule <span class="op">=</span> <span class="fu">SAH</span><span class="dt">{3}</span>(<span class="fl">5</span>, <span class="fl">10</span>));</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    settings <span class="op">=</span> <span class="fu">RTSettings</span>(pkill <span class="op">=</span> <span class="fl">0.9</span>, maxiter <span class="op">=</span> <span class="fl">4</span>, nx <span class="op">=</span> <span class="fl">5</span>, ny <span class="op">=</span> <span class="fl">5</span>, dx <span class="op">=</span> <span class="fl">20.0</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                          dy <span class="op">=</span> <span class="fl">20.0</span>, parallel <span class="op">=</span> <span class="cn">true</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">RayTracer</span>(scene, sources, settings <span class="op">=</span> settings, acceleration <span class="op">=</span> BVH,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                     rule <span class="op">=</span> <span class="fu">SAH</span><span class="dt">{3}</span>(<span class="fl">5</span>, <span class="fl">10</span>));</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The actual ray tracing simulation is performed by calling the <code>trace!()</code> method on the ray tracing object. This will trace all rays from all light sources and update the radiant power absorbed by the different surfaces in the scene inside the <code>Material</code> objects (see <code>feed!()</code> above):</p>
 <div class="cell" data-execution_count="9">

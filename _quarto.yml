@@ -15,7 +15,6 @@ website:
     contents:
       - section: "User Manual"
         contents:
-          - manual/Introduction/index.qmd
           - manual/Julia/index.qmd
           - manual/Graphs/index.qmd
           - manual/Geometry/Turtle/index.qmd
@@ -35,7 +34,8 @@ website:
             - tutorials/photosynthesis_forest/index.qmd
             - tutorials/beyond_VPL/index.qmd
             - tutorials/turtle_message/index.qmd
-            - tutorials/advanced_raytracing/index.qmd
+            - tutorials/ground_cover/index.qmd
+            - tutorials/point_clouds/index.qmd
             - tutorials/meshes/index.qmd
       - section: "API"
         contents:

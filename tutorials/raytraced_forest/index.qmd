@@ -1,5 +1,5 @@
 ---
-title: "Ray-traced forest of binary trees"
+title: "RUE-drive forest"
 author: 
     - name: "Alejandro Morales Sierra"
       affiliation: "Centre for Crop Systems Analysis - Wageningen University"
@@ -15,13 +15,12 @@ The following packages are needed:
 
 ```{julia}
 using VPL
-using Base.Threads: @threads
-using Plots
-import Random
-using FastGaussQuadrature
-using Distributions
 using Sky
+using Plots
+using Distributions
+import Random
 Random.seed!(123456789)
+using Base.Threads: @threads
 ```
 
 ## Model definition
@@ -292,7 +291,8 @@ by avoiding testing all rays against all objects in the scene.
 
 ```{julia}
 function create_raytracer(scene, sources)
-    settings = RTSettings(pkill = 0.9, maxiter = 4, nx = 5, ny = 5, parallel = true)
+    settings = RTSettings(pkill = 0.9, maxiter = 4, nx = 5, ny = 5, dx = 20.0,
+                          dy = 20.0, parallel = true)
     RayTracer(scene, sources, settings = settings, acceleration = BVH,
                      rule = SAH{3}(5, 10));
 end

@@ -1,11 +1,11 @@
 ---
-title: "Advanced ray tracing"
+title: "Using ray tracer for point clouds"
 author: 
     - name: "Alejandro Morales Sierra"
       affiliation: "Centre for Crop Systems Analysis - Wageningen University"
 date: last-modified
 execute: 
-    enabled: false
+  enabled: false
 ---
 
-**Coming soon!**
+**Coming soon**
