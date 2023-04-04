@@ -9,10 +9,10 @@ execute:
 ---
 
 
-In this example we extend the binary forest example to have more complex, time-
+In this example we extend the forest example to have more complex, time-
 depedent development and growth based on carbon allocation. For simplicity, the
 model assumes a constant relative growth rate at the plant level to compute the
-biomass increment. In the next example this assumptio is relaxed by a model of
+biomass increment. In the next example this assumption is relaxed by a model of
 radiation use efficiency. When modelling growth from carbon allocation, the 
 biomass of each organ is then translated in to an area or volume and the
 dimensions of the organs are updated accordingly (assuming a particular shape). 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Alejandro Morales Sierra">
-<meta name="dcterms.date" content="2023-03-19">
+<meta name="dcterms.date" content="2023-04-03">
 
 <title>Virtual Plant Laboratory - The Virtual Plant Laboratory</title>
 <style>
@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link">RUE-drive forest</a>
+  <a href="./tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link">RUE-driven forest</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -354,13 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
     </ul>
     </div>
-<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src=".\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
-</figure>
-</div>
-</div></div></nav>
+</nav>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -392,7 +386,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 19, 2023</p>
+      <p class="date">April 3, 2023</p>
     </div>
   </div>
   
@@ -412,7 +406,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The Virtual Plant Laboratory is in an early developmental stage and it is released for the purposes of early testing and user feedback. Please contact me if you intend to use it for research or commercial purposes at this stage.</p>
+<p>The Virtual Plant Laboratory is in development and it is released for the purposes of testing and user feedback.</p>
 </div>
 </div>
 <section id="introduction" class="level2">
@@ -423,9 +417,9 @@ Important
 </section>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>VPL requires using Julia version 1.7 or higher. The installation of VPL is as easy as running the following code:</p>
+<p>VPL requires using Julia version 1.8 or higher. The installation of VPL is as easy as running the following code:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>(<span class="fu">PackageSpec</span>(url <span class="op">=</span> <span class="st">"https://github.com/AleMorales/VPL.git"</span>, rev  <span class="op">=</span> <span class="st">"master"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pkg<span class="st">"add https://github.com/AleMorales/VPL.git; precompile"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This requires an Internet connection such that Julia will download the source code of the VPL package and install it in the local machine.</p>
 </section>
 <section id="the-vplverse" class="level2">
@@ -433,19 +427,23 @@ Important
 <p>The package VPL contains all the basic functionality to build FSP models but, as indicated earlier, the emphasis is on minimal, simple and transparent interfaces. In order to facilitate the construction of non-trivial FSP models, an ecosystem of packages built around VPL provide additional support to the modeller by offering reusable modules that can be reused in new models.</p>
 <p>The packages currently planned for <em>VPLverse</em> are:</p>
 <ul>
-<li><p><em>Ecophys</em> - Algorithms and data structures to simulate ecophysiological processes including photosynthesis, transpiration, leaf energy balance, phenology or respiration.</p></li>
-<li><p><em>Sky</em> - Algorithms to simulate different sky conditions in terms of the intensity of solar radiation and its spatial distribution.</p></li>
+<li><p><em>Ecophys.jl</em> - Algorithms and data structures to simulate ecophysiological processes including photosynthesis, transpiration, leaf energy balance, phenology or respiration.</p></li>
+<li><p><em>Sky.jl</em> - Algorithms to simulate different sky conditions in terms of the intensity of solar radiation and its spatial distribution.</p></li>
 </ul>
 <p>In addition, all the tutorials on this website can be found at the <a href="https://github.com/AleMorales/VPLTutorials">VPLTutorials</a> package.</p>
+<p>Some of the components currently in VPL will be moved to their own packages as part of the VPLverse in the future.</p>
 </section>
 <section id="documentation" class="level2">
 <h2 class="anchored" data-anchor-id="documentation">Documentation</h2>
 <p>Documentation for VPL is provided in this website in four formats:</p>
 <ol type="1">
-<li>User manual</li>
-<li>Tutorials and examples</li>
-<li>API</li>
-<li>Technical notes</li>
+<li>User manual<br>
+</li>
+<li>Tutorials<br>
+</li>
+<li>API<br>
+</li>
+<li>Technical notes (in development)</li>
 </ol>
 <p>The documentation for packages from the <em>VPLverse</em> are included in their respective sections.</p>
 <p>New users are expected to start with the tutorials and consult the user manual to understand better the different concepts used in VPL and get an overview of the different options available. The API documentation describes each individual function and data type, with an emphasis on inputs and outputs and (in addition to this website) it can be accessed from within Julia with <code>?</code> (see the section <a href="https://docs.julialang.org/en/v1/manual/documentation/#Accessing-Documentation-1">Accessing Documentation</a> in the Julia manual). The technical notes are useful for people who want to understand the internal details of VPL and how different algorithms are implemented (i.e.&nbsp;the technical notes should be seen as a supplementary to the source code of VPL).</p>

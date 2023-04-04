@@ -9,7 +9,7 @@
 <meta name="author" content="Alejandro Morales Sierra">
 <meta name="dcterms.date" content="2023-03-29">
 
-<title>Virtual Plant Laboratory - RUE-drive forest</title>
+<title>Virtual Plant Laboratory - RUE-driven forest</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -136,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">RUE-drive forest</h1>
+      <h1 class="quarto-secondary-nav-title">RUE-driven forest</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link active">RUE-drive forest</a>
+  <a href="../../tutorials/raytraced_forest/index.html" class="sidebar-item-text sidebar-link active">RUE-driven forest</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -354,13 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
     </ul>
     </div>
-<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm"><img src="../..\img/wur.svg" class="img-fluid figure-img" style="width:100.0%"></a></p>
-</figure>
-</div>
-</div></div></nav>
+</nav>
 <!-- margin-sidebar -->
     
 <!-- main -->
@@ -368,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">RUE-drive forest</h1>
+<h1 class="title d-none d-lg-block">RUE-driven forest</h1>
 </div>
 
 
@@ -402,8 +396,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>In this example we extend the forest growth model to include PAR interception a radiation use efficiency to compute the daily growth rate.</p>
-<p>The following packages are needed:</p>
+<p>In this example we extend the forest growth model to include PAR interception and a radiation use efficiency to compute the daily growth rate.</p>
+<p>The initial setup is as follows:</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">VPL</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Sky</span></span>

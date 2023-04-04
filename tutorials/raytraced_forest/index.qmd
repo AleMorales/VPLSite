@@ -1,5 +1,5 @@
 ---
-title: "RUE-drive forest"
+title: "RUE-driven forest"
 author: 
     - name: "Alejandro Morales Sierra"
       affiliation: "Centre for Crop Systems Analysis - Wageningen University"
@@ -8,10 +8,10 @@ execute:
   eval: false
 ---
 
-In this example we extend the forest growth model to include PAR interception a
+In this example we extend the forest growth model to include PAR interception and a
 radiation use efficiency to compute the daily growth rate.
 
-The following packages are needed:
+The initial setup is as follows:
 
 ```{julia}
 using VPL

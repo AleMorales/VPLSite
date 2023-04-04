@@ -7,8 +7,8 @@ execute:
 website:
   title: "Virtual Plant Laboratory"
   sidebar:
-    footer: | 
-      [![](/img/wur.svg){width=100%}](https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm)
+    # footer: | 
+    #   [![](/img/wur.svg){width=100%}](https://www.wur.nl/en/research-results/chair-groups/plant-sciences/centre-for-crop-systems-analysis.htm)
     style: "docked"
     collapse-level: 1
     search: true

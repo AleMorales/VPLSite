@@ -9,7 +9,8 @@ execute:
 ---
 
 :::{.callout-important}
-The Virtual Plant Laboratory is in an early developmental stage and it is released for the purposes of early testing and user feedback. Please contact me if you intend to use it for research or commercial purposes at this stage.
+The Virtual Plant Laboratory is in development and it is released for the purposes
+of testing and user feedback.
 :::
 
 ## Introduction
@@ -44,12 +45,12 @@ software, though may also make them more transparent and easier to follow.
 
 ## Installation 
 
-VPL requires using Julia version 1.7 or higher. The installation of VPL is as
+VPL requires using Julia version 1.8 or higher. The installation of VPL is as
 easy as running the following code:
 
 ```julia
 using Pkg
-Pkg.add(PackageSpec(url = "https://github.com/AleMorales/VPL.git", rev  = "master"))
+pkg"add https://github.com/AleMorales/VPL.git; precompile"
 ```
 
 This requires an Internet connection such that Julia will download the source code of the VPL package 
@@ -65,20 +66,23 @@ reusable modules that can be reused in new models.
 
 The packages currently planned for *VPLverse* are:
 
-* *Ecophys* - Algorithms and data structures to simulate ecophysiological processes including photosynthesis, transpiration, leaf energy balance, phenology or respiration.
+* *Ecophys.jl* - Algorithms and data structures to simulate ecophysiological processes including photosynthesis, transpiration, leaf energy balance, phenology or respiration.
 
-* *Sky* - Algorithms to simulate different sky conditions in terms of the intensity of solar radiation and its spatial distribution.
+* *Sky.jl* - Algorithms to simulate different sky conditions in terms of the intensity of solar radiation and its spatial distribution.
 
 In addition, all the tutorials on this website can be found at the [VPLTutorials](https://github.com/AleMorales/VPLTutorials) package.
+
+Some of the components currently in VPL will be moved to their own packages as 
+part of the VPLverse in the future.
 
 ## Documentation
 
 Documentation for VPL is provided in this website in four formats:
 
-1. User manual
-2. Tutorials and examples
-3. API
-4. Technical notes
+1. User manual  
+2. Tutorials  
+3. API  
+4. Technical notes (in development)  
 
 The documentation for packages from the *VPLverse* are included in their respective sections.
 
